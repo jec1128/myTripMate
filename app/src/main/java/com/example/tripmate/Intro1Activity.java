@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-public class IntroActivity extends Activity {
+public class Intro1Activity extends Activity {
     Handler handler = new Handler();
     Runnable r = new Runnable() {
         @Override
         public void run() {
             //3초뒤에 다음화면(MainActivity)으로 넘어가기 Handler 사용
-            Intent intent =  new Intent(getApplicationContext(), loginActivity.class);
+            Intent intent =  new Intent(getApplicationContext(), Intro2Activity.class);
             startActivity(intent); // 다음화면으로 넘어가기
             finish(); // Activity 화면 제거
         }
@@ -20,14 +20,14 @@ public class IntroActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro); // xml과 java소스를 연결
+        setContentView(R.layout.activity_intro1); // xml과 java소스를 연결
     } // end of onCreate
 
     @Override
     protected void onResume() {
         super.onResume();
        // 다시 화면에 들어왔을 때 예약 걸어주기
-        handler.postDelayed(r, 3000); // 3초 뒤에 Runnable 객체 수행
+        handler.postDelayed(r, 1000); // 3초 뒤에 Runnable 객체 수행
     }
 
     @Override
