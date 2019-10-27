@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tripmate">
 
@@ -8,7 +7,9 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -18,30 +19,31 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".Board.BoardWriteActivity"
+            android:windowSoftInputMode = "adjustPan">
+        </activity>
+        <activity android:name=".Chat.fragmentFriend" />
+        <activity android:name=".Chat.MessageActivity" />
         <activity android:name=".Board.fragmentBoard" />
-        <activity android:name=".Board.fragmentBoardWrite" />
         <activity android:name=".Chat.fragmentChatroom" />
         <activity android:name=".User.RegisterActivity" />
         <activity android:name=".User.LoginActivity" />
         <activity android:name=".Intro2Activity" />
-
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".placeActivity" />
         <activity android:name=".Intro1Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

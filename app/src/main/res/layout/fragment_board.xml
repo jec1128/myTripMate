@@ -14,13 +14,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <Button
+                android:id="@+id/board_button_write"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="board"
-                android:textSize="50sp">
+                android:text="글 쓰기">
 
-            </TextView>
+            </Button>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -12,7 +12,7 @@
         </menu>
     </item>
 
-    <item android:title="A">
+    <item android:title="B">
         <menu>
             <item
                 android:id="@+id/B"

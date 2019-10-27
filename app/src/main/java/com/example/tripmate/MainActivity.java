@@ -1,5 +1,6 @@
 package com.example.tripmate;
 
+import android.support.annotation.NavigationRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
@@ -8,9 +9,11 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private fragmentActivity2 fragment2 = new fragmentActivity2();
     private fragmentActivity3 fragment3 = new fragmentActivity3();
     private fragmentActivity4 fragment4 = new fragmentActivity4();
-    private NearLocationFragment fragment5 = new NearLocationFragment();
+    private fragmentActivity5 fragment5 = new fragmentActivity5();
 
 
 
@@ -81,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.action_home5:
                         transaction.replace(R.id.frameLayout, fragment5).commitNowAllowingStateLoss();
-
                         break;
                 }
                 return true;

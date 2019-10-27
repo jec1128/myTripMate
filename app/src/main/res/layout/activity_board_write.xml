@@ -1,9 +1,302 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/WriteBoardActivity_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Board.fragmentBoardWrite">
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="어디로 여행가시나요?"
+                android:textColor="#000000"
+                android:textSize="20sp">
+
+            </TextView>
+
+           <EditText
+                android:id="@+id/BoardWriteActivity_text_where"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:hint="서울"
+                android:inputType="text"
+                android:privateImeOptions="defaultInputmode=korean"
+                android:singleLine="true"
+                android:textColor="#808080"
+                android:textColorHint="#808080"
+                android:textSize="20sp"
+                android:cursorVisible="false"
+               >
+
+            </EditText>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="내용"
+            android:textColor="#000000"
+            android:textSize="20sp"></TextView>
+
+        <EditText
+            android:id="@+id/BoardWriteActivity_text_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:hint="자기 인적사항 및 소개"
+            android:textColor="#808080"
+            android:textColorHint="#808080"
+            android:textSize="15sp"
+            android:maxLength="1000"
+            android:maxHeight="200dp"
+            android:cursorVisible="false"
+            >
+
+        </EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="상대방 성별"
+            android:textColor="#000000"
+            android:textSize="20sp"></TextView>
+
+        <RadioGroup
+            android:id="@+id/BoardWriteActivity_group_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/BoardWriteActivity_radio_man"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="남자"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/BoardWriteActivity_radio_woman"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="여자"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/BoardWriteActivity_radio_all"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="상관 없음"
+                android:textSize="18sp" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="상대방 나이"
+                android:textColor="#000000"
+                android:textSize="20sp"></TextView>
+
+            <EditText
+                android:id="@+id/BoardWriteActivity_edittext_age_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:hint="최소나이"
+                android:inputType="number"
+                android:cursorVisible="false">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/BoardWriteActivity_edittext_age_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:hint="최대나이"
+                android:inputType="number"
+                android:cursorVisible="false"
+                >
+
+            </EditText>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="여행 날짜 시간 선택"
+            android:textColor="#000000"
+            android:textSize="20sp"></TextView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/BoardWriteActivity_edittext_date_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:editable="false"
+                android:focusable="false"
+                android:inputType="date"
+                android:text="시작 날짜">
+
+            </EditText>
+
+
+            <EditText
+                android:id="@+id/BoardWriteActivity_edittext_time_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:editable="false"
+                android:focusable="false"
+                android:inputType="time"
+                android:text="시작 시간">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/BoardWriteActivity_edittext_time_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:editable="false"
+                android:focusable="false"
+                android:inputType="time"
+                android:text="종료 시간"></EditText>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="여행 테마 선택"
+            android:textColor="#000000"
+            android:textSize="20sp"></TextView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/BoardWriteActivity_check_food"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:padding="15dp"
+                android:text="맛집">
+
+            </CheckBox>
+
+            <CheckBox
+                android:id="@+id/BoardWriteActivity_check_rest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="휴식"></CheckBox>
+
+            <CheckBox
+                android:id="@+id/BoardWriteActivity_check_nature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="자연"></CheckBox>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/BoardWriteActivity_check_leisure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:padding="15dp"
+                android:text="레져"></CheckBox>
+
+            <CheckBox
+                android:id="@+id/BoardWriteActivity_check_walk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="걷기"></CheckBox>
+
+            <CheckBox
+                android:id="@+id/BoardWriteActivity_check_biking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="자전거"></CheckBox>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/BoardWriteActivity_button_write"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="글 쓰기">
+
+        </Button>
+
+    </LinearLayout>
+</ScrollView>
