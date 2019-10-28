@@ -1,5 +1,6 @@
 package com.example.tripmate;
 
+import android.content.Intent;
 import android.support.annotation.NavigationRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private fragmentActivity2 fragment2 = new fragmentActivity2();
     private fragmentActivity3 fragment3 = new fragmentActivity3();
     private fragmentActivity4 fragment4 = new fragmentActivity4();
-    private fragmentActivity5 fragment5 = new fragmentActivity5();
+    private NearLocationFragment fragment5 = new NearLocationFragment();
 
 
 
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = getIntent();
+        String nickname = intent.getExtras().getString("nickname");
+        System.out.println("mainactivity" + nickname);
         //첫 화면 지정
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frameLayout,fragment1).commitAllowingStateLoss();
@@ -45,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //툴바에 홈버튼을 활성화
-       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //툴바의 홈버튼의 이미지를 변경(기본 이미지는 뒤로가기 화살표)
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_appbar_menu);
         //툴바 중앙 제목

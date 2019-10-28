@@ -19,25 +19,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Board.BoardWriteActivity"
-            android:windowSoftInputMode = "adjustPan">
-        </activity>
-        <activity android:name=".Chat.fragmentFriend" />
-        <activity android:name=".Chat.MessageActivity" />
-        <activity android:name=".Board.fragmentBoard" />
-        <activity android:name=".Chat.fragmentChatroom" />
-        <activity android:name=".User.RegisterActivity" />
-        <activity android:name=".User.LoginActivity" />
-        <activity android:name=".Intro2Activity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Intro2Activity"></activity>
+        <activity android:name=".Intro1Activity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".placeActivity" />
-        <activity android:name=".Intro1Activity">
+        <activity
+            android:name=".Board.BoardWriteActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Chat.fragmentFriend" />
+        <activity android:name=".Chat.MessageActivity" />
+        <activity android:name=".Board.fragmentBoard" />
+        <activity android:name=".Chat.fragmentChatroom" />
+        <activity android:name=".User.RegisterActivity" />
+        <activity android:name=".User.LoginActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -26,14 +26,14 @@ public class Intro1Activity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-       // 다시 화면에 들어왔을 때 예약 걸어주기
+        // 다시 화면에 들어왔을 때 예약 걸어주기
         handler.postDelayed(r, 1000); // 3초 뒤에 Runnable 객체 수행
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-      // 화면을 벗어나면, handler 에 예약해놓은 작업을 취소하자
+        // 화면을 벗어나면, handler 에 예약해놓은 작업을 취소하자
         handler.removeCallbacks(r); // 예약 취소
     }
 
