@@ -1,9 +1,13 @@
 package com.example.tripmate;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NavigationRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -22,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Button open_close;
     DrawerLayout drawerLayout;
+    Dialog dialog;
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private fragmentActivity1 fragment1 = new fragmentActivity1();
@@ -40,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String nickname = intent.getExtras().getString("nickname");
         System.out.println("mainactivity" + nickname);
+        final Bundle bundle = new Bundle();
+        bundle.putString("nickname",nickname);
+
         //첫 화면 지정
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frameLayout,fragment1).commitAllowingStateLoss();
@@ -84,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                         transaction.replace(R.id.frameLayout, fragment3).commitAllowingStateLoss();
                         break;
                     case R.id.action_home4:
+                        fragment4.setArguments(bundle);
                         transaction.replace(R.id.frameLayout, fragment4).commitAllowingStateLoss();
                         break;
                     case R.id.action_home5:
@@ -122,7 +131,24 @@ public class MainActivity extends AppCompatActivity {
             drawerLayout.closeDrawers();
         }
         else{
-            super.onBackPressed();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("종료").setMessage("종료하시겠습니까?");
+            builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    ActivityCompat.finishAffinity(MainActivity.this);
+                    System.runFinalizersOnExit(true);
+                    System.exit(0);
+                }
+            });
+            builder.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            dialog = builder.create();
+            dialog.show();
         }
     }
 }
