@@ -1,5 +1,6 @@
 package com.example.tripmate;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
@@ -19,14 +20,17 @@ import com.example.tripmate.Chat.fragmentChatroom;
 
 
 public class fragmentActivity4 extends Fragment {
+    private static String nickname;
     View myFragment;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private Toolbar toolbar;
-    private String nickname;
+    private int[] icons = new int []{R.drawable.img_tab_board,
+            R.drawable.img_tab_chat,
+            R.drawable.img_tab_friend};
 
-
-
+    @SuppressLint("ValidFragment")
+    public fragmentActivity4(){}
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,9 +51,12 @@ public class fragmentActivity4 extends Fragment {
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
         // Initializing the TabLayout
-        tabLayout.addTab(tabLayout.newTab().setText("friend"));
+       /* tabLayout.addTab(tabLayout.newTab().setText("friend"));
         tabLayout.addTab(tabLayout.newTab().setText("board"));
-        tabLayout.addTab(tabLayout.newTab().setText("chat"));
+        tabLayout.addTab(tabLayout.newTab().setText("chat"));*/
+        tabLayout.addTab(tabLayout.newTab().setIcon(icons[2]));
+        tabLayout.addTab(tabLayout.newTab().setIcon(icons[0]));
+        tabLayout.addTab(tabLayout.newTab().setIcon(icons[1]));
 
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
@@ -83,8 +90,14 @@ public class fragmentActivity4 extends Fragment {
 
         return myFragment;
     }
+    public static fragmentActivity4 newInstance(){
+        fragmentActivity4 fragment = new fragmentActivity4();
+        Bundle bundle = new Bundle();
+        bundle.putString("nickname",getNickname());
+        return fragment;
+    }
 
-    public String getNickname() {
+    public static String getNickname() {
         return nickname;
     }
 }
