@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private fragmentActivity4 fragment4 = new fragmentActivity4();
     private NearLocationFragment fragment5 = new NearLocationFragment();
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

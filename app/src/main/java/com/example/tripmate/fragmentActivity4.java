@@ -39,9 +39,6 @@ public class fragmentActivity4 extends Fragment {
         }
         System.out.println("fragment4 " + nickname);
 
-
-
-
         viewPager = myFragment.findViewById(R.id.Viewpager);
         tabLayout = myFragment.findViewById(R.id.tabLayout);
 
