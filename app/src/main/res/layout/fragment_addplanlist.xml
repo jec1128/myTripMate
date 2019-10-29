@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        tools:context="com.example.tripmate.fragmentActivity2">
+
+        <!-- <ImageButton
+             android:id="@+id/imgbt_close"
+             android:layout_width="35dp"
+             android:layout_height="35dp"
+             android:layout_gravity="end"
+             android:layout_marginTop="10dp"
+             android:layout_marginRight="10dp"
+             android:background="@android:color/transparent"
+             android:src="@drawable/img_addplan_close" />-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="94dp"
+            android:lineSpacingExtra="38sp"
+            android:text="어디로 여행 가시나요?"
+            android:textColor="#616161"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="40dp"
+            android:background="@android:color/transparent"
+            android:hint="장소를 검색하세요"
+            android:lineSpacingExtra="100sp"
+            android:textColor="#616161"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="336dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="2.5dp"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:background="#bcbcbc"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32.5dp"
+            android:layout_marginLeft="35dp"
+            android:textSize="13sp"
+            android:textColor="#616161"
+            android:lineSpacingExtra="38sp"
+            android:textStyle="bold"
+            android:text="여행 타이틀" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:layout_marginLeft="40dp"
+            android:textSize="18sp"
+            android:textColor="#616161"
+            android:lineSpacingExtra="100sp"
+            android:hint="title"
+            android:background="@android:color/transparent" />
+
+        <View
+            android:layout_width="336dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="2.5dp"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:background="#bcbcbc"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32.5dp"
+            android:layout_marginLeft="35dp"
+            android:textSize="13sp"
+            android:textColor="#616161"
+            android:lineSpacingExtra="38sp"
+            android:textStyle="bold"
+            android:text="여행 일정 입력" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:layout_width="137dp"
+                    android:layout_height="34dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/planlist_round" />
+
+                <ImageButton
+                    android:id="@+id/imgbt_startdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="107dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#03FFFFFF"
+                    android:maxWidth="14dp"
+                    android:maxHeight="14dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/img_plan_add_date" />
+
+                <TextView
+                    android:id="@+id/tv_stardate"
+                    android:layout_width="57dp"
+                    android:layout_height="19dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="18dp"
+                    android:gravity="center_horizontal"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="38sp"
+                    android:text=""
+                    android:textColor="#5d5d5d"
+                    android:textSize="11sp" />
+
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="18dp"
+                android:lineSpacingExtra="38sp"
+                android:text="TO"
+                android:textColor="#bcbcbc"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:layout_width="137dp"
+                    android:layout_height="34dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/planlist_round" />
+
+                <ImageButton
+                    android:id="@+id/imgbt_enddate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#03FFFFFF"
+                    android:maxWidth="14dp"
+                    android:maxHeight="14dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/img_plan_add_date" />
+
+                <TextView
+                    android:id="@+id/tv_enddate"
+                    android:layout_width="57dp"
+                    android:layout_height="19dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="18dp"
+                    android:gravity="center_horizontal"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="38sp"
+                    android:textColor="#5d5d5d"
+                    android:textSize="11sp" />
+
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="26dp"
+                android:lineSpacingExtra="38sp"
+                android:text="일정 시작 시간"
+                android:textColor="#616161"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="125dp"
+                android:layout_marginTop="26dp"
+                android:lineSpacingExtra="38sp"
+                android:text="일정 종료 시간"
+                android:textColor="#616161"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:layout_width="137dp"
+                    android:layout_height="34dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/planlist_round"/>
+
+                <ImageButton
+                    android:id="@+id/imgbt_starttime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="107dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#03FFFFFF"
+                    android:maxWidth="14dp"
+                    android:maxHeight="14dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/img_plan_add_date" />
+
+                <TextView
+                    android:layout_width="57dp"
+                    android:layout_height="19dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="18dp"
+                    android:gravity="center_horizontal"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="38sp"
+                    android:text="dd/dd/dd"
+                    android:textColor="#5d5d5d"
+                    android:textSize="11sp" />
+
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="18dp"
+                android:lineSpacingExtra="38sp"
+                android:text="TO"
+                android:textColor="#bcbcbc"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:layout_width="137dp"
+                    android:layout_height="34dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="22dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/planlist_round"/>
+
+                <ImageButton
+                    android:id="@+id/imgbt_endtime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#03FFFFFF"
+                    android:maxWidth="14dp"
+                    android:maxHeight="14dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/img_plan_add_date" />
+
+                <TextView
+                    android:layout_width="57dp"
+                    android:layout_height="19dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="18dp"
+                    android:gravity="center_horizontal"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="38sp"
+                    android:text="dd/dd/dd"
+                    android:textColor="#5d5d5d"
+                    android:textSize="11sp" />
+
+            </FrameLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_ok"
+            android:layout_width="216dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="70dp"
+            android:layout_gravity="center"
+            android:text="Done"
+            android:textSize="13sp"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="38sp"
+            android:background="@drawable/bt_round"/>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>
