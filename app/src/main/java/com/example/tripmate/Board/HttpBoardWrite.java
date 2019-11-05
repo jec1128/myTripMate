@@ -24,8 +24,8 @@ public class HttpBoardWrite extends Activity{
     public class sendTask extends AsyncTask<String, Void, String> {
         public String doInBackground(String... strings) {
             try {
-                String url = "http://192.168.43.52:8080/TripMateServer/Board/Write.jsp";
-                //122.199.81.73
+                String url = "http://122.199.81.61:8080/TripMateServer/Board/Write.jsp";
+
                 URL obj = null;
                 try {
                     obj = new URL(url);
@@ -40,8 +40,9 @@ public class HttpBoardWrite extends Activity{
                     conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
                     OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
-                    String sendmsg = "id=" + strings[0]+"&password="+strings[1]+"&nickname="+strings[2]+"&age="+strings[3]
-                            +"&gender="+strings[4]+"&email="+strings[5];
+                    String sendmsg = "nickname=" + strings[0]+"&destination="+strings[1]+"&content="+strings[2]+"&gender="+strings[3]
+                            +"&minage="+strings[4]+"&maxage="+strings[5]+"&date="+strings[6]+"&starttime="+strings[7]+"&endtime="+strings[8]
+                            +"&thema1="+strings[9]+"&thema2="+strings[10]+"&thema3="+strings[11];
                     os.write(sendmsg);
                     os.flush();
                     os.close();
@@ -63,9 +64,6 @@ public class HttpBoardWrite extends Activity{
                     String receiveMsg = parsedData(result);
                     return receiveMsg;
 
-
-
-
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -79,7 +77,7 @@ public class HttpBoardWrite extends Activity{
     public String parsedData(String recvMsg){
         JSONArray jarray = null;
         try {
-            jarray = new JSONObject(recvMsg).getJSONArray("register");
+            jarray = new JSONObject(recvMsg).getJSONArray("write");
             JSONObject jsonObject = jarray.getJSONObject(0);
             String receiveMsg = jsonObject.getString("msg");
             return receiveMsg;

@@ -9,14 +9,18 @@ import com.example.tripmate.Board.fragmentBoard;
 import com.example.tripmate.Chat.fragmentChatroom;
 import com.example.tripmate.Chat.fragmentFriend;
 
+import java.util.ArrayList;
+
 
 public class TabPagerAdapter extends FragmentStatePagerAdapter {
-    private int tabCount;
-
-    public TabPagerAdapter(FragmentManager fm, int tabCount) {
+    //  private final ArrayList<Fragment> mFragmentList = new ArrayList<>();
+    private int count;
+    public TabPagerAdapter(FragmentManager fm, int count) {
         super(fm);
-        this.tabCount = tabCount;
+        this.count = count;
     }
+
+
 
     @Override
     public Fragment getItem(int position) {
@@ -24,11 +28,11 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter {
         // Returning the current tabs
         switch (position) {
             case 0:
-                fragmentFriend tabFragment3 = new fragmentFriend();
-                return tabFragment3;
+                fragmentFriend tabFragment1 = new fragmentFriend();
+                return tabFragment1;
             case 1:
                 fragmentBoard tabFragment2 = new fragmentBoard();
-                fragmentActivity4 fragment4 = new fragmentActivity4().newInstance();
+                fragmentActivity4 fragment4 = fragmentActivity4.getInstance();
                 String nickname = fragment4.getNickname();
                 System.out.println("tabpageradapter  " + nickname);
                 Bundle bundle = new Bundle();
@@ -36,8 +40,8 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter {
                 tabFragment2.setArguments(bundle);
                 return tabFragment2;
             case 2:
-                fragmentChatroom tabFragment1 = new fragmentChatroom();
-                return tabFragment1;
+                fragmentChatroom tabFragment3 = new fragmentChatroom();
+                return tabFragment3;
             default:
                 return null;
         }
@@ -45,6 +49,6 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return tabCount;
+        return count;
     }
 }

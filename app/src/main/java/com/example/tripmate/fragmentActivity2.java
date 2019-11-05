@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.tripmate.Plan.AddListActivity;
+
 public class fragmentActivity2  extends Fragment {
 
     @Nullable

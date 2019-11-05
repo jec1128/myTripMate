@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private fragmentActivity1 fragment1 = new fragmentActivity1();
     private fragmentActivity2 fragment2 = new fragmentActivity2();
     private fragmentActivity3 fragment3 = new fragmentActivity3();
-    private fragmentActivity4 fragment4 = new fragmentActivity4();
+    private fragmentActivity4 fragment4 =  fragmentActivity4.getInstance();
     private NearLocationFragment fragment5 = new NearLocationFragment();
 
     @Override

@@ -1,11 +1,9 @@
-package com.example.tripmate.User;
+package com.example.tripmate.Board;
 
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import com.example.tripmate.R;
-
+import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,20 +16,18 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class HttpUserLogin extends Activity {
 
+public class HttpBoardView extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
 
-
     public class sendTask extends AsyncTask<String, Void, String> {
         public String doInBackground(String... strings) {
             try {
+                String url = "http://122.199.81.61:8080/TripMateServer/Board/View.jsp";
 
-
-                String url = "http://122.199.81.61:8080/TripMateServer/User/Login.jsp";
                 URL obj = null;
                 try {
                     obj = new URL(url);
@@ -46,13 +42,13 @@ public class HttpUserLogin extends Activity {
                     conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
                     OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
-                    String sendmsg = "id=" + strings[0] + "&password=" + strings[1];
-
+                    String sendmsg = "boardcode=" + strings[0];
                     os.write(sendmsg);
                     os.flush();
                     os.close();
 
                     int retCode = conn.getResponseCode();
+
                     InputStream is = conn.getInputStream();
                     BufferedReader br = new BufferedReader(new InputStreamReader(is));
                     String line;
@@ -64,9 +60,7 @@ public class HttpUserLogin extends Activity {
                     br.close();
 
                     String result = response.toString();
-                    System.out.println(result);
                     return result;
-
 
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -78,4 +72,5 @@ public class HttpUserLogin extends Activity {
             return null;
         }
     }
+
 }

@@ -51,6 +51,7 @@ public class RegisterActivity extends Activity {
     private AlertDialog dialog;
     private boolean id_validate = false;
     private boolean nickname_validate = false;
+    private static final String TAG = "register Activity : ";
 
     private ImageView profile;
     private Uri imageUri;
@@ -220,7 +221,7 @@ public class RegisterActivity extends Activity {
                                             .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                                    System.out.println("파이어베이스 인증 성공");
+                                                    Log.d(TAG,"파이어베이스 인증 성공");
                                                     final String uid = task.getResult().getUser().getUid();
                                                     final StorageReference profileImageRef = FirebaseStorage.getInstance().getReference().child("userImages").child(uid);
                                                     profileImageRef.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
@@ -233,11 +234,12 @@ public class RegisterActivity extends Activity {
                                                             userModel.setUserName(sendnickname);
                                                             userModel.setProfileImageUrl(imageUrl);
                                                             userModel.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
-
+                                                            Log.d(TAG,"storage에 이미지 넣기 성공");
 
                                                             FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                 @Override
                                                                 public void onSuccess(Void aVoid) {
+                                                                    Log.d(TAG,"파이어베이스 db 추가 성공");
                                                                     System.out.println("파이어베이스 회원가입 성공");
 
                                                                 }
@@ -264,9 +266,7 @@ public class RegisterActivity extends Activity {
                                 } else {
                                     alert("회원 가입", "다시 시도해 주세요");
                                 }
-                            } catch (ExecutionException e) {
-                                e.printStackTrace();
-                            } catch (InterruptedException e) {
+                            } catch (ExecutionException | InterruptedException e) {
                                 e.printStackTrace();
                             }
 

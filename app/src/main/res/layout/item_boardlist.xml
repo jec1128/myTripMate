@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="vertical">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/boardlistitem_textview_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="aaaaaa123123"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="님의 메이트 찾기"
+            android:textSize="10dp"
+            android:layout_toRightOf="@+id/boardlistitem_textview_nickname"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/boardlistitem_textview_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2019.11.10"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+        </TextView>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/boardlistitem_textview_destination"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="서울"
+            android:textSize="22dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp">
+        </TextView>
+
+        <ImageView
+            android:id="@+id/boardlistitem_imageview_gender"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="40dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/img_board_man">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/boardlistitem_textview_minage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25"
+            android:textSize="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="30dp">
+        </TextView>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" ~ "
+            android:textSize="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp">
+        </TextView>
+
+        <TextView
+            android:id="@+id/boardlistitem_textview_maxage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30"
+            android:textSize="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp">
+        </TextView>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="세"
+            android:textSize="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp">
+        </TextView>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/boardlistitem_textview_thema1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="테마1"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/boardlistitem_textview_thema2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="테마2"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="20dp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/boardlistitem_textview_thema3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="테마3"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="20dp">
+
+        </TextView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="2dp">
+    </LinearLayout>
+
+</LinearLayout>
