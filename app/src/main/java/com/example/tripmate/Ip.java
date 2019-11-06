@@ -1,7 +1,7 @@
 package com.example.tripmate;
 
 public class Ip {
-    private static String ip = "122.199.81.61";
+    private static String ip = "192.168.0.6";
 
     public Ip() { }
 

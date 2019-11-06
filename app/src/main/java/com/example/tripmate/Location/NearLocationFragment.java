@@ -16,6 +16,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,6 @@ import java.util.List;
 public class NearLocationFragment extends Fragment implements TMapGpsManager.onLocationChangedCallback{
     private View v;
     private ViewSwitcher switcher;
-
     private LocationManager locationManager;
     private static final int REQUEST_CODE_LOCATION = 2;
 
@@ -51,16 +51,17 @@ public class NearLocationFragment extends Fragment implements TMapGpsManager.onL
     TMapPoint tMapPoint =  null; //new TMapPoint(37.570841, 126.985302);
     private TMapView tMapView;
     private TMapCircle tMapCircle;
+    private Button searchButton;
 
     private TMapGpsManager gpsMaager = null; //단말기 위치 탐색을 위한 변수(api 클래스)
     private Context mContext =null;
 
-    private ArrayList<LocationDataInfo> arrayList;
-    private LocationInfoAPI api;
-
     private FloatingActionButton fab;
 
     private boolean isPerGranted = false;
+
+    //관광정보 관련 API 관련 변수 목록
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -228,54 +229,32 @@ public class NearLocationFragment extends Fragment implements TMapGpsManager.onL
     }
 
     public void addTMapMarkerItem() { //마커 추가
+        Log.i("ddddd","지금출력되고있다");
 
-        //Intent intent = getIntent(); /*데이터 수신*/
-        // final String keyword = intent.getStringExtra("keyword"); /*String형*/
-        arrayList = new ArrayList<>();
-        api = new LocationInfoAPI();
+        new Thread(new Runnable() {
+            public void run() {
+                ArrayList<LocationDataInfo> arraylist = new ArrayList<>();
+                LocationInfoAPI api = new LocationInfoAPI();
+                arraylist.addAll(api.getLocationInfo(126.981611,37.568477,1000));
 
-        arrayList.addAll(api.getLocationInfo(tMapPoint.getLatitude(),tMapPoint.getLongitude()));
-
-        //  new Thread(new Runnable() {
-        //    @Override public void run() {
-        Bitmap bitmap = BitmapFactory.decodeResource(v.getContext().getResources(), R.drawable.custom_marker2);
-
-        Toast toast = Toast.makeText(getContext(), "fsewrweewrd", Toast.LENGTH_LONG);
-        toast.show();
-        for (int i = 0; i < arrayList.size(); i++) {
-            TMapMarkerItem item = new TMapMarkerItem(); //지도 마커 표시 변수 (api 클래스)
-
-            if (arrayList.get(i).getMapX() == 0 || arrayList.get(i).getMapY() == 0) {
-                continue;
-            } else {
-                item.setTMapPoint(new TMapPoint(arrayList.get(i).getMapX(), arrayList.get(i).getMapY()));
-
+                Log.i("sssss",arraylist.get(1).getTitle());
             }
-            item.setIcon(bitmap);
-            item.setVisible(TMapMarkerItem.VISIBLE);
-            item.setName(arrayList.get(i).getTitle());
-            //adapter.addItem(item.getName(),toiletList.get(i).toilet_addr1.equals("")? toiletList.get(i).toilet_addr2:toiletList.get(i).toilet_addr1, distance);
-            tMapView.addMarkerItem((arrayList.get(i).getTitle()), item);
-
-        }
-
-        //  }
-
-        //  }).start();
+        }).start();
     }
 
 
 
     public void onSearchButtonClick(View v){
-        Button searchButton = (Button) v.findViewById(R.id.SearchButton);
-
-
+        searchButton = (Button) v.findViewById(R.id.SearchButton);
+        addTMapMarkerItem();
+        /*
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addTMapMarkerItem();
             }
         });
+        */
     }
 
 }

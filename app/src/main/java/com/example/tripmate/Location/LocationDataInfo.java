@@ -24,6 +24,7 @@ public class LocationDataInfo {
     public void setAddress2(String address2) {
         this.address2 = address2;
     }
+
     public String getFirstimage() {
         return firstimage;
     }
