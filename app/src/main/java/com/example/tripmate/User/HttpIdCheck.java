@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-
-import com.example.tripmate.R;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,7 +26,7 @@ public class HttpIdCheck extends Activity {
     public class sendTask extends AsyncTask<String, Void, String> {
         public String doInBackground(String... strings) {
             try {
-                String url = "http://122.199.81.61:8080/TripMateServer/User/ReceiveUserId.jsp";
+                String url = "http://192.168.214.146:8080/TripMateServer/User/ReceiveUserId.jsp";
                 URL obj = null;
                 try {
                     obj = new URL(url);
