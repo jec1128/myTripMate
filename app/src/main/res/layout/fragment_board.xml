@@ -8,18 +8,6 @@
     android:orientation="vertical"
     tools:context=".Board.fragmentBoard">
 
-    <Button
-        android:id="@+id/boardfragment_button_write"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginLeft="230dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/bt_round"
-        android:text="글 쓰기">
-
-    </Button>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/boardfragment_recyclerview"
@@ -27,6 +15,19 @@
         android:layout_height="wrap_content">
 
     </android.support.v7.widget.RecyclerView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/boardfragment_button_write"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorAccent"
+        android:clickable="true"
+        android:focusable="true"
+        app:srcCompat="@drawable/img_board_write"
+        tools:layout_editor_absoluteX="318dp"
+        tools:layout_editor_absoluteY="530dp" />
 
 
 </LinearLayout>

@@ -24,7 +24,7 @@ public class HttpBoardWrite extends Activity{
     public class sendTask extends AsyncTask<String, Void, String> {
         public String doInBackground(String... strings) {
             try {
-                String url = "http://122.199.81.61:8080/TripMateServer/Board/Write.jsp";
+                String url = "http://192.168.214.146:8080/TripMateServer/Board/Write.jsp";
 
                 URL obj = null;
                 try {

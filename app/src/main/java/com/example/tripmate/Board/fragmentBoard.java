@@ -34,7 +34,7 @@ public class fragmentBoard extends Fragment {
     private RecyclerView recyclerView;
     private View view;
 
-    public static fragmentBoard getInstance(){
+    public static fragmentBoard getInstance() {
         if(instance == null){
             instance = new fragmentBoard();
             return instance;
@@ -47,6 +47,7 @@ public class fragmentBoard extends Fragment {
         view = inflater.inflate(R.layout.fragment_board, container, false);
         // Inflate the layout for this fragment
         Bundle extra = this.getArguments();
+
         if (extra != null) {
             extra = getArguments();
             nickname = extra.getString("nickname");

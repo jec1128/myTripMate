@@ -23,6 +23,7 @@ public class LocationInfoAPI {
          * contentTypeID : 12(관광지), 14(문화시설), 15(축제/공연/행사), 25(여행코스), 28(레포츠), 32(숙박),
          * 38(쇼핑), 39(음식)
          */
+
         String contentTypeId = "12";
 
         ArrayList<LocationDataInfo> dto = new ArrayList();
@@ -30,10 +31,11 @@ public class LocationInfoAPI {
         try {
             String urlStr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?ServiceKey="
                     + serviceKey
-                    + "&MobileApp=AppTest&MobileOS=ETC&pageNo=1&numOfRows=10&listYN=Y&arrange=A&contentTypeId=&mapX=&mapY=1&radius="
+                    + "&MobileApp=AppTest&MobileOS=ETC&pageNo=1&numOfRows=10&listYN=Y&arrange=A&contentTypeId=&mapX=&mapY=1&radius=2000&contentTypeId="
                     + contentTypeId +"&_type=json";
 
             URL url = new URL(urlStr);
+
             Log.i("TDB",urlStr);
 
             //36.145981
