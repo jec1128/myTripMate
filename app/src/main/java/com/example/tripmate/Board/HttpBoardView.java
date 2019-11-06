@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.example.tripmate.Ip;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +29,10 @@ public class HttpBoardView extends Activity{
     public class sendTask extends AsyncTask<String, Void, String> {
         public String doInBackground(String... strings) {
             try {
-                String url = "http://122.199.81.61:8080/TripMateServer/Board/View.jsp";
+                Ip i = new Ip();
+                String ip = i.getIP();
+                String url = "http://"+ip+":8080/TripMateServer/Board/View.jsp";
+                //String url = "http://192.168.214.146:8080/TripMateServer/Board/View.jsp";
 
                 URL obj = null;
                 try {

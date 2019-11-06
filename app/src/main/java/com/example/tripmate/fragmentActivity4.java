@@ -95,4 +95,5 @@ public class fragmentActivity4 extends Fragment {
     public static String getNickname() {
         return nickname;
     }
+
 }
