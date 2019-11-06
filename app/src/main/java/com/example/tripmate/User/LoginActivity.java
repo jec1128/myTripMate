@@ -36,6 +36,7 @@ public class LoginActivity extends Activity {
     private String nickname;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
+    private String ip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

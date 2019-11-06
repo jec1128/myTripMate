@@ -1,11 +1,8 @@
-package com.example.tripmate.User;
+package com.example.tripmate.Board;
 
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import com.example.tripmate.R;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,20 +15,19 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class HttpUserLogin extends Activity {
+
+public class HttpBoardList extends Activity{
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
 
-
     public class sendTask extends AsyncTask<String, Void, String> {
         public String doInBackground(String... strings) {
             try {
+                String url = "http://122.199.81.61:8080/TripMateServer/Board/ShowList.jsp";
 
-
-                String url = "http://122.199.81.61:8080/TripMateServer/User/Login.jsp";
                 URL obj = null;
                 try {
                     obj = new URL(url);
@@ -46,13 +42,13 @@ public class HttpUserLogin extends Activity {
                     conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
                     OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
-                    String sendmsg = "id=" + strings[0] + "&password=" + strings[1];
-
+                    String sendmsg = "pagenumber=" + strings[0];
                     os.write(sendmsg);
                     os.flush();
                     os.close();
 
                     int retCode = conn.getResponseCode();
+
                     InputStream is = conn.getInputStream();
                     BufferedReader br = new BufferedReader(new InputStreamReader(is));
                     String line;
@@ -65,7 +61,35 @@ public class HttpUserLogin extends Activity {
 
                     String result = response.toString();
                     System.out.println(result);
-                    return result;
+
+                    JSONArray jarray = null;
+                    jarray = new JSONObject(result).getJSONArray("show");
+
+                    final BoardListAdapter adapter = BoardListAdapter.getInstance();
+
+                    for(int i = 0 ; i < jarray.length(); i++){
+                        JSONObject jsonObject = jarray.getJSONObject(i);
+                        String boardCode = jsonObject.getString("boardcode");
+                        String destination = jsonObject.getString("destination");
+                        String nickname = jsonObject.getString("nickname");
+                        String date = jsonObject.getString("date");
+                        int minage = jsonObject.getInt("minage");
+                        int maxage = jsonObject.getInt("maxage");
+                        int gender = jsonObject.getInt("gender");
+                        String thema1 = jsonObject.getString("thema1");
+                        String thema2 = jsonObject.getString("thema2");
+                        String thema3 = jsonObject.getString("thema3");
+                        BoardModel boardModel = new BoardModel(boardCode,nickname,destination,gender,minage,maxage,thema1,thema2,thema3,date);
+                        adapter.addBoardList(i,boardModel);
+                    }
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter.notifyDataSetChanged();
+                        }
+                    });
+
 
 
                 } catch (IOException ex) {
@@ -77,5 +101,10 @@ public class HttpUserLogin extends Activity {
             }
             return null;
         }
+
+
     }
+
+
+
 }

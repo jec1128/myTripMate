@@ -1,28 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/sv_plan"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-
-
+    android:orientation="vertical">
+    <!--android:id="@+id/layout_planlist"-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="true"
         android:focusableInTouchMode="true">
 
-       <android.support.v7.widget.RecyclerView
-            android:id="@+id/rc_list"
+
+        <EditText
+            android:id="@+id/et_psch"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="33dp"
-            android:clipToPadding="false"
-            android:scrollbars="vertical">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="32dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="63dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/plansearch_round"
+            android:gravity="center_vertical"
+            android:hint="찾고 싶은 일정을 찾아보세요"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:lineSpacingExtra="39sp"
+            android:paddingLeft="22dp"
+            android:privateImeOptions="defaultInputmode=korean"
+            android:singleLine="true"
+            android:textSize="12sp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="72dp"
+            android:layout_marginRight="52dp"
+            android:adjustViewBounds="true"
+            android:background="#6ec8fd"
+            android:maxWidth="14dp"
+            android:maxHeight="14dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img_plan_date" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="72dp"
+            android:layout_marginRight="29dp"
+            android:adjustViewBounds="true"
+            android:background="#6ec8fd"
+            android:maxWidth="14dp"
+            android:maxHeight="14dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img_planlist_search" />
+
     </FrameLayout>
+    <!--<Button
+        android:id="@+id/imgbt_add"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="11.2dp"
+        android:background="#00000000"
+        android:drawableTop="@drawable/img_planlist_plus" />-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rc_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="33dp"
+                android:clipToPadding="false"
+                android:scrollbars="vertical">
+
+            </android.support.v7.widget.RecyclerView>
+        </FrameLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_addlist"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="80dp"
+            android:background="@color/colorAccent"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onFabClick"
+            app:srcCompat="@drawable/img_planlist_plus"
+            tools:layout_editor_absoluteX="318dp"
+            tools:layout_editor_absoluteY="530dp" />
+
+    </RelativeLayout>
+
 
 </LinearLayout>

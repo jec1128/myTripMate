@@ -47,11 +47,13 @@ public class fragmentFriend extends Fragment {
 
     class PeopleFragmentRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-        List<UserModel> userModels;
+        List<UserModel> userModels = null;
+        String myUid;
 
         public PeopleFragmentRecyclerViewAdapter() {
             userModels = new ArrayList<>();
-            final String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+            myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
             FirebaseDatabase.getInstance().getReference().child("users").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {

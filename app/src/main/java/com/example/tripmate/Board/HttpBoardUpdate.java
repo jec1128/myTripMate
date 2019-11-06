@@ -1,11 +1,9 @@
-package com.example.tripmate.User;
+package com.example.tripmate.Board;
 
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import com.example.tripmate.R;
-
+import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,20 +16,17 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class HttpUserLogin extends Activity {
-
+public class HttpBoardUpdate extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
 
-
     public class sendTask extends AsyncTask<String, Void, String> {
         public String doInBackground(String... strings) {
             try {
+                String url = "http://122.199.81.61:8080/TripMateServer/Board/Update.jsp";
 
-
-                String url = "http://122.199.81.61:8080/TripMateServer/User/Login.jsp";
                 URL obj = null;
                 try {
                     obj = new URL(url);
@@ -46,13 +41,15 @@ public class HttpUserLogin extends Activity {
                     conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
                     OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
-                    String sendmsg = "id=" + strings[0] + "&password=" + strings[1];
-
+                    String sendmsg = "boardcode=" + strings[0]+"&nickname=" + strings[1]+"&destination="+strings[2]+"&content="+strings[3]+"&gender="+strings[4]
+                            +"&minage="+strings[5]+"&maxage="+strings[6]+"&date="+strings[7]+"&starttime="+strings[8]+"&endtime="+strings[9]
+                            +"&thema1="+strings[10]+"&thema2="+strings[11]+"&thema3="+strings[12];
                     os.write(sendmsg);
                     os.flush();
                     os.close();
 
                     int retCode = conn.getResponseCode();
+
                     InputStream is = conn.getInputStream();
                     BufferedReader br = new BufferedReader(new InputStreamReader(is));
                     String line;
@@ -65,8 +62,8 @@ public class HttpUserLogin extends Activity {
 
                     String result = response.toString();
                     System.out.println(result);
-                    return result;
-
+                    String receiveMsg = parsedData(result);
+                    return receiveMsg;
 
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -77,5 +74,18 @@ public class HttpUserLogin extends Activity {
             }
             return null;
         }
+    }
+    public String parsedData(String recvMsg){
+        JSONArray jarray = null;
+        try {
+            jarray = new JSONObject(recvMsg).getJSONArray("update");
+            JSONObject jsonObject = jarray.getJSONObject(0);
+            String receiveMsg = jsonObject.getString("msg");
+            return receiveMsg;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
 
+import com.example.tripmate.MainActivity;
 import com.example.tripmate.R;
 import com.example.tripmate.User.HttpUserRegister;
 import com.example.tripmate.User.RegisterActivity;
@@ -43,20 +46,21 @@ public class BoardWriteActivity extends AppCompatActivity {
     private EditText age_start;
     private EditText age_end;
     private Button write;
-    private RadioGroup gender;
     private RadioButton man;
     private RadioButton woman;
     private RadioButton all;
     private Date now;
     private Dialog dialog;
+    private String nickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board_write);
         Intent intent = getIntent();
-        String nickname = intent.getExtras().getString("nickname");
+        nickname = intent.getExtras().getString("nickname");
         System.out.println("boardwriteactivity" + nickname);
+
         destination = findViewById(R.id.BoardWriteActivity_text_where);
         content = findViewById(R.id.BoardWriteActivity_text_content);
         age_start = findViewById(R.id.BoardWriteActivity_edittext_age_start);
@@ -113,7 +117,7 @@ public class BoardWriteActivity extends AppCompatActivity {
                 mTimePicker = new TimePickerDialog(BoardWriteActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        time_start.setText(selectedHour + "시 " + selectedMinute + "분");
+                        time_start.setText(selectedHour + "시" + selectedMinute + "분");
                         startDate.set(startyear, startmonth, startday, selectedHour, selectedMinute);
                         // EditText에 출력할 형식 지정
                     }
@@ -135,7 +139,7 @@ public class BoardWriteActivity extends AppCompatActivity {
                 mTimePicker = new TimePickerDialog(BoardWriteActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        time_end.setText(selectedHour + "시 " + selectedMinute + "분");
+                        time_end.setText(selectedHour + "시" + selectedMinute + "분");
 
                         // EditText에 출력할 형식 지정
                     }
@@ -162,8 +166,8 @@ public class BoardWriteActivity extends AppCompatActivity {
                     alert("글 쓰기", "모든칸을 다 채워주세요");
                 }
                     else{
-                        int minage = Integer.parseInt(age_start.getText().toString());
-                        int maxage = Integer.parseInt(age_end.getText().toString());
+                        final int minage = Integer.parseInt(age_start.getText().toString());
+                        final int maxage = Integer.parseInt(age_end.getText().toString());
                         if (minage > maxage){
                             alert("글 쓰기", "최소나이가 최대나이보다 클 수 없습니다");
                         }
@@ -199,51 +203,79 @@ public class BoardWriteActivity extends AppCompatActivity {
                             if (cb6.isChecked()) {
                                 checkCount++;
                             }
-                            ArrayList<String> interest = new ArrayList<>(3);
+                            final ArrayList<String> thema = new ArrayList<>(3);
                             if (checkCount > 3 || checkCount == 0) {
                                 alert("체크 갯수 제한","1,2,3개만 입력하세요");
                             } else{
-                                man = findViewById(R.id.RegisterActivity_radio_man);
-                                woman = findViewById(R.id.RegisterActivity_radio_woman);
+                                man = findViewById(R.id.BoardWriteActivity_radio_man);
+                                woman = findViewById(R.id.BoardWriteActivity_radio_woman);
+                                all = findViewById(R.id.BoardWriteActivity_radio_all);
 
-                                String senddestination = destination.getText().toString();
+                                final String senddestination = destination.getText().toString();
 
-                                String sendcontent = content.getText().toString();
-                                String sendgender = null;
+                                final String sendcontent = content.getText().toString();
+                                String sendgender1 = null;
                                 if (man.isChecked())
-                                    sendgender = "0";
+                                    sendgender1 = "0";
                                 else if (woman.isChecked())
-                                    sendgender = "1";
+                                    sendgender1 = "1";
                                 else if (all.isChecked())
-                                    sendgender = "2";
-                                String sendminage = age_start.getText().toString();
-                                String sendmaxage=age_end.getText().toString();
+                                    sendgender1 = "2";
+                                final int sendgender = Integer.parseInt(sendgender1);
+                                final String sendminage = age_start.getText().toString();
 
-                                String senddate = date_start.getText().toString();
-                                String sendstarttime= time_start.getText().toString();
-                                String sendendtime = time_end.getText().toString();
+                                final String sendmaxage=age_end.getText().toString();
 
-                                if (cb1.isChecked() == true) interest.add(cb1.getText().toString());
-                                if (cb2.isChecked() == true) interest.add(cb2.getText().toString());
-                                if (cb3.isChecked() == true) interest.add(cb3.getText().toString());
-                                if (cb4.isChecked() == true) interest.add(cb4.getText().toString());
-                                if (cb5.isChecked() == true) interest.add(cb5.getText().toString());
-                                if (cb6.isChecked() == true) interest.add(cb6.getText().toString());
+                                final String senddate = date_start.getText().toString();
+                                final String sendstarttime= time_start.getText().toString();
+                                final String sendendtime = time_end.getText().toString();
+
+                                final String date;
+                                String date1;
+                                date1 = senddate.replace("년","-");
+                                date1 = date1.replace("월","-");
+                                date1 = date1.replace("일","");
+                                date = date1;
+
+
+                                if (cb1.isChecked() == true) thema.add(cb1.getText().toString());
+                                if (cb2.isChecked() == true) thema.add(cb2.getText().toString());
+                                if (cb3.isChecked() == true) thema.add(cb3.getText().toString());
+                                if (cb4.isChecked() == true) thema.add(cb4.getText().toString());
+                                if (cb5.isChecked() == true) thema.add(cb5.getText().toString());
+                                if (cb6.isChecked() == true) thema.add(cb6.getText().toString());
                                 String result = null;
 
-                                HttpUserRegister httpUserDataActivity = new HttpUserRegister();
-                                HttpUserRegister.sendTask send = httpUserDataActivity.new sendTask();
+                                HttpBoardWrite httpBoardWriteActivity = new HttpBoardWrite();
+                                HttpBoardWrite.sendTask send = httpBoardWriteActivity.new sendTask();
                                 try {
-                                    if(interest.size() == 1)
-                                        result = send.execute(senddestination, sendcontent, sendgender, sendminage, sendmaxage, senddate,sendstarttime,sendendtime, interest.get(0)," "," ").get();
-                                    else if (interest.size() == 2)
-                                        result = send.execute(senddestination, sendcontent, sendgender, sendminage, sendmaxage, senddate,sendstarttime,sendendtime, interest.get(0),interest.get(1)," ").get();
-                                    else if (interest.size() == 3)
-                                        result = send.execute(senddestination, sendcontent, sendgender, sendminage, sendmaxage, senddate,sendstarttime,sendendtime, interest.get(0),interest.get(1),interest.get(2)).get();
+                                    if(thema.size() == 1)
+                                        result = send.execute(nickname,senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate,sendstarttime,sendendtime, thema.get(0)," "," ").get();
+                                    else if (thema.size() == 2)
+                                        result = send.execute(nickname,senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate,sendstarttime,sendendtime, thema.get(0),thema.get(1)," ").get();
+                                    else if (thema.size() == 3)
+                                        result = send.execute(nickname,senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate,sendstarttime,sendendtime, thema.get(0),thema.get(1),thema.get(2)).get();
 
                                     if("success".equals(result)){
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(BoardWriteActivity.this);
+                                        builder.setTitle("게시판").setMessage("게시글 등록이 완료되었습니다");
+                                        final String finalDate = date;
+                                        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                              final BoardListAdapter adapter = BoardListAdapter.getInstance();
+                                              adapter.removeAllItem();
+                                              adapter.httpwork();
 
+                                              onBackPressed();
+                                            }
+                                        });
+                                        dialog = builder.create();
+                                        dialog.show();
+
+                                    } else {
+                                        alert("게시판", "다시 시도해 주세요");
                                     }
+
                                 } catch (ExecutionException | InterruptedException e) {
                                     e.printStackTrace();
                                 }

@@ -20,7 +20,7 @@ import com.skt.Tmap.TMapMarkerItem;
 import com.skt.Tmap.TMapPoint;
 
 public class NearLocationFragment extends Fragment{
-    private View v;
+   /* private View v;
     private ViewSwitcher switcher;
 
     private TMapGpsManager gpsMarker = null; //mymarker
@@ -76,14 +76,14 @@ public class NearLocationFragment extends Fragment{
         tMapMarkerItem.setName("임의의 위치"); //마커의 타이틀 지정
         tMapView.addMarkerItem("tMapMarkerItem",tMapMarkerItem); //지도에 마커추가
 
-       /* tMapView.setCenterPoint(126.985302, 37.570841 );
+       *//* tMapView.setCenterPoint(126.985302, 37.570841 );
 
         tMapCircle.setCenterPoint(gpsMarker.getLocation());
         tMapCircle.setAreaColor(Color.GRAY);
         tMapCircle.setAreaAlpha(100);
         tMapCircle.setRadius(2000);
         tMapCircle.setRadiusVisible(true);
-        tMapView.addTMapCircle("범위",tMapCircle);*/
+        tMapView.addTMapCircle("범위",tMapCircle);*//*
     }
 
     public void onSwitchButtonClick1(View v){ //리스트뷰전환 버튼 클릭이벤트 추가
@@ -121,12 +121,7 @@ public class NearLocationFragment extends Fragment{
 
 
     }
-
-
-
-
-
-
+    */
 
 
 }

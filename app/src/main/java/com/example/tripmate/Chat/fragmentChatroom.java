@@ -142,8 +142,6 @@ public class fragmentChatroom extends Fragment {
                 }
             });
 
-
-
             simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
             long unixTime = (long) chatModels.get(position).comments.get(lastMessageKey).timestamp;
             Date date = new Date(unixTime);
