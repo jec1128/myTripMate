@@ -10,10 +10,10 @@
 
 
     <ViewSwitcher
-                android:id="@+id/switch_layout"
-                 android:layout_width="match_parent"
-                 android:layout_height="0dp"
-                android:layout_weight="8">
+        android:id="@+id/switch_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8">
 
         <RelativeLayout
             android:id="@+id/linearLayoutTmap"
@@ -33,22 +33,36 @@
                 android:visibility="gone" />
 
 
-                <Button
-                    android:id="@+id/switchListButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="270dp"
-                    android:layout_marginTop="70dp"
-                    android:background="@drawable/list_change_button"
-                    android:textColor="#FFFFFF"
+            <Button
+                android:id="@+id/switchListButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="270dp"
+                android:layout_marginTop="70dp"
+                android:background="@drawable/list_change_button"
+                android:textColor="#FFFFFF"
 
-                    android:onClick="onSwitchButtonClick"
-                    android:text="ListView" />
+                android:onClick="onSwitchButtonClick"
+                android:text="ListView" />
+
+            <Button
+                android:id="@+id/SearchButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="70dp"
+                android:background="@drawable/list_change_button"
+                android:textColor="#FFFFFF"
+
+                android:onClick="onSearchButtonClick"
+                android:text="Search" />
+
+
 
 
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/floatingActionButton"
+                android:id="@+id/fab"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_alignParentEnd="true"
@@ -58,40 +72,43 @@
                 android:background="@color/colorAccent"
                 android:clickable="true"
                 android:focusable="true"
-                android:onClick="onFabClick"
+
                 app:srcCompat="@drawable/ic_round_my_location_24px"
                 tools:layout_editor_absoluteX="318dp"
                 tools:layout_editor_absoluteY="530dp" />
+
 
         </RelativeLayout>
 
 
         <RelativeLayout
-                     android:id="@+id/list_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                     <Button
-                         android:id="@+id/switchMapButton"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:layout_marginLeft="270dp"
-                         android:layout_marginTop="70dp"
-                         android:background="@drawable/list_change_button"
-                         android:textColor="#FFFFFF"
-                       android:onClick="onSwitchButtonClick"
-                         android:text="MapView" />
+            android:id="@+id/list_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/switchMapButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="270dp"
+                android:layout_marginTop="70dp"
+                android:background="@drawable/list_change_button"
+                android:textColor="#FFFFFF"
+                android:onClick="onSwitchButtonClick"
+                android:text="MapView" />
 
-                     <ListView
-                         android:id="@+id/location_list"
-                         android:layout_below="@+id/switchMapButton"
-                        android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:background="#FFFFFF">
-                    </ListView>
+            <ListView
+                android:id="@+id/location_list"
+                android:layout_below="@+id/switchMapButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF">
+            </ListView>
 
-                 </RelativeLayout>
+        </RelativeLayout>
 
-             </ViewSwitcher>
+
+
+    </ViewSwitcher>
 
 
 
