@@ -50,7 +50,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View view) {
                 if ((TextUtils.isEmpty(id.getText()) || TextUtils.isEmpty(password.getText()))) {
-                    alert("로그인", "ID와 비밀번호를 입력해주세요");
+                    alert("로그인", "아이디와 비밀번호를 입력해주세요");
                 } else {
                     String sendid = id.getText().toString();
                     String sendpassword = password.getText().toString();
@@ -105,7 +105,7 @@ public class LoginActivity extends Activity {
                             dialog = builder.create();
                             dialog.show();
                         } else if ("no-id".equals(receiveMsg)) {
-                            alert("로그인", "해당 id가 없습니다");
+                            alert("로그인", "해당 아이디가 없습니다");
                         } else if ("password-wrong".equals(receiveMsg)) {
                             alert("로그인", "비밀번호가 틀렸습니다");
                         } else if ("error".equals(receiveMsg)) {

@@ -1,3 +1,4 @@
+/*지역 리스트를 보여주기위한 어뎁터*/
 package com.example.tripmate.Main;
 
 import android.content.Context;

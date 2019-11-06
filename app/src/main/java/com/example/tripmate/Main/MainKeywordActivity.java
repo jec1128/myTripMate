@@ -1,3 +1,5 @@
+/* 관광지 리스트를 보여주는 화면 */
+
 package com.example.tripmate.Main;
 
 import android.content.Intent;
@@ -7,6 +9,7 @@ import android.text.Html;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.tripmate.R;
 import com.example.tripmate.TourAPI.TripDataInfo;
@@ -21,7 +24,7 @@ public class MainKeywordActivity extends AppCompatActivity {
     private KeywordListAdapter adapter;      // 리스트뷰에 연결할 아답터
     private ArrayList<TripDataInfo> arraylist;
     private TripInfoAPI api;
-
+    private TextView textview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,9 @@ public class MainKeywordActivity extends AppCompatActivity {
         arraylist = new ArrayList<>();
         Log.i("ddddd","지금출력되고있다");
 
+        textview = (TextView)findViewById(R.id.top_title);
+        textview.setText(keyword);
+
         new Thread(new Runnable() {
             public void run() {
                 arraylist = new ArrayList<>();
@@ -51,8 +57,9 @@ public class MainKeywordActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
                         for(int i = 0; i < arraylist.size(); i++) {
-                            adapter.addItem(arraylist.get(i).getTitle(),arraylist.get(i).getAddress1(),arraylist.get(i).getAddress2(),arraylist.get(i).getTitle());
+                            adapter.addItem(arraylist.get(i).getTitle(),arraylist.get(i).getAddress1(),arraylist.get(i).getAddress2(),arraylist.get(i).getImgURL(),arraylist.get(i).getTitle());
                         }
                         adapter.notifyDataSetChanged();
                     }

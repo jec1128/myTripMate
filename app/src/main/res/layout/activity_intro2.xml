@@ -4,25 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/nico"
+    android:background="@drawable/img_bg"
     >
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@drawable/logo2"
         android:paddingTop="100dp"
-        >
-    </ImageView>
+        android:src="@drawable/logo2"></ImageView>
 
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="260dp"
-        android:layout_height="43dp"
+        android:fontFamily="@font/notosans_light"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:textColor="#616161"
         android:layout_gravity="center"
-        android:background="@drawable/login_bar"
+        android:backgroundTint="#fff"
+        android:background="@drawable/round_style"
+        android:text="Sing in"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_marginTop="100dp"
 
         >
@@ -30,11 +33,16 @@
 
     <Button
         android:id="@+id/registerButton"
-        android:layout_width="260dp"
-        android:layout_height="43dp"
+        android:fontFamily="@font/notosans_light"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/register_bar"
-        android:layout_marginTop="30dp"
+        android:backgroundTint="#fff"
+        android:background="@drawable/round_style"
+        android:text="Sing UP"
+        android:textColor="#616161"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_marginTop="10dp"
 
         >
     </Button>

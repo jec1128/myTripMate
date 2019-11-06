@@ -5,35 +5,35 @@
     <item
         android:id="@+id/action_home"
         android:title="Home"
-        android:icon="@drawable/home"
+        android:icon="@drawable/home_btn_hover"
         >
     </item>
 
     <item
         android:id="@+id/action_home2"
         android:title="Home2"
-        android:icon="@drawable/schedule"
+        android:icon="@drawable/share_btn_hover"
         >
     </item>
 
     <item
         android:id="@+id/action_home3"
         android:title="Home3"
-        android:icon="@drawable/schedule_add"
+        android:icon="@drawable/tripplan_btn_hover"
         >
     </item>
 
     <item
         android:id="@+id/action_home4"
         android:title="Home4"
-        android:icon="@drawable/mate"
+        android:icon="@drawable/mate_btn_hover"
         >
     </item>
 
     <item
         android:id="@+id/action_home5"
         android:title="Home5"
-        android:icon="@drawable/location"
+        android:icon="@drawable/location_btn_hover"
         >
     </item>
 

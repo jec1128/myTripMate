@@ -83,7 +83,7 @@ public class RegisterActivity extends Activity {
             public void onClick(View view) {
                 Log.i("register", "중복 확인 버튼을 누름");
                 if (TextUtils.isEmpty(id.getText())) {
-                    alert("id", "id를 입력하세요");
+                    alert("아이디 입력", "아이디를 입력하세요");
                 } else {
 
                     try {
@@ -95,9 +95,9 @@ public class RegisterActivity extends Activity {
                         System.out.println(result);
                         if ("success".equals(result)) {
                             id_validate = true;
-                            alert("id", "id 중복검사 완료");
+                            alert("아이디 입력", "아이디 중복검사 완료");
                         } else {
-                            alert("id", "id중복!!! id를 바꿔주세요");
+                            alert("아이디 입력", "사용할 수 없는 아이디입니다.");
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -112,7 +112,7 @@ public class RegisterActivity extends Activity {
             public void onClick(View view) {
                 Log.i("register", "중복 확인 버튼을 누름");
                 if (TextUtils.isEmpty(nickname.getText())) {
-                    alert("Nickname", "Nickname을 입력하세요");
+                    alert("닉네임 입력", "닉네임을 입력하세요");
                 } else {
 
                     try {
@@ -124,9 +124,9 @@ public class RegisterActivity extends Activity {
                         System.out.println("회원가입 결과 : " + result);
                         if ("success".equals(result)) {
                             nickname_validate = true;
-                            alert("Nickname", "Nickname 중복검사 완료");
+                            alert("닉네임 입력", "닉네임 중복검사 완료");
                         } else {
-                            alert("Nickname", "Nickname 중복!!! Nickname을 바꿔주세요");
+                            alert("닉네임 입력", "사용할 수 없는 닉네임입니다.");
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -140,10 +140,10 @@ public class RegisterActivity extends Activity {
             @Override
             public void onClick(View view) {
                 if ((TextUtils.isEmpty(age.getText()) || TextUtils.isEmpty(password.getText()) || TextUtils.isEmpty(email.getText())) || imageUri == null) {
-                    alert("회원 가입", "모든칸을 다 채워주세요");
+                    alert("회원 가입", "모든 입력을 완료 해주세요");
                 } else {
                     if (id_validate == false || nickname_validate == false) {
-                        alert("회원 가입", "중복검사를 다 해주세요");
+                        alert("회원 가입", "중복검사가 완료되어야 합니다.");
                     } else {
                         if (password.getText().toString().length() < 6) {
                             alert("비밀번호", "비밀번호를 6자 이상으로 해주세요"); // 파이어베이스 인증할때 비밀번호 6자보다 적으면 에러발생

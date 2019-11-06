@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:descendantFocusability="blocksDescendants">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -23,7 +22,8 @@
             android:lineSpacingExtra="39sp"
             android:paddingLeft="40dp"
             android:privateImeOptions="defaultInputmode=korean"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            />
 
         <ImageButton
             android:id="@+id/id_search_button"
@@ -45,7 +45,8 @@
         android:layout_width="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_height="wrap_content"
-        android:id="@+id/mainListView">
+        android:id="@+id/mainListView"
+        android:descendantFocusability="beforeDescendants">
 
     </ListView>
 

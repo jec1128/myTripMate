@@ -6,7 +6,8 @@
     android:id="@+id/sv_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragmentActivity1">
+    tools:context=".fragmentActivity1"
+    android:paddingTop="?android:attr/actionBarSize">
 
 
     <LinearLayout
@@ -14,7 +15,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:scrollbars="vertical">
-
 
         <FrameLayout
             android:layout_width="wrap_content"

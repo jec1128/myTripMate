@@ -1,5 +1,8 @@
+/* 지역 키워드를 보여주는 화면 */
+
 package com.example.tripmate.Main;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +12,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -42,6 +46,7 @@ public class MainSearchListActivity extends AppCompatActivity {
         editSearch = (EditText) findViewById(R.id.mainSerchBox);
         listView = (ListView) findViewById(R.id.mainListView);
 
+        editSearch.requestFocus();
         // 검색에 사용할 데이터을 미리 저장한다.
         settingList();
 
@@ -54,6 +59,7 @@ public class MainSearchListActivity extends AppCompatActivity {
 
         // 리스트뷰에 아답터를 연결한다.
         listView.setAdapter(adapter);
+        listView.setItemsCanFocus(true);
 
         // input창에 검색어를 입력시 "addTextChangedListener" 이벤트 리스너를 정의한다.
         editSearch.addTextChangedListener(new TextWatcher() {
@@ -84,6 +90,7 @@ public class MainSearchListActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainSearchListActivity.this,MainKeywordActivity.class);
                 intent.putExtra("keyword", keyword);
                 startActivity(intent);
+
                 finish();
             }
         });
@@ -130,6 +137,5 @@ public class MainSearchListActivity extends AppCompatActivity {
         list.add("춘천");
         list.add("강릉");
     }
-
 
 }

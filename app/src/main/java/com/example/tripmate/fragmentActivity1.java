@@ -1,3 +1,5 @@
+/* 화면 : 메인 */
+
 package com.example.tripmate;
 
 import android.content.Intent;

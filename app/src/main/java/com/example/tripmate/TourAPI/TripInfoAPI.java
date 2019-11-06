@@ -35,7 +35,7 @@ public class TripInfoAPI  {
 			String keywords = URLEncoder.encode(keyword, "UTF-8");
 			String urlStr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword?serviceKey="
 					+ serviceKey
-					+ "&MobileApp=AppTest&MobileOS=ETC&pageNo=1&numOfRows=10&listYN=Y&arrange=A&contentTypeId="
+					+ "&MobileApp=AppTest&MobileOS=ETC&pageNo=1&numOfRows=100&listYN=Y&arrange=A&contentTypeId="
 					+ contentTypeId+"&keyword="+keywords +"&_type=json";
 
 			URL url = new URL(urlStr);
@@ -84,7 +84,12 @@ public class TripInfoAPI  {
 				TripDataInfo info = new TripDataInfo();
 				JSONObject tripObject = (JSONObject) InfoArray.get(i);
 
-				info.setAddress1(tripObject.getString("addr1"));
+				if(tripObject.isNull("addr1")) {
+					info.setAddress2("주소가 없음");
+				} else {
+
+					info.setAddress1(tripObject.getString("addr1"));
+				}
 
 				if(tripObject.isNull("addr2")) {
 					info.setAddress2("주소가 없음");

@@ -26,7 +26,7 @@ public class HttpNicknameCheck extends Activity {
     public class sendTask extends AsyncTask<String, Void, String> {
         public String doInBackground(String... strings) {
             try {
-                String url = "http://192.168.43.52:8080/TripMateServer/User/ReceiveUserNickname.jsp";
+                String url = "http://192.168.214.146:8080/TripMateServer/User/ReceiveUserNickname.jsp";
                 //학교 192.168.218.112
                 URL obj = null;
                 try {

@@ -1,63 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/img_bg_dark">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:orientation="vertical">
+            android:fontFamily="@font/notosans_bold"
+            android:text="Welcom Back"
+            android:layout_marginLeft="68dp"
+            android:textSize="32dp"
+            android:layout_marginTop="120dp"
+            android:textColor="#fff"
+            android:gravity="left"
+            android:includeFontPadding="false"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="Login"
-                android:textColor="#ffffff"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans_light"
+            android:text="TripMate"
+            android:layout_marginLeft="68dp"
+            android:textSize="32dp"
+            android:layout_marginTop="-10dp"
+            android:textColor="#fff"
+            android:gravity="left"
+            android:includeFontPadding="false"/>
 
         <EditText
             android:id="@+id/LoginActivity_text_id"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="100dp"
-            android:background="@color/colorPrimary"
-            android:hint="ID"
+            android:layout_marginTop="50dp"
+            android:textStyle="bold"
+            android:hint="Your ID"
             android:inputType="text"
-            android:padding="10dp"
+            android:padding="15dp"
             android:singleLine="true"
             android:textColor="#ffffff"
-            android:textColorHint="#ffffff" />
+            android:textColorHint="#ffffff"
+            android:backgroundTint="#ffffff"/>
 
         <EditText
             android:id="@+id/LoginActivity_text_password"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:background="@color/colorPrimary"
-            android:hint="PASSWORD"
+            android:layout_marginTop="20dp"
+            android:hint="Password"
             android:inputType="textPassword"
-            android:padding="10dp"
+            android:padding="15dp"
             android:singleLine="true"
             android:textColor="#ffffff"
-            android:textColorHint="#ffffff" />
+            android:textColorHint="#ffffff"
+            android:backgroundTint="#ffffff"/>
 
 
         <Button
@@ -65,9 +69,11 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="100dp"
-            android:background="@drawable/login_bar"
-            />
+            android:layout_marginTop="50dp"
+            android:backgroundTint="#fff"
+            android:background="@drawable/round_style"
+            android:text="Sing IN"
+            style="?android:attr/borderlessButtonStyle"/>
 
     </LinearLayout>
 </LinearLayout>
