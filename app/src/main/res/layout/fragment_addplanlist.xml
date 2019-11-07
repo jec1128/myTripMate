@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="35dp"
-            android:layout_marginTop="94dp"
+            android:layout_marginTop="150dp"
             android:lineSpacingExtra="38sp"
             android:text="어디로 여행 가시나요?"
             android:textColor="#616161"
@@ -33,6 +33,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/et_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
@@ -64,6 +65,7 @@
             android:text="여행 타이틀" />
 
         <EditText
+            android:id="@+id/et_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
@@ -185,7 +187,7 @@
 
             </FrameLayout>
         </LinearLayout>
-
+<!--
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -243,6 +245,7 @@
                     android:src="@drawable/img_plan_add_date" />
 
                 <TextView
+                    android:id="@+id/tv_starttime"
                     android:layout_width="57dp"
                     android:layout_height="19dp"
                     android:layout_marginLeft="40dp"
@@ -250,7 +253,6 @@
                     android:gravity="center_horizontal"
                     android:letterSpacing="0.05"
                     android:lineSpacingExtra="38sp"
-                    android:text="dd/dd/dd"
                     android:textColor="#5d5d5d"
                     android:textSize="11sp" />
 
@@ -292,6 +294,7 @@
                     android:src="@drawable/img_plan_add_date" />
 
                 <TextView
+                    android:id="@+id/tv_endtime"
                     android:layout_width="57dp"
                     android:layout_height="19dp"
                     android:layout_marginLeft="60dp"
@@ -299,12 +302,12 @@
                     android:gravity="center_horizontal"
                     android:letterSpacing="0.05"
                     android:lineSpacingExtra="38sp"
-                    android:text="dd/dd/dd"
                     android:textColor="#5d5d5d"
                     android:textSize="11sp" />
 
             </FrameLayout>
         </LinearLayout>
+        -->
 
         <Button
             android:id="@+id/bt_ok"
