@@ -53,8 +53,6 @@
                 android:layout_marginTop="70dp"
                 android:background="@drawable/list_change_button"
                 android:textColor="#FFFFFF"
-
-                android:onClick="onSearchButtonClick"
                 android:text="Search" />
 
 

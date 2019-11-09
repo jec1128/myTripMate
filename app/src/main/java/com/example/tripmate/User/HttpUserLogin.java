@@ -32,7 +32,7 @@ public class HttpUserLogin extends Activity {
                 String ip = i.getIP();
                 String url = "http://"+ip+":8080/TripMateServer/User/Login.jsp";
                 //String url = "http://122.199.81.61:8080/TripMateServer/User/Login.jsp";
-                System.out.println(url);
+
                 URL obj = null;
                 try {
                     obj = new URL(url);

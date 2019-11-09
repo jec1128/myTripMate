@@ -31,9 +31,8 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter {
                 fragmentFriend tabFragment1 = new fragmentFriend();
                 return tabFragment1;
             case 1:
-                fragmentBoard tabFragment2 = new fragmentBoard();
-                fragmentActivity4 fragment4 = fragmentActivity4.getInstance();
-                String nickname = fragment4.getNickname();
+                fragmentBoard tabFragment2 = fragmentBoard.getInstance();
+                String nickname = fragmentActivity4.getNickname();
                 System.out.println("tabpageradapter  " + nickname);
                 Bundle bundle = new Bundle();
                 bundle.putString("nickname",nickname);

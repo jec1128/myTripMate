@@ -59,7 +59,7 @@ public class NearLocationFragment extends Fragment implements TMapGpsManager.onL
     private FloatingActionButton fab;
 
     private boolean isPerGranted = false;
-
+    private Button search;
     //관광정보 관련 API 관련 변수 목록
 
 
@@ -98,14 +98,20 @@ public class NearLocationFragment extends Fragment implements TMapGpsManager.onL
         onSwitchButtonClick1(v); //리스트뷰전환 버튼 클릭이벤트 추가
         onSwitchButtonClick2(v); //맵뷰전환 버튼 클릭이벤트 추가
         onFabClick(v);
-        onSearchButtonClick(v);
+        //onSearchButtonClick(v);
         linearLayoutTmap.addView(tMapView); //지도 추가
 
         //화면 중심을 단말의 현재위치로 이동
         // tMapView.setTrackingMode(true);
         //tMapView.setSightVisible(true);
-
-
+        search= v.findViewById(R.id.SearchButton);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("search 버튼을 누름");
+                addTMapMarkerItem();
+            }
+        });
         return v;
     }
 
@@ -244,9 +250,9 @@ public class NearLocationFragment extends Fragment implements TMapGpsManager.onL
 
 
 
-    public void onSearchButtonClick(View v){
-        searchButton = (Button) v.findViewById(R.id.SearchButton);
-        addTMapMarkerItem();
+    //public void onSearchButtonClick(View v){
+     //   searchButton = (Button) v.findViewById(R.id.SearchButton);
+     //   addTMapMarkerItem();
         /*
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -255,7 +261,7 @@ public class NearLocationFragment extends Fragment implements TMapGpsManager.onL
             }
         });
         */
-    }
+   // }
 
 }
 

@@ -36,7 +36,6 @@ public class LoginActivity extends Activity {
     private String nickname;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
-    private String ip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +61,6 @@ public class LoginActivity extends Activity {
                         String result = send.execute(sendid, sendpassword).get();
                         JSONArray jarray = null;
                         String receiveMsg = null;
-                        String receiveNickname = null;
-                        String receiveEmail = null;
 
                         try {
                             jarray = new JSONObject(result).getJSONArray("Login");
@@ -81,7 +78,7 @@ public class LoginActivity extends Activity {
 
                         if ("success".equals(receiveMsg)) {
                             firebaseAuth = FirebaseAuth.getInstance();
-                            firebaseAuth.signOut();
+                            //firebaseAuth.signOut();  로그아웃하는부분;
                             loginEvent();
 
                             authStateListener = new FirebaseAuth.AuthStateListener() {

@@ -1,8 +1,10 @@
 package com.example.tripmate.Board;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,9 +36,14 @@ public class fragmentBoard extends Fragment {
     private BoardListAdapter adapter;
     private RecyclerView recyclerView;
     private View view;
+    private Boolean first = false;
+
+    @SuppressLint("ValidFragment")
+    private fragmentBoard() {
+    }
 
     public static fragmentBoard getInstance() {
-        if(instance == null){
+        if (instance == null) {
             instance = new fragmentBoard();
             return instance;
         }
@@ -54,12 +61,9 @@ public class fragmentBoard extends Fragment {
             nickname = extra.getString("nickname");
             System.out.println("fragment board : " + nickname);
         }
-
+        first = true;
         recyclerView = (RecyclerView) view.findViewById(R.id.boardfragment_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
-        adapter = BoardListAdapter.getInstance();
-        adapter.httpwork();
-        recyclerView.setAdapter(adapter);
 
         write = view.findViewById(R.id.boardfragment_button_write);
         write.setOnClickListener(new View.OnClickListener() {
@@ -74,8 +78,24 @@ public class fragmentBoard extends Fragment {
         return view;
     }
 
-    public String getNickname(){
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (first) {
+            showBoardList();
+        }
+    }
+
+    public String getNickname() {
         return nickname;
     }
+
+    public void showBoardList() {
+
+        adapter = BoardListAdapter.getInstance();
+        adapter.httpwork();
+        recyclerView.setAdapter(adapter);
+
+    }
+
 
 }

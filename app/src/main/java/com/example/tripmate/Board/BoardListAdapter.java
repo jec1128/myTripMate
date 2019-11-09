@@ -31,6 +31,7 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.Boar
     private BoardListAdapter(){ }
 
     public void httpwork(){
+        removeAllItem();
         HttpBoardList httpBoardDataActivity = new HttpBoardList();
         HttpBoardList.sendTask send = httpBoardDataActivity.new sendTask();
         send.execute("1"); //page번호 전송
@@ -114,7 +115,7 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.Boar
             public void onClick(View view) {
 
                 Intent intent = new Intent(view.getContext(), BoardViewActivity.class);
-                fragmentBoard fragmentboard = new fragmentBoard();
+                fragmentBoard fragmentboard = fragmentBoard.getInstance();
                 nickname = fragmentboard.getNickname();
                 System.out.println("click listener : "+nickname);
                 intent.putExtra("nickname", nickname);

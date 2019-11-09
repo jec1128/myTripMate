@@ -98,23 +98,18 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
-       checkChatRoom();
+        checkChatRoom();
 
 
     }
 
     /*void sendGcm() {
-
             Gson gson = new Gson();
-
             NotificationModel notificationModel = new NotificationModel();
             notificationModel.to = destinationUserModel.pushToken;
             notificationModel.notification.title = "보낸이 아이디";
             notificationModel.notification.text = editText.getText().toString();
-
-
             RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf8"), gson.toJson(notificationModel));
-
             Request request = new Request.Builder()
                     .header("Content-Type", "application/json")
                     .addHeader("Authorization", "key=AIzaSyDNFs9vhpZQzQ3VeMXojsAJIId2Z7aj_Xk")
@@ -125,16 +120,11 @@ public class MessageActivity extends AppCompatActivity {
             okHttpClient.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-
                 }
-
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-
                 }
             });
-
-
         }*/
 
 

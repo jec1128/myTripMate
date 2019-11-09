@@ -11,9 +11,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.tripmate.Chat.MessageActivity;
 import com.example.tripmate.MainActivity;
 import com.example.tripmate.R;
 import com.example.tripmate.User.LoginActivity;
+import com.example.tripmate.User.UserModel;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +43,7 @@ public class BoardViewActivity extends AppCompatActivity {
     private Button chat;
     private Dialog dialog;
     private Dialog dialog1;
-
+    private DatabaseReference mDatabase;
 
 
     @Override
@@ -189,6 +193,18 @@ public class BoardViewActivity extends AppCompatActivity {
             }
             else{
                 chat.setVisibility(View.VISIBLE);
+                chat.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //상대닉네임 : swriter
+                        //상대 uid를 닉네임으로 구해오기
+
+                        Intent intent = new Intent(view.getContext(), MessageActivity.class);
+                        intent.putExtra("mynickname", myNickname);
+                        intent.putExtra("destination-nickname",swriter);
+                        startActivity(intent);
+                    }
+                });
             }
 
 

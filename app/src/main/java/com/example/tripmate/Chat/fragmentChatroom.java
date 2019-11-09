@@ -108,7 +108,7 @@ public class fragmentChatroom extends Fragment {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     UserModel userModel =  dataSnapshot.getValue(UserModel.class);
-                   Glide.with(customViewHolder.itemView.getContext())
+                    Glide.with(customViewHolder.itemView.getContext())
                             .load(userModel.getProfileImageUrl())
                             .apply(new RequestOptions().circleCrop())
                             .into(customViewHolder.imageView);
