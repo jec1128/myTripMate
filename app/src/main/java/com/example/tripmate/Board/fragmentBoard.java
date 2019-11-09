@@ -33,7 +33,7 @@ public class fragmentBoard extends Fragment {
     private static fragmentBoard instance;
     private FloatingActionButton write;
     private static String nickname;
-    private BoardListAdapter adapter;
+    private BoardListAdapter adapter = BoardListAdapter.getInstance();
     private RecyclerView recyclerView;
     private View view;
     private Boolean first = false;
