@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.tripmate.Chat.MessageActivity;
 import com.example.tripmate.MainActivity;
 import com.example.tripmate.R;
+import com.example.tripmate.User.HttpNicknameToUID;
 import com.example.tripmate.User.LoginActivity;
 import com.example.tripmate.User.UserModel;
 import com.google.firebase.database.DatabaseReference;
@@ -129,10 +130,7 @@ public class BoardViewActivity extends AppCompatActivity {
                         intent.putExtra("matchingDate",smatchingDate);
                         intent.putExtra("writingDate",swritingDate);
                         intent.putExtra("content",scontent);
-
-
-
-                        startActivity(intent);
+                         startActivity(intent);
 
                     }
                 });
@@ -198,11 +196,21 @@ public class BoardViewActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         //상대닉네임 : swriter
                         //상대 uid를 닉네임으로 구해오기
+                        String result;
+                        HttpNicknameToUID nicknameToUID = new HttpNicknameToUID();
+                        HttpNicknameToUID.sendTask send = nicknameToUID.new sendTask();
+                        try {
+                            result = send.execute(swriter).get();
+                            System.out.println("boardviewactivity result " + result);
+                            Intent intent = new Intent(view.getContext(), MessageActivity.class);
+                            intent.putExtra("destinationUid",result);
+                            startActivity(intent);
 
-                        Intent intent = new Intent(view.getContext(), MessageActivity.class);
-                        intent.putExtra("mynickname", myNickname);
-                        intent.putExtra("destination-nickname",swriter);
-                        startActivity(intent);
+                        } catch (ExecutionException | InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+
                     }
                 });
             }
