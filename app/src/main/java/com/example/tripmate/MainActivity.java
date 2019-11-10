@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -16,8 +18,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.tripmate.Location.NearLocationFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -62,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Navigation Drawer 생성 및 초기화
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        ImageView imageView = findViewById(R.id.user_Img);
 
         //하단 툴바 생성
         bottomNavigationView =(BottomNavigationView)findViewById(R.id.bottom_navigation);
@@ -96,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
                         transaction.replace(R.id.frameLayout, fragment5).commitNowAllowingStateLoss();
                         break;
                 }
+
+
                 return true;
             }
 
@@ -124,9 +134,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
         if(drawerLayout.isDrawerOpen(GravityCompat.START)){
             drawerLayout.closeDrawers();
         }
+
         else{
 
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);

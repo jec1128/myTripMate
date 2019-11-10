@@ -3,6 +3,7 @@ package com.example.tripmate.Board;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,24 +29,18 @@ import okhttp3.Response;
 
 
 public class fragmentBoard extends Fragment {
-    private static fragmentBoard instance;
+
     private FloatingActionButton write;
     private static String nickname;
     private BoardListAdapter adapter;
     private RecyclerView recyclerView;
     private View view;
 
-    public static fragmentBoard getInstance() {
-        if(instance == null){
-            instance = new fragmentBoard();
-            return instance;
-        }
-        return instance;
-    }
-
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_board, container, false);
+
         // Inflate the layout for this fragment
         Bundle extra = this.getArguments();
 
@@ -71,6 +66,7 @@ public class fragmentBoard extends Fragment {
 
             }
         });
+
         return view;
     }
 

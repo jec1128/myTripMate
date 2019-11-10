@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "502281071643-40but5fqtuhdvv2rgfj1e40b2gni4pr6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tripmate",
+            "certificate_hash": "3ad1d892f4d7ae859411034586ad9a6ef7897842"
+          }
+        },
+        {
           "client_id": "502281071643-aonpm0pckiefoi1lghhqg8edor2kaj0p.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/big_round_style"
+    android:elevation="10dp"
+    android:layout_margin="10dp"
+    android:padding="10dp"
+    >
+
+    <FrameLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/share_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="경주스탬프투어"
+            android:textSize="17dp"
+            android:fontFamily="@font/notosans_bold"
+            android:textColor="#66A6FF" />
+
+        <Button
+            android:id="@+id/share_route_get_btn"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="200dp"
+            android:background="@drawable/round_style"
+            android:text="가져오기"
+            android:textSize="12dp"
+            android:layout_gravity="right"
+            android:textColor="#A5A5A5"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/img_share_location"/>
+
+        <TextView
+            android:id="@+id/share_location_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:layout_marginTop="2dp"
+            android:text="경상북도 경주시"/>
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/share_title_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/big_round_style"
+            android:backgroundTint="#d9d9d9"
+            />
+        <TextView
+            android:id="@+id/share_content"
+            android:layout_width="230dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            android:textSize="12dp"
+            android:text="20대가 가기 전에 친구들끼리 인생샷이라도 한번 남겨보고싶어 짰던 여행일정입니다! 인생샷 건지고 싶다면 지금 건지세용!"
+            android:ellipsize="end"
+            android:layout_gravity="center_horizontal"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/share_like_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="100dp"
+            android:backgroundTint="#fff"
+            android:src="@drawable/ic_img_share_like" />
+
+        <TextView
+            android:id="@+id/share_like_number"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:textSize="10dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="80dp"
+            android:gravity="center_vertical"
+            android:text="3500"/>
+
+        <ImageButton
+            android:id="@+id/share_view_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:backgroundTint="#fff"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/ic_img_share_view"/>
+
+        <TextView
+            android:id="@+id/share_view_number"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:textSize="10dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="5dp"
+            android:gravity="center_vertical"
+            android:text="3500"/>
+
+    </FrameLayout>
+
+</LinearLayout>

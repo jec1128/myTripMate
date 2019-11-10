@@ -85,6 +85,7 @@ public class HttpBoardList extends Activity{
                         String thema1 = jsonObject.getString("thema1");
                         String thema2 = jsonObject.getString("thema2");
                         String thema3 = jsonObject.getString("thema3");
+
                         BoardModel boardModel = new BoardModel(boardCode,nickname,destination,gender,minage,maxage,thema1,thema2,thema3,date);
                         adapter.addBoardList(i,boardModel);
                     }

@@ -48,16 +48,18 @@ public class BoardViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_board_view);
 
         Intent intent = getIntent();
+
         myNickname = intent.getExtras().getString("nickname");
         System.out.println("boardviewActivity" + myNickname);
         boardCode = intent.getExtras().getString("boardcode");
         System.out.println("boardviewActivity" + boardCode);
 
-
         writerGenderAge = findViewById(R.id.boardview_text_writergenderage);
+
         thema1 = findViewById(R.id.boardview_text_thema1);
         thema2 = findViewById(R.id.boardview_text_thema2);
         thema3 = findViewById(R.id.boardview_text_thema3);
+
         destination = findViewById(R.id.boardview_text_destination);
         mathcingGenderAge = findViewById(R.id.boardview_text_matchinggenderage);
         writerNickname = findViewById(R.id.boardview_text_writer);
@@ -70,7 +72,9 @@ public class BoardViewActivity extends AppCompatActivity {
 
         HttpBoardView httpBoardViewActivity = new HttpBoardView();
         HttpBoardView.sendTask send = httpBoardViewActivity.new sendTask();
-        String result = null;
+
+       String result = null;
+
         try {
             result = send.execute(boardCode).get();
         } catch (ExecutionException | InterruptedException e) {
@@ -112,6 +116,7 @@ public class BoardViewActivity extends AppCompatActivity {
                 update.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         Intent intent = new Intent(getApplicationContext(), BoardUpdateActivity.class);
                         intent.putExtra("myNickname",myNickname);
                         intent.putExtra("boardCode",boardCode);
@@ -126,12 +131,10 @@ public class BoardViewActivity extends AppCompatActivity {
                         intent.putExtra("writingDate",swritingDate);
                         intent.putExtra("content",scontent);
 
-
-
                         startActivity(intent);
-
                     }
                 });
+
                 delete.setVisibility(View.VISIBLE);
                 delete.setOnClickListener(new View.OnClickListener(){
 
