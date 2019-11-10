@@ -3,9 +3,9 @@ package com.example.tripmate.User;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.tripmate.Ip;
-import com.example.tripmate.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,7 +19,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class HttpUserLogin extends Activity {
+public class HttpUserUID extends Activity {
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -30,9 +31,8 @@ public class HttpUserLogin extends Activity {
             try {
                 Ip i = new Ip();
                 String ip = i.getIP();
-                String url = "http://"+ip+":8080/TripMateServer/User/Login.jsp";
-                //String url = "http://122.199.81.61:8080/TripMateServer/User/Login.jsp";
-
+                String url = "http://"+ip+":8080/TripMateServer/User/Uid.jsp";
+                //String url = "http://192.168.214.146:8080/TripMateServer/User/ReceiveUserId.jsp";
                 URL obj = null;
                 try {
                     obj = new URL(url);
@@ -47,13 +47,13 @@ public class HttpUserLogin extends Activity {
                     conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
                     OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
-                    String sendmsg = "id=" + strings[0] + "&password=" + strings[1];
-
+                    String sendmsg = "uid=" + strings[0]+"&nickname=" + strings[1];
                     os.write(sendmsg);
                     os.flush();
                     os.close();
 
                     int retCode = conn.getResponseCode();
+
                     InputStream is = conn.getInputStream();
                     BufferedReader br = new BufferedReader(new InputStreamReader(is));
                     String line;
@@ -66,7 +66,10 @@ public class HttpUserLogin extends Activity {
 
                     String result = response.toString();
                     System.out.println(result);
-                    return result;
+                    String receiveMsg = parsedData(result);
+                    return receiveMsg;
+
+
 
 
                 } catch (IOException ex) {
@@ -78,5 +81,17 @@ public class HttpUserLogin extends Activity {
             }
             return null;
         }
+    }
+    public String parsedData(String recvMsg){
+        JSONArray jarray = null;
+        try {
+            jarray = new JSONObject(recvMsg).getJSONArray("uid-update");
+            JSONObject jsonObject = jarray.getJSONObject(0);
+            String receiveMsg = jsonObject.getString("msg");
+            return receiveMsg;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

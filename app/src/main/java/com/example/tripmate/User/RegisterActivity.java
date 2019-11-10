@@ -185,7 +185,7 @@ public class RegisterActivity extends Activity {
                         if (checkCount > 3 || checkCount == 0) {
                             alert("체크 갯수 제한","1,2,3개만 입력하세요");
                         } else {*/
-                            String sendid = id.getText().toString();
+                            final String sendid = id.getText().toString();
                             String sendpassword = password.getText().toString();
                             final String sendnickname = nickname.getText().toString();
                             String sendage = age.getText().toString();
@@ -222,30 +222,43 @@ public class RegisterActivity extends Activity {
                                                 @Override
                                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                                     Log.d(TAG,"파이어베이스 인증 성공");
+                                                    String result1;
                                                     final String uid = task.getResult().getUser().getUid();
-                                                    final StorageReference profileImageRef = FirebaseStorage.getInstance().getReference().child("userImages").child(uid);
-                                                    profileImageRef.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                                                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                                                            Task<Uri> uriTask = profileImageRef.getDownloadUrl();
-                                                            while(!uriTask.isSuccessful());
-                                                            Uri downloadUrl = uriTask.getResult();
-                                                            String imageUrl = String.valueOf(downloadUrl);
-                                                            UserModel userModel = new UserModel();
-                                                            userModel.setUserName(sendnickname);
-                                                            userModel.setProfileImageUrl(imageUrl);
-                                                            userModel.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                                            Log.d(TAG,"storage에 이미지 넣기 성공");
+                                                    HttpUserUID httpUID = new HttpUserUID();
+                                                    HttpUserUID.sendTask send = httpUID.new sendTask();
+                                                    try {
+                                                        result1 = send.execute(uid,sendnickname).get();
+                                                        if("success".equals(result1)){
+                                                            final StorageReference profileImageRef = FirebaseStorage.getInstance().getReference().child("userImages").child(uid);
+                                                            profileImageRef.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                                                    Task<Uri> uriTask = profileImageRef.getDownloadUrl();
+                                                                    while(!uriTask.isSuccessful());
+                                                                    Uri downloadUrl = uriTask.getResult();
+                                                                    String imageUrl = String.valueOf(downloadUrl);
+                                                                    UserModel userModel = new UserModel();
+                                                                    userModel.setUserName(sendnickname);
+                                                                    userModel.setProfileImageUrl(imageUrl);
+                                                                    userModel.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                                                    Log.d(TAG,"storage에 이미지 넣기 성공");
 
-                                                            FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                @Override
-                                                                public void onSuccess(Void aVoid) {
-                                                                    Log.d(TAG,"파이어베이스 db 추가 성공");
-                                                                    System.out.println("파이어베이스 회원가입 성공");
+                                                                    FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                        @Override
+                                                                        public void onSuccess(Void aVoid) {
+                                                                            Log.d(TAG,"파이어베이스 db 추가 성공");
+                                                                            System.out.println("파이어베이스 회원가입 성공");
 
+                                                                        }
+                                                                    });
                                                                 }
                                                             });
                                                         }
-                                                    });
+                                                    } catch (ExecutionException | InterruptedException e) {
+                                                        e.printStackTrace();
+                                                    }
+
+
+
                                                 }
                                             });
 

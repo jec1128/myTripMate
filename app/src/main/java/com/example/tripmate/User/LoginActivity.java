@@ -32,11 +32,11 @@ public class LoginActivity extends Activity {
     private EditText id;
     private EditText password;
     private Button login;
+    private String myuid;
     private String email;
     private String nickname;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
-    private String ip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +62,13 @@ public class LoginActivity extends Activity {
                         String result = send.execute(sendid, sendpassword).get();
                         JSONArray jarray = null;
                         String receiveMsg = null;
-                        String receiveNickname = null;
-                        String receiveEmail = null;
 
                         try {
                             jarray = new JSONObject(result).getJSONArray("Login");
-                            JSONObject jsonObject2 = jarray.getJSONObject(2);
-                            receiveMsg = jsonObject2.getString("msg");
+
+                            JSONObject jsonObject3 = jarray.getJSONObject(2);
+                            receiveMsg = jsonObject3.getString("msg");
+
                             JSONObject jsonObject1 = jarray.getJSONObject(1);
                             email = jsonObject1.getString("email");
                             JSONObject jsonObject0 = jarray.getJSONObject(0);
@@ -81,7 +81,7 @@ public class LoginActivity extends Activity {
 
                         if ("success".equals(receiveMsg)) {
                             firebaseAuth = FirebaseAuth.getInstance();
-                            firebaseAuth.signOut();
+                            //firebaseAuth.signOut();  로그아웃하는부분;
                             loginEvent();
 
                             authStateListener = new FirebaseAuth.AuthStateListener() {
@@ -96,7 +96,6 @@ public class LoginActivity extends Activity {
                             builder.setTitle("로그인").setMessage("로그인 성공했습니다");
                             builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    // 메인 액티비티로 화면이동해야하는지 프레그먼트로 이동해야하는지 개념이 안섬;;
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     intent.putExtra("nickname",nickname);
                                     startActivity(intent);

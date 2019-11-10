@@ -93,7 +93,7 @@ public class fragmentFriend extends Fragment {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
 
-           Glide.with
+            Glide.with
                     (holder.itemView.getContext())
                     .load(userModels.get(position).getProfileImageUrl())
                     .apply(new RequestOptions().circleCrop())
