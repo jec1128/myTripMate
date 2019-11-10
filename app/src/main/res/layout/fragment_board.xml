@@ -8,7 +8,18 @@
     android:orientation="vertical"
     tools:context=".Board.fragmentBoard">
 
+    <Button
+        android:id="@+id/boardfragment_button_matching"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="동반자 매칭하기"
+        android:fontFamily="@font/notosans_light"
+        android:textSize="30dp"
+        android:background="@drawable/bt_round"
+        >
 
+
+    </Button>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/boardfragment_recyclerview"

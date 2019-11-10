@@ -48,7 +48,7 @@ public class MessageActivity extends AppCompatActivity {
     private String chatRoomUid;
 
     private RecyclerView recyclerView;
-
+    private RecyclerViewAdapter adater;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm");
 
     private UserModel destinationUserModel;
@@ -139,7 +139,8 @@ public class MessageActivity extends AppCompatActivity {
                         chatRoomUid = item.getKey();
                         button.setEnabled(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(MessageActivity.this));
-                        recyclerView.setAdapter(new RecyclerViewAdapter());
+                        adater = new RecyclerViewAdapter();
+                        recyclerView.setAdapter(adater);
                     }
                 }
             }
@@ -267,6 +268,7 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
+        adater.notifyDataSetChanged();
         finish();
     }
 }

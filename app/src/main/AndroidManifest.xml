@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Board.BoardUpdateActivity"></activity>
+        <activity android:name=".Board.BoardUpdateActivity" />
         <activity android:name=".Board.BoardViewActivity" />
         <activity android:name=".Intro2Activity" />
         <activity android:name=".Intro1Activity">

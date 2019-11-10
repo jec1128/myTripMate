@@ -52,6 +52,7 @@ public class BoardWriteActivity extends AppCompatActivity {
     private Date now;
     private Dialog dialog;
     private String nickname;
+    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,8 @@ public class BoardWriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_board_write);
         Intent intent = getIntent();
         nickname = intent.getExtras().getString("nickname");
+        type = intent.getExtras().getString("type");
+
         System.out.println("boardwriteactivity" + nickname);
 
         destination = findViewById(R.id.BoardWriteActivity_text_where);
@@ -165,108 +168,133 @@ public class BoardWriteActivity extends AppCompatActivity {
                         TextUtils.isEmpty(time_end.getText())) {
                     alert("글 쓰기", "모든칸을 다 채워주세요");
                 }
+                else{
+                    final int minage = Integer.parseInt(age_start.getText().toString());
+                    final int maxage = Integer.parseInt(age_end.getText().toString());
+                    if (minage > maxage){
+                        alert("글 쓰기", "최소나이가 최대나이보다 클 수 없습니다");
+                    }
                     else{
-                        final int minage = Integer.parseInt(age_start.getText().toString());
-                        final int maxage = Integer.parseInt(age_end.getText().toString());
-                        if (minage > maxage){
-                            alert("글 쓰기", "최소나이가 최대나이보다 클 수 없습니다");
+                        CheckBox cb1 = findViewById(R.id.BoardWriteActivity_check_food);
+                        CheckBox cb2 = findViewById(R.id.BoardWriteActivity_check_rest);
+                        CheckBox cb3 = findViewById(R.id.BoardWriteActivity_check_nature);
+                        CheckBox cb4 = findViewById(R.id.BoardWriteActivity_check_leisure);
+                        CheckBox cb5 = findViewById(R.id.BoardWriteActivity_check_walk);
+                        CheckBox cb6 = findViewById(R.id.BoardWriteActivity_check_biking);
+
+                        int checkCount = 0;
+
+                        if (cb1.isChecked()) {
+                            checkCount++;
+
                         }
-                        else{
-                            CheckBox cb1 = findViewById(R.id.BoardWriteActivity_check_food);
-                            CheckBox cb2 = findViewById(R.id.BoardWriteActivity_check_rest);
-                            CheckBox cb3 = findViewById(R.id.BoardWriteActivity_check_nature);
-                            CheckBox cb4 = findViewById(R.id.BoardWriteActivity_check_leisure);
-                            CheckBox cb5 = findViewById(R.id.BoardWriteActivity_check_walk);
-                            CheckBox cb6 = findViewById(R.id.BoardWriteActivity_check_biking);
+                        if (cb2.isChecked()) {
+                            checkCount++;
 
-                            int checkCount = 0;
+                        }
+                        if (cb3.isChecked()) {
+                            checkCount++;
 
-                            if (cb1.isChecked()) {
-                                checkCount++;
+                        }
+                        if (cb4.isChecked()) {
+                            checkCount++;
 
-                            }
-                            if (cb2.isChecked()) {
-                                checkCount++;
+                        }
+                        if (cb5.isChecked()) {
+                            checkCount++;
+                        }
+                        if (cb6.isChecked()) {
+                            checkCount++;
+                        }
+                        final ArrayList<String> thema = new ArrayList<>(3);
+                        if (checkCount > 3 || checkCount == 0) {
+                            alert("체크 갯수 제한","1,2,3개만 입력하세요");
+                        } else {
+                            man = findViewById(R.id.BoardWriteActivity_radio_man);
+                            woman = findViewById(R.id.BoardWriteActivity_radio_woman);
+                            all = findViewById(R.id.BoardWriteActivity_radio_all);
 
-                            }
-                            if (cb3.isChecked()) {
-                                checkCount++;
+                            final String senddestination = destination.getText().toString();
 
-                            }
-                            if (cb4.isChecked()) {
-                                checkCount++;
+                            final String sendcontent = content.getText().toString();
+                            String sendgender1 = null;
+                            if (man.isChecked())
+                                sendgender1 = "0";
+                            else if (woman.isChecked())
+                                sendgender1 = "1";
+                            else if (all.isChecked())
+                                sendgender1 = "2";
+                            final int sendgender = Integer.parseInt(sendgender1);
+                            final String sendminage = age_start.getText().toString();
 
-                            }
-                            if (cb5.isChecked()) {
-                                checkCount++;
-                            }
-                            if (cb6.isChecked()) {
-                                checkCount++;
-                            }
-                            final ArrayList<String> thema = new ArrayList<>(3);
-                            if (checkCount > 3 || checkCount == 0) {
-                                alert("체크 갯수 제한","1,2,3개만 입력하세요");
-                            } else{
-                                man = findViewById(R.id.BoardWriteActivity_radio_man);
-                                woman = findViewById(R.id.BoardWriteActivity_radio_woman);
-                                all = findViewById(R.id.BoardWriteActivity_radio_all);
+                            final String sendmaxage = age_end.getText().toString();
 
-                                final String senddestination = destination.getText().toString();
+                            final String senddate = date_start.getText().toString();
+                            final String sendstarttime = time_start.getText().toString();
+                            final String sendendtime = time_end.getText().toString();
 
-                                final String sendcontent = content.getText().toString();
-                                String sendgender1 = null;
-                                if (man.isChecked())
-                                    sendgender1 = "0";
-                                else if (woman.isChecked())
-                                    sendgender1 = "1";
-                                else if (all.isChecked())
-                                    sendgender1 = "2";
-                                final int sendgender = Integer.parseInt(sendgender1);
-                                final String sendminage = age_start.getText().toString();
-
-                                final String sendmaxage=age_end.getText().toString();
-
-                                final String senddate = date_start.getText().toString();
-                                final String sendstarttime= time_start.getText().toString();
-                                final String sendendtime = time_end.getText().toString();
-
-                                final String date;
-                                String date1;
-                                date1 = senddate.replace("년","-");
-                                date1 = date1.replace("월","-");
-                                date1 = date1.replace("일","");
-                                date = date1;
+                            final String date;
+                            String date1;
+                            date1 = senddate.replace("년", "-");
+                            date1 = date1.replace("월", "-");
+                            date1 = date1.replace("일", "");
+                            date = date1;
 
 
-                                if (cb1.isChecked() == true) thema.add(cb1.getText().toString());
-                                if (cb2.isChecked() == true) thema.add(cb2.getText().toString());
-                                if (cb3.isChecked() == true) thema.add(cb3.getText().toString());
-                                if (cb4.isChecked() == true) thema.add(cb4.getText().toString());
-                                if (cb5.isChecked() == true) thema.add(cb5.getText().toString());
-                                if (cb6.isChecked() == true) thema.add(cb6.getText().toString());
+                            if (cb1.isChecked() == true) thema.add(cb1.getText().toString());
+                            if (cb2.isChecked() == true) thema.add(cb2.getText().toString());
+                            if (cb3.isChecked() == true) thema.add(cb3.getText().toString());
+                            if (cb4.isChecked() == true) thema.add(cb4.getText().toString());
+                            if (cb5.isChecked() == true) thema.add(cb5.getText().toString());
+                            if (cb6.isChecked() == true) thema.add(cb6.getText().toString());
+
+                            if ("write".equals(type)) {
+
+
                                 String result = null;
+                                HttpBoardMatching httpBoardMatching = new HttpBoardMatching();
+                                HttpBoardMatching.sendTask send = httpBoardMatching.new sendTask();
+                                try {
+                                    if (thema.size() == 1)
+                                        result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, thema.get(0), " ", " ").get();
+                                    else if (thema.size() == 2)
+                                        result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, thema.get(0), thema.get(1), " ").get();
+                                    else if (thema.size() == 3)
+                                        result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, thema.get(0), thema.get(1), thema.get(2)).get();
 
+                                    if ("success".equals(result)) {
+
+                                    }
+
+
+                                } catch (ExecutionException | InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            else{
+                                String result = null;
                                 HttpBoardWrite httpBoardWriteActivity = new HttpBoardWrite();
                                 HttpBoardWrite.sendTask send = httpBoardWriteActivity.new sendTask();
                                 try {
-                                    if(thema.size() == 1)
-                                        result = send.execute(nickname,senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate,sendstarttime,sendendtime, thema.get(0)," "," ").get();
+                                    if (thema.size() == 1)
+                                        result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, thema.get(0), " ", " ").get();
                                     else if (thema.size() == 2)
-                                        result = send.execute(nickname,senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate,sendstarttime,sendendtime, thema.get(0),thema.get(1)," ").get();
+                                        result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, thema.get(0), thema.get(1), " ").get();
                                     else if (thema.size() == 3)
-                                        result = send.execute(nickname,senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate,sendstarttime,sendendtime, thema.get(0),thema.get(1),thema.get(2)).get();
+                                        result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, thema.get(0), thema.get(1), thema.get(2)).get();
 
-                                    if("success".equals(result)){
+                                    if ("success".equals(result)) {
                                         AlertDialog.Builder builder = new AlertDialog.Builder(BoardWriteActivity.this);
                                         builder.setTitle("게시판").setMessage("게시글 등록이 완료되었습니다");
                                         final String finalDate = date;
                                         builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
-                                              final BoardListAdapter adapter = BoardListAdapter.getInstance();
-                                              adapter.removeAllItem();
-                                              adapter.httpwork();
+                                                final BoardListAdapter adapter = BoardListAdapter.getInstance();
+                                                adapter.removeAllItem();
+                                                adapter.httpwork();
 
-                                              onBackPressed();
+                                                onBackPressed();
                                             }
                                         });
                                         dialog = builder.create();
@@ -279,9 +307,11 @@ public class BoardWriteActivity extends AppCompatActivity {
                                 } catch (ExecutionException | InterruptedException e) {
                                     e.printStackTrace();
                                 }
-                            }
 
+                            }
                         }
+
+                    }
 
                 }
 
@@ -302,3 +332,4 @@ public class BoardWriteActivity extends AppCompatActivity {
         dialog.show();
     }
 }
+
