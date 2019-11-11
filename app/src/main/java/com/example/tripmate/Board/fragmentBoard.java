@@ -32,15 +32,16 @@ import okhttp3.Response;
 public class fragmentBoard extends Fragment {
     private static fragmentBoard instance;
     private FloatingActionButton write;
+    private FloatingActionButton matching;
     private static String nickname;
-    private BoardListAdapter adapter = BoardListAdapter.getInstance();
+    private BoardListAdapter boardListadapter;
+    private BoardMatchingListAdapter matchingListadapter;
     private RecyclerView recyclerView;
     private View view;
-    private Boolean first = false;
+
 
     @SuppressLint("ValidFragment")
-    private fragmentBoard() {
-    }
+    private fragmentBoard() { }
 
     public static fragmentBoard getInstance() {
         if (instance == null) {
@@ -61,9 +62,17 @@ public class fragmentBoard extends Fragment {
             nickname = extra.getString("nickname");
             System.out.println("fragment board : " + nickname);
         }
-        first = true;
+
         recyclerView = (RecyclerView) view.findViewById(R.id.boardfragment_recyclerview);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
+        //boardListadapter = BoardListAdapter.getInstance();
+        boardListadapter = new BoardListAdapter();
+        boardListadapter.httpwork();
+
+        recyclerView.setAdapter(boardListadapter);
+
+
 
         write = view.findViewById(R.id.boardfragment_button_write);
         write.setOnClickListener(new View.OnClickListener() {
@@ -75,27 +84,27 @@ public class fragmentBoard extends Fragment {
 
             }
         });
-        return view;
-    }
 
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (first) {
-            showBoardList();
-        }
+        matching = view.findViewById(R.id.boardfragment_button_matching);
+        matching.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+        });
+
+        return view;
     }
 
     public String getNickname() {
         return nickname;
     }
 
-    public void showBoardList() {
-
-        adapter = BoardListAdapter.getInstance();
-        adapter.httpwork();
-        recyclerView.setAdapter(adapter);
-
+    public void doAdapter(){
+        boardListadapter = new BoardListAdapter();
+        boardListadapter.httpwork();
+        recyclerView.setAdapter(boardListadapter);
     }
-
 
 }

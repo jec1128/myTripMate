@@ -226,7 +226,8 @@ public class BoardViewActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
 
-        final BoardListAdapter adapter = BoardListAdapter.getInstance();
+       // final BoardListAdapter adapter = BoardListAdapter.getInstance();
+        BoardListAdapter adapter = new BoardListAdapter();
         adapter.removeAllItem();
         adapter.httpwork();
         super.onBackPressed();

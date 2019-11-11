@@ -64,10 +64,10 @@ public class fragmentActivity4 extends Fragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 System.out.println("onTabSelected " + tab.getPosition());
-
                 viewPager.setCurrentItem(tab.getPosition());
-                if(tab.getPosition() == 0){
-                    fragmentBoard.getInstance().showBoardList();
+                if(tab.getPosition() == 1){
+                    fragmentBoard fragment = fragmentBoard.getInstance();
+                    fragment.doAdapter();
                 }
 
             }
@@ -86,7 +86,7 @@ public class fragmentActivity4 extends Fragment {
     }
 
 
-    public static fragmentActivity4 getInstance() {
+   public static fragmentActivity4 getInstance() {
         if(instance == null){
             instance = new fragmentActivity4();
             return instance;

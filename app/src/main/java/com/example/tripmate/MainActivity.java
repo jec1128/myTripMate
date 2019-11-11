@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String nickname = intent.getExtras().getString("nickname");
-        System.out.println("mainactivity" + nickname);
+        System.out.println("MainActivity " + nickname);
         final Bundle bundle = new Bundle();
         bundle.putString("nickname",nickname);
 

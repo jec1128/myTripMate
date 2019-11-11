@@ -108,6 +108,7 @@ public class BoardMatchingListAdapter extends RecyclerView.Adapter<BoardMatching
             public void onClick(View view) {
 
                 Intent intent = new Intent(view.getContext(), BoardViewActivity.class);
+                //fragmentBoard fragmentboard = new fragmentBoard();
                 fragmentBoard fragmentboard = fragmentBoard.getInstance();
                 nickname = fragmentboard.getNickname();
                 System.out.println("click listener : "+nickname);

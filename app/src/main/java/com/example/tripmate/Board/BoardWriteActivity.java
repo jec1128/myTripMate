@@ -290,7 +290,8 @@ public class BoardWriteActivity extends AppCompatActivity {
                                         final String finalDate = date;
                                         builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
-                                                final BoardListAdapter adapter = BoardListAdapter.getInstance();
+                                                //final BoardListAdapter adapter = BoardListAdapter.getInstance();
+                                                BoardListAdapter adapter = new BoardListAdapter();
                                                 adapter.removeAllItem();
                                                 adapter.httpwork();
 

@@ -10,10 +10,15 @@ import android.widget.TextView;
 
 import com.example.tripmate.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.BoardListViewHolder> {
-    private static BoardListAdapter adapter = new BoardListAdapter();
+    //private static BoardListAdapter adapter = new BoardListAdapter();
     private ArrayList<BoardModel> boardlist = new ArrayList<>();
     private int[] gender = new int []{R.drawable.img_board_man,
             R.drawable.img_board_woman,
@@ -21,24 +26,49 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.Boar
     private static String nickname;
 
 
-    private BoardListAdapter(){ }
+    //private BoardListAdapter(){ }
 
     public void httpwork(){
         removeAllItem();
         HttpBoardList httpBoardDataActivity = new HttpBoardList();
         HttpBoardList.sendTask send = httpBoardDataActivity.new sendTask();
-        send.execute("1"); //page번호 전송
+        String result = null;
+        try {
+            result = send.execute("1").get(); //page번호 전송
+            JSONArray jarray = null;
+            jarray = new JSONObject(result).getJSONArray("show");
+
+
+            for(int i = 0 ; i < jarray.length(); i++){
+                JSONObject jsonObject = jarray.getJSONObject(i);
+                String boardCode = jsonObject.getString("boardcode");
+                String destination = jsonObject.getString("destination");
+                String nickname = jsonObject.getString("nickname");
+                String date = jsonObject.getString("date");
+                int minage = jsonObject.getInt("minage");
+                int maxage = jsonObject.getInt("maxage");
+                int gender = jsonObject.getInt("gender");
+                String thema1 = jsonObject.getString("thema1");
+                String thema2 = jsonObject.getString("thema2");
+                String thema3 = jsonObject.getString("thema3");
+
+                BoardModel boardModel = new BoardModel(boardCode,nickname,destination,gender,minage,maxage,thema1,thema2,thema3,date);
+                boardlist.add(boardModel);
+            }
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static BoardListAdapter getInstance(){
+   /* public static BoardListAdapter getInstance(){
         if(adapter == null){
             adapter = new BoardListAdapter();
             return adapter;
         }
         return adapter;
-    }
+    }*/
 
-    public class BoardListViewHolder extends RecyclerView.ViewHolder {
+    public static class BoardListViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView gender;
         public TextView textnickname;
@@ -108,8 +138,7 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.Boar
             public void onClick(View view) {
 
                 Intent intent = new Intent(view.getContext(), BoardViewActivity.class);
-                fragmentBoard fragmentboard = fragmentBoard.getInstance();
-                nickname = fragmentboard.getNickname();
+                nickname = fragmentBoard.getInstance().getNickname();
                 System.out.println("click listener : "+nickname);
                 intent.putExtra("nickname", nickname);
                 intent.putExtra("boardcode",boardCode);

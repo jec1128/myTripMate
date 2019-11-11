@@ -7,7 +7,6 @@ import android.os.Bundle;
 import com.example.tripmate.Ip;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -17,6 +16,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 
 public class HttpBoardList extends Activity{
@@ -66,36 +66,7 @@ public class HttpBoardList extends Activity{
                     br.close();
 
                     String result = response.toString();
-                    System.out.println(result);
-
-                    JSONArray jarray = null;
-                    jarray = new JSONObject(result).getJSONArray("show");
-
-                    final BoardListAdapter adapter = BoardListAdapter.getInstance();
-
-                    for(int i = 0 ; i < jarray.length(); i++){
-                        JSONObject jsonObject = jarray.getJSONObject(i);
-                        String boardCode = jsonObject.getString("boardcode");
-                        String destination = jsonObject.getString("destination");
-                        String nickname = jsonObject.getString("nickname");
-                        String date = jsonObject.getString("date");
-                        int minage = jsonObject.getInt("minage");
-                        int maxage = jsonObject.getInt("maxage");
-                        int gender = jsonObject.getInt("gender");
-                        String thema1 = jsonObject.getString("thema1");
-                        String thema2 = jsonObject.getString("thema2");
-                        String thema3 = jsonObject.getString("thema3");
-
-                        BoardModel boardModel = new BoardModel(boardCode,nickname,destination,gender,minage,maxage,thema1,thema2,thema3,date);
-                        adapter.addBoardList(i,boardModel);
-                    }
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            adapter.notifyDataSetChanged();
-                        }
-                    });
+                    return result;
 
 
 
