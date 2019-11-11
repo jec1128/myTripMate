@@ -1,3 +1,5 @@
+/* 내가 수정할 부분 */
+
 package com.example.tripmate.Board;
 
 import android.annotation.SuppressLint;

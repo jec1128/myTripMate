@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                         transaction.replace(R.id.frameLayout, fragment3).commitAllowingStateLoss();
                         break;
                     case R.id.action_home4:
+                        /* 내가 수정할 부분 */
                         fragment4.setArguments(bundle);
                         System.out.println("mainactivity  4번째 누름");
                         transaction.replace(R.id.frameLayout, fragment4).commitAllowingStateLoss();
