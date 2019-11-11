@@ -40,14 +40,17 @@ public class BoardUpdateActivity extends AppCompatActivity {
     private RadioButton man;
     private RadioButton woman;
     private RadioButton all;
+    private RadioButton food;
+    private RadioButton carfull;
+    private RadioButton picture;
+    private RadioButton tour;
+
     private Date now;
     private Dialog dialog;
     private String smyNickname;
     private String sboardCode;
     private String swriterGenderAge;
-    private String sthema1;
-    private String sthema2;
-    private String sthema3;
+    private String spurpose;
     private String sdestination;
     private String smatchingGenderAge;
     private String swritingDate;
@@ -64,9 +67,7 @@ public class BoardUpdateActivity extends AppCompatActivity {
         smyNickname = intent.getExtras().getString("myNickname");
         sboardCode = intent.getExtras().getString("boardCode");
         swriterGenderAge= intent.getExtras().getString("writerGenderAge");
-        sthema1 = intent.getExtras().getString("thema1");
-        sthema2 = intent.getExtras().getString("thema2");
-        sthema3 = intent.getExtras().getString("thema3");
+        spurpose = intent.getExtras().getString("purpose");
         sdestination = intent.getExtras().getString("destination");
         smatchingGenderAge = intent.getExtras().getString("matchingGenderAge");
         swriter = intent.getExtras().getString("writerNickname");
@@ -193,56 +194,36 @@ public class BoardUpdateActivity extends AppCompatActivity {
                         alert("글 쓰기", "최소나이가 최대나이보다 클 수 없습니다");
                     }
                     else{
-                        CheckBox cb1 = findViewById(R.id.BoardUpdateActivity_check_food);
-                        CheckBox cb2 = findViewById(R.id.BoardUpdateActivity_check_rest);
-                        CheckBox cb3 = findViewById(R.id.BoardUpdateActivity_check_nature);
-                        CheckBox cb4 = findViewById(R.id.BoardUpdateActivity_check_leisure);
-                        CheckBox cb5 = findViewById(R.id.BoardUpdateActivity_check_walk);
-                        CheckBox cb6 = findViewById(R.id.BoardUpdateActivity_check_biking);
 
-                        int checkCount = 0;
-
-                        if (cb1.isChecked()) {
-                            checkCount++;
-
-                        }
-                        if (cb2.isChecked()) {
-                            checkCount++;
-
-                        }
-                        if (cb3.isChecked()) {
-                            checkCount++;
-
-                        }
-                        if (cb4.isChecked()) {
-                            checkCount++;
-
-                        }
-                        if (cb5.isChecked()) {
-                            checkCount++;
-                        }
-                        if (cb6.isChecked()) {
-                            checkCount++;
-                        }
-                        final ArrayList<String> thema = new ArrayList<>(3);
-                        if (checkCount > 3 || checkCount == 0) {
-                            alert("체크 갯수 제한","1,2,3개만 입력하세요");
-                        } else{
                             man = findViewById(R.id.BoardUpdateActivity_radio_man);
                             woman = findViewById(R.id.BoardUpdateActivity_radio_woman);
                             all = findViewById(R.id.BoardUpdateActivity_radio_all);
-
+                            tour = findViewById(R.id.BoardWriteActivity_radio_tour);
+                            carfull = findViewById(R.id.BoardWriteActivity_radio_carfull);
+                            picture = findViewById(R.id.BoardWriteActivity_radio_picture);
+                            food = findViewById(R.id.BoardWriteActivity_radio_food);
                             final String senddestination = destination.getText().toString();
 
                             final String sendcontent = content.getText().toString();
                             String sendgender1 = null;
+                            String sendpurpose = null;
                             if (man.isChecked())
                                 sendgender1 = "0";
                             else if (woman.isChecked())
                                 sendgender1 = "1";
                             else if (all.isChecked())
                                 sendgender1 = "2";
+
+                            if(food.isChecked())
+                                sendpurpose="맛집";
+                            else if(carfull.isChecked())
+                                sendpurpose = "카풀";
+                            else if (picture.isChecked())
+                                sendpurpose = "사진";
+                            else if (tour.isChecked())
+                                sendpurpose = "관광";
                             final int sendgender = Integer.parseInt(sendgender1);
+
                             final String sendminage = age_start.getText().toString();
 
                             final String sendmaxage=age_end.getText().toString();
@@ -259,23 +240,12 @@ public class BoardUpdateActivity extends AppCompatActivity {
                             date = date1;
 
 
-                            if (cb1.isChecked() == true) thema.add(cb1.getText().toString());
-                            if (cb2.isChecked() == true) thema.add(cb2.getText().toString());
-                            if (cb3.isChecked() == true) thema.add(cb3.getText().toString());
-                            if (cb4.isChecked() == true) thema.add(cb4.getText().toString());
-                            if (cb5.isChecked() == true) thema.add(cb5.getText().toString());
-                            if (cb6.isChecked() == true) thema.add(cb6.getText().toString());
 
                             String result = null;
                             HttpBoardUpdate httpBoardUpdateActivity = new HttpBoardUpdate();
                             HttpBoardUpdate.sendTask send = httpBoardUpdateActivity.new sendTask();
                             try {
-                                if(thema.size() == 1)
-                                    result = send.execute(sboardCode,smyNickname,senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate,sendstarttime,sendendtime, thema.get(0)," "," ").get();
-                                else if (thema.size() == 2)
-                                    result = send.execute(sboardCode,smyNickname,senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate,sendstarttime,sendendtime, thema.get(0),thema.get(1)," ").get();
-                                else if (thema.size() == 3)
-                                    result = send.execute(sboardCode,smyNickname,senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate,sendstarttime,sendendtime, thema.get(0),thema.get(1),thema.get(2)).get();
+                                    result = send.execute(sboardCode,smyNickname,senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate,sendstarttime,sendendtime, sendpurpose).get();
 
                                 if("success".equals(result)){
                                     AlertDialog.Builder builder = new AlertDialog.Builder(BoardUpdateActivity.this);
@@ -306,7 +276,7 @@ public class BoardUpdateActivity extends AppCompatActivity {
 
                 }
 
-            }
+
         });
 
 
