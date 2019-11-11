@@ -2,24 +2,36 @@ package com.example.tripmate.Plan;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.app.TimePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
+import com.example.tripmate.Ip;
 import com.example.tripmate.R;
 import com.example.tripmate.fragmentActivity2;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -60,7 +72,7 @@ public class AddListActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_addplanlist);
 
         //여행지
-        place = findViewById(R.id.et_place);
+        place = (EditText) findViewById(R.id.et_place);
 
         //일정타이틀
         title = findViewById(R.id.et_title);
@@ -94,20 +106,21 @@ public class AddListActivity extends AppCompatActivity {
                 String sendstart = text_sDate.getText().toString();
                 String sendend = text_eDate.getText().toString();
 
-                String result = null;
+                //String result = null;
+                try {
+                    SendTask send = new SendTask();
+                    send.execute(sendplace, sendtitle, sendstart, sendend).get();
 
 
+                    onBackPressed();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
             }
         });
-    }
-
-    public void replaceFragment()
-    {
-        fragmentActivity2 fragmentActivity2 = new fragmentActivity2();
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-       // fragmentTransaction.replace(R.id.frg_2, fragmentActivity2);
-        fragmentTransaction.commit();
     }
 
     //시작일
@@ -125,10 +138,69 @@ public class AddListActivity extends AppCompatActivity {
         text_eDate.setText(a);
     }
 
+    //데이터 송수신
+    class SendTask extends AsyncTask<String, Void, String> {
+        public String doInBackground(String... strings) {
+            try {
+                Ip a = new Ip();
+                String ip = a.getIP();
+                String url = "http://" + ip + ":8080/TripMateServer/Plan/AddOk.jsp";
+                URL obj = null;
+                try {
+                    obj = new URL(url);
+                    HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
 
+                    conn.setReadTimeout(3000);
+                    conn.setConnectTimeout(5000);
+                    conn.setRequestMethod("POST");
+                    conn.setRequestProperty("Accept-Charset", "UTF-8");
+                    conn.setDoInput(true);
+                    conn.setDoOutput(true);
+                    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
+                    OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
+                    String sendMsg = "place=" + strings[0] + "&title=" + strings[1] + "&start=" + strings[2] + "&end=" + strings[3];
+                    System.out.println(sendMsg);
+                    osw.write(sendMsg);
+                    osw.flush();
+                    osw.close();
 
+                    InputStream is = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                    String line;
+                    StringBuffer buffer = new StringBuffer();
+                    while ((line = reader.readLine()) != null) {
+                        buffer.append(line);
+                        buffer.append(' ');
+                    }
+                    reader.close();
 
+                    String result = buffer.toString();
+                    System.out.println(result);
 
+                    JSONArray jarray = null;
+                    jarray = new JSONObject(result).getJSONArray("addList");
+
+                    for (int i = 0; i < jarray.length(); i++) {
+                        JSONObject jsonObject = jarray.getJSONObject(i);
+                        String planCode = jsonObject.getString("plancode");
+                        String place = jsonObject.getString("place");
+                        String title = jsonObject.getString("title");
+                        String start = jsonObject.getString("start");
+                        String end = jsonObject.getString("end");
+                        PlanListModel planListModel = new PlanListModel(planCode, place, title, start, end);
+                        System.out.println(planListModel);
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
 
 }
