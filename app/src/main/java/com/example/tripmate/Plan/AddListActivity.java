@@ -110,8 +110,6 @@ public class AddListActivity extends AppCompatActivity {
                 try {
                     SendTask send = new SendTask();
                     send.execute(sendplace, sendtitle, sendstart, sendend).get();
-
-
                     onBackPressed();
 
                 } catch (InterruptedException e) {
