@@ -2,6 +2,9 @@ package com.example.tripmate.Location;
 
 import android.util.Log;
 import android.content.Intent;
+
+import com.example.tripmate.Location.LocationDataInfo;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -68,7 +71,7 @@ public class LocationInfoAPI {
                 sb.append(line + "\n");
             }
 
-            Log.i("ddddd","지금출력되고있다");
+            Log.i("first","지금출력되고있다");
             br.close();
             conn.disconnect();
 
@@ -129,12 +132,18 @@ public class LocationInfoAPI {
                     info.setTitle(tripObject.getString("title"));
                 }
 
+                if(tripObject.isNull("tel")) {
+                    info.setTel("");
+                } else {
+                    info.setTel(tripObject.getString("tel"));
+                }
+
                 dto.add(info);
 
 
             }
 
-            Log.i("TDB",dto.get(1).getTitle());
+
 
         } catch (Exception e) {
             e.printStackTrace();

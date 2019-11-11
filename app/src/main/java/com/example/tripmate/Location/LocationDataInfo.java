@@ -6,6 +6,7 @@ public class LocationDataInfo {
     private double mapX; //gps X 좌표
     private double mapY; //gps Y 좌표
     private String title; //콘텐츠명(제목)
+    private String tel;
 
     private String firstimage; //원본 이미지
     private String firstimage2; //썸네일 이미지
@@ -24,7 +25,6 @@ public class LocationDataInfo {
     public void setAddress2(String address2) {
         this.address2 = address2;
     }
-
     public String getFirstimage() {
         return firstimage;
     }
@@ -68,5 +68,10 @@ public class LocationDataInfo {
 
     public String getTitle(){return title;}
     public void setTitle(String title){this.title=title;}
+
+    public String getTel(){return tel;}
+    public void setTel(String tel){
+        this.tel = tel;
+    }
 
 }

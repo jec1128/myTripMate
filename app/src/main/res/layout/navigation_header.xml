@@ -4,15 +4,57 @@
          xmlns:app="http://schemas.android.com/apk/res-auto"
          xmlns:tools="http://schemas.android.com/tools"
          android:layout_width="match_parent"
-         android:layout_height="150dp"
-         >
+         android:layout_height="220dp"
+         android:padding="20dp"
+         android:background="@drawable/img_nav_bg">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/user_Img"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_Img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#fff"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="85dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:fontFamily="@font/notosans_regular"
+            android:text="동글쓰"
+            android:gravity="center_vertical"
+            android:textSize="25dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans_regular"
+            android:text="hogildong@gmail.com"
+            android:paddingLeft="5dp"
+            android:gravity="center_vertical"
+            android:textSize="12dp"/>
+
+    </LinearLayout>
+
+
     <!--
          <TextView
              android:id="@+id/textView2"

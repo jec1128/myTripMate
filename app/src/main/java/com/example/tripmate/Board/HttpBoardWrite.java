@@ -53,7 +53,6 @@ public class HttpBoardWrite extends Activity{
                     os.flush();
                     os.close();
 
-                    int retCode = conn.getResponseCode();
 
                     InputStream is = conn.getInputStream();
                     BufferedReader br = new BufferedReader(new InputStreamReader(is));
