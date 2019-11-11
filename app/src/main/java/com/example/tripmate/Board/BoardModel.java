@@ -9,21 +9,17 @@ public class BoardModel {
     private int gender;
     private int minage;
     private int maxage;
-    private String thema1;
-    private String thema2;
-    private String thema3;
+    private String purpose;
     private String matchdate;
 
-    public BoardModel(String boardCode,String nickname, String destination, int gender, int minage, int maxage, String thema1, String thema2, String thema3, String matchdate) {
+    public BoardModel(String boardCode,String nickname, String destination, int gender, int minage, int maxage, String purpose,  String matchdate) {
         this.boardCode = boardCode;
         this.nickname = nickname;
         this.destination = destination;
         this.gender = gender;
         this.minage = minage;
         this.maxage = maxage;
-        this.thema1 = thema1;
-        this.thema2 = thema2;
-        this.thema3 = thema3;
+        this.purpose = purpose;
         this.matchdate = matchdate;
     }
 
@@ -73,28 +69,11 @@ public class BoardModel {
         this.maxage = maxage;
     }
 
-    public String getThema1() {
-        return thema1;
+    public String getPurpose() {
+        return purpose;
     }
-
-    public void setThema1(String thema1) {
-        this.thema1 = thema1;
-    }
-
-    public String getThema2() {
-        return thema2;
-    }
-
-    public void setThema2(String thema2) {
-        this.thema2 = thema2;
-    }
-
-    public String getThema3() {
-        return thema3;
-    }
-
-    public void setThema3(String thema3) {
-        this.thema3 = thema3;
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
     }
 
     public String getMatchdate() {

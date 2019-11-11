@@ -49,7 +49,7 @@ public class HttpBoardUpdate extends Activity{
                     OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
                     String sendmsg = "boardcode=" + strings[0]+"&nickname=" + strings[1]+"&destination="+strings[2]+"&content="+strings[3]+"&gender="+strings[4]
                             +"&minage="+strings[5]+"&maxage="+strings[6]+"&date="+strings[7]+"&starttime="+strings[8]+"&endtime="+strings[9]
-                            +"&thema1="+strings[10]+"&thema2="+strings[11]+"&thema3="+strings[12];
+                            +"&purpose="+strings[10];
                     os.write(sendmsg);
                     os.flush();
                     os.close();

@@ -17,10 +17,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-public class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.BoardListViewHolder> {
+public class BoardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     //private static BoardListAdapter adapter = new BoardListAdapter();
     private ArrayList<BoardModel> boardlist = new ArrayList<>();
-    private int[] gender = new int []{R.drawable.img_board_man,
+    private int[] gender = new int[]{R.drawable.img_board_man,
             R.drawable.img_board_woman,
             R.drawable.img_board_all};
     private static String nickname;
@@ -28,7 +28,7 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.Boar
 
     //private BoardListAdapter(){ }
 
-    public void httpwork(){
+    public void httpwork() {
         removeAllItem();
         HttpBoardList httpBoardDataActivity = new HttpBoardList();
         HttpBoardList.sendTask send = httpBoardDataActivity.new sendTask();
@@ -38,22 +38,24 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.Boar
             JSONArray jarray = null;
             jarray = new JSONObject(result).getJSONArray("show");
 
+            if (jarray != null) {
 
-            for(int i = 0 ; i < jarray.length(); i++){
-                JSONObject jsonObject = jarray.getJSONObject(i);
-                String boardCode = jsonObject.getString("boardcode");
-                String destination = jsonObject.getString("destination");
-                String nickname = jsonObject.getString("nickname");
-                String date = jsonObject.getString("date");
-                int minage = jsonObject.getInt("minage");
-                int maxage = jsonObject.getInt("maxage");
-                int gender = jsonObject.getInt("gender");
-                String thema1 = jsonObject.getString("thema1");
-                String thema2 = jsonObject.getString("thema2");
-                String thema3 = jsonObject.getString("thema3");
+                for (int i = 0; i < jarray.length(); i++) {
+                    JSONObject jsonObject = jarray.getJSONObject(i);
+                    String boardCode = jsonObject.getString("boardcode");
+                    String destination = jsonObject.getString("destination");
+                    String nickname = jsonObject.getString("nickname");
+                    String date = jsonObject.getString("date");
+                    int minage = jsonObject.getInt("minage");
+                    int maxage = jsonObject.getInt("maxage");
+                    int gender = jsonObject.getInt("gender");
+                    String purpose = jsonObject.getString("purpose");
 
-                BoardModel boardModel = new BoardModel(boardCode,nickname,destination,gender,minage,maxage,thema1,thema2,thema3,date);
-                boardlist.add(boardModel);
+
+                    BoardModel boardModel = new BoardModel(boardCode, nickname, destination, gender, minage, maxage, purpose, date);
+                    boardlist.add(boardModel);
+                }
+
             }
         } catch (ExecutionException | InterruptedException | JSONException e) {
             e.printStackTrace();
@@ -68,7 +70,7 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.Boar
         return adapter;
     }*/
 
-    public static class BoardListViewHolder extends RecyclerView.ViewHolder {
+    public class BoardListViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView gender;
         public TextView textnickname;
@@ -76,9 +78,7 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.Boar
         public TextView destination;
         public TextView minage;
         public TextView maxage;
-        public TextView thema1;
-        public TextView thema2;
-        public TextView thema3;
+        public TextView purpose;
 
 
         public BoardListViewHolder(View view) {
@@ -90,14 +90,13 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.Boar
             destination = view.findViewById(R.id.boardlistitem_textview_destination);
             minage = view.findViewById(R.id.boardlistitem_textview_minage);
             maxage = view.findViewById(R.id.boardlistitem_textview_maxage);
-            thema1 = view.findViewById(R.id.boardlistitem_textview_thema1);
-            thema2 = view.findViewById(R.id.boardlistitem_textview_thema2);
-            thema3 = view.findViewById(R.id.boardlistitem_textview_thema3);
+            purpose = view.findViewById(R.id.boardlistitem_textview_purpose);
+
         }
     }
 
     @Override
-    public BoardListViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_boardlist, parent, false);
         BoardListViewHolder holder = new BoardListViewHolder(view);
         return holder;
@@ -105,54 +104,46 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.Boar
     }
 
     @Override
-    public void onBindViewHolder(BoardListViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         // 각 위치에 문자열 세팅
         int itemposition = position;
+        final BoardListViewHolder boardListViewHolder = (BoardListViewHolder) holder;
         final String boardCode = boardlist.get(itemposition).getBoardCode();
-        holder.textnickname.setText(boardlist.get(itemposition).getNickname());
-        holder.date.setText(boardlist.get(itemposition).getMatchdate());
-        holder.destination.setText(boardlist.get(itemposition).getDestination());
-        holder.thema1.setText(boardlist.get(itemposition).getThema1());
-        if("null".equals(boardlist.get(itemposition).getThema2()))
-            holder.thema2.setText("");
-        else
-            holder.thema2.setText(boardlist.get(itemposition).getThema2());
+        boardListViewHolder.textnickname.setText(boardlist.get(itemposition).getNickname());
+        boardListViewHolder.date.setText(boardlist.get(itemposition).getMatchdate());
+        boardListViewHolder.destination.setText(boardlist.get(itemposition).getDestination());
+        boardListViewHolder.purpose.setText(boardlist.get(itemposition).getPurpose());
+        boardListViewHolder.minage.setText(String.valueOf(boardlist.get(itemposition).getMinage()));
+        boardListViewHolder.maxage.setText(String.valueOf(boardlist.get(itemposition).getMaxage()));
 
-        if("null".equals(boardlist.get(itemposition).getThema3()))
-            holder.thema3.setText("");
-        else
-            holder.thema3.setText(boardlist.get(itemposition).getThema3());
-
-        holder.minage.setText(String.valueOf(boardlist.get(itemposition).getMinage()));
-        holder.maxage.setText(String.valueOf(boardlist.get(itemposition).getMaxage()));
-
-        if(boardlist.get(itemposition).getGender() == 0)
-            holder.gender.setImageResource(gender[0]);
+        if (boardlist.get(itemposition).getGender() == 0)
+            boardListViewHolder.gender.setImageResource(gender[0]);
         else if (boardlist.get(itemposition).getGender() == 1)
-            holder.gender.setImageResource(gender[1]);
+            boardListViewHolder.gender.setImageResource(gender[1]);
         else
-            holder.gender.setImageResource(gender[2]);
+            boardListViewHolder.gender.setImageResource(gender[2]);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        boardListViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent intent = new Intent(view.getContext(), BoardViewActivity.class);
                 nickname = fragmentBoard.getInstance().getNickname();
-                System.out.println("click listener : "+nickname);
+                System.out.println("click listener : " + nickname);
                 intent.putExtra("nickname", nickname);
-                intent.putExtra("boardcode",boardCode);
+                intent.putExtra("boardcode", boardCode);
                 view.getContext().startActivity(intent);
             }
         });
     }
+
     @Override
     public int getItemCount() {
         return boardlist.size(); // RecyclerView의 size return
     }
 
 
-    void addBoardList(final int position, BoardModel boardModel){
+    void addBoardList(final int position, BoardModel boardModel) {
         boardlist.add(boardModel);
     }
 
@@ -165,7 +156,7 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.Boar
         boardlist.remove(position);
     }
 
-    public void removeAllItem(){
+    public void removeAllItem() {
         boardlist.clear();
     }
 }

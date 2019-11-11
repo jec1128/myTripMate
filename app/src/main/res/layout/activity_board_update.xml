@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/WriteBoardActivity_layout"
+    android:id="@+id/BoardUpdateActivity_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
     android:orientation="vertical">
 
 
@@ -36,6 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="10dp"
+                android:hint="서울"
                 android:inputType="text"
                 android:privateImeOptions="defaultInputmode=korean"
                 android:singleLine="true"
@@ -64,6 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
+            android:hint="자기 인적사항 및 소개"
             android:textColor="#808080"
             android:textColorHint="#808080"
             android:textSize="15sp"
@@ -99,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="남자"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <RadioButton
                 android:id="@+id/BoardUpdateActivity_radio_woman"
@@ -107,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="여자"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <RadioButton
                 android:id="@+id/BoardUpdateActivity_radio_all"
@@ -116,7 +117,7 @@
                 android:layout_weight="1"
                 android:checked="true"
                 android:text="상관 없음"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
         </RadioGroup>
 
         <LinearLayout
@@ -222,70 +223,65 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:text="여행 테마 선택"
+            android:layout_marginBottom="10dp"
+            android:text="여행 목적 선택"
             android:textColor="#000000"
             android:textSize="20sp"></TextView>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:orientation="horizontal">
 
-            <CheckBox
-                android:id="@+id/BoardUpdateActivity_check_food"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/BoardUpdateActivity_trip_purose"
+                android:layout_width="328dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:padding="15dp"
-                android:text="맛집">
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
 
-            </CheckBox>
+                <RadioButton
+                    android:id="@+id/BoardUpdateActivity_radio_food"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:text="맛집"
+                    android:checked="true"
+                    android:textSize="18sp" />
 
-            <CheckBox
-                android:id="@+id/BoardUpdateActivity_check_rest"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="휴식"></CheckBox>
+                <RadioButton
+                    android:id="@+id/BoardUpdateActivity_radio_tour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:text="관광"
+                    android:textSize="18sp" />
 
-            <CheckBox
-                android:id="@+id/BoardUpdateActivity_check_nature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="자연"></CheckBox>
-        </LinearLayout>
+                <RadioButton
+                    android:id="@+id/BoardUpdateActivity_radio_carfull"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:text="카풀"
+                    android:textSize="18sp" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/BoardUpdateActivity_radio_picture"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:text="사진"
+                    android:textSize="18sp" />
+            </RadioGroup>
 
-            <CheckBox
-                android:id="@+id/BoardUpdateActivity_check_leisure"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:padding="15dp"
-                android:text="레져"></CheckBox>
 
-            <CheckBox
-                android:id="@+id/BoardUpdateActivity_check_walk"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="걷기"></CheckBox>
-
-            <CheckBox
-                android:id="@+id/BoardUpdateActivity_check_biking"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="자전거"></CheckBox>
 
         </LinearLayout>
 

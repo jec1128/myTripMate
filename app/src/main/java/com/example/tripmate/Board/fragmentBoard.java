@@ -3,30 +3,14 @@ package com.example.tripmate.Board;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.example.tripmate.Chat.fragmentChatroom;
 import com.example.tripmate.R;
-import com.example.tripmate.User.HttpUserRegister;
-import com.example.tripmate.fragmentActivity4;
-
-import java.io.IOException;
-import java.util.concurrent.ExecutionException;
-
-import okhttp3.Call;
-import okhttp3.Response;
 
 
 public class fragmentBoard extends Fragment {
@@ -35,7 +19,6 @@ public class fragmentBoard extends Fragment {
     private FloatingActionButton matching;
     private static String nickname;
     private BoardListAdapter boardListadapter;
-    private BoardMatchingListAdapter matchingListadapter;
     private RecyclerView recyclerView;
     private View view;
 
@@ -65,13 +48,12 @@ public class fragmentBoard extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.boardfragment_recyclerview);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
+
         //boardListadapter = BoardListAdapter.getInstance();
         boardListadapter = new BoardListAdapter();
         boardListadapter.httpwork();
-
         recyclerView.setAdapter(boardListadapter);
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
 
 
         write = view.findViewById(R.id.boardfragment_button_write);

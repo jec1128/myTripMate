@@ -30,9 +30,7 @@ public class BoardViewActivity extends AppCompatActivity {
     private String myNickname;
     private String boardCode;
     private TextView writerGenderAge;
-    private TextView thema1;
-    private TextView thema2;
-    private TextView thema3;
+    private TextView purpose;
     private TextView destination;
     private TextView mathcingGenderAge;
     private TextView writerNickname;
@@ -60,9 +58,8 @@ public class BoardViewActivity extends AppCompatActivity {
 
 
         writerGenderAge = findViewById(R.id.boardview_text_writergenderage);
-        thema1 = findViewById(R.id.boardview_text_thema1);
-        thema2 = findViewById(R.id.boardview_text_thema2);
-        thema3 = findViewById(R.id.boardview_text_thema3);
+        purpose = findViewById(R.id.boardview_text_purpose);
+
         destination = findViewById(R.id.boardview_text_destination);
         mathcingGenderAge = findViewById(R.id.boardview_text_matchinggenderage);
         writerNickname = findViewById(R.id.boardview_text_writer);
@@ -91,9 +88,8 @@ public class BoardViewActivity extends AppCompatActivity {
             jarray = new JSONObject(result).getJSONArray("view");
             JSONObject jsonObject = jarray.getJSONObject(0);
             final String swriterGenderAge = jsonObject.getString("writer-gender-age");
-            final String sthema1 = jsonObject.getString("thema1");
-            final String sthema2 = jsonObject.getString("thema2");
-            final String sthema3 = jsonObject.getString("thema3");
+            final String spurpose = jsonObject.getString("purpose");
+
             final String sdestination = jsonObject.getString("destination");
             final String smatchingGenderAge = jsonObject.getString("matching-gender-age");
             final String swriter = jsonObject.getString("writer");
@@ -102,9 +98,7 @@ public class BoardViewActivity extends AppCompatActivity {
             final String scontent = jsonObject.getString("content");
 
             writerGenderAge.setText(swriterGenderAge);
-            thema1.setText(sthema1);
-            thema2.setText(sthema2);
-            thema3.setText(sthema3);
+             purpose.setText(spurpose);
             destination.setText(sdestination);
             mathcingGenderAge.setText(smatchingGenderAge);
             writerNickname.setText(swriter);
@@ -121,9 +115,7 @@ public class BoardViewActivity extends AppCompatActivity {
                         intent.putExtra("myNickname",myNickname);
                         intent.putExtra("boardCode",boardCode);
                         intent.putExtra("writerGenderAge",swriterGenderAge);
-                        intent.putExtra("thema1",sthema1);
-                        intent.putExtra("thema2",sthema2);
-                        intent.putExtra("thema3",sthema3);
+                        intent.putExtra("purpose",spurpose);
                         intent.putExtra("destination",sdestination);
                         intent.putExtra("matchingGenderAge",smatchingGenderAge);
                         intent.putExtra("writerNickname",swriter);
