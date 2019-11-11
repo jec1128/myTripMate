@@ -21,13 +21,11 @@
             android:focusable="true"
             android:focusableInTouchMode="true">
 
-            <ImageView
-                android:id="@+id/iv_top"
-                android:layout_width="wrap_content"
-                android:layout_height="230dp"
-                android:contentDescription="TODO"
-                android:scaleType="fitXY"
-                android:src="@drawable/img_main_back" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@drawable/img_main_back">
+            </FrameLayout>
 
             <ImageButton
                 android:id="@+id/et_sch"
@@ -61,8 +59,10 @@
                 android:src="@drawable/img_main_gps" />
 
             <TextView
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/notosans_light"
                 android:layout_marginTop="58dp"
                 android:paddingLeft="19dp"
                 android:text="안녕하세요"
@@ -74,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="88dp"
                 android:paddingLeft="19dp"
+                android:fontFamily="@font/notosans_light"
                 android:text="김길동님 D-100일 전"
                 android:textColor="#FFFFFF"
                 android:textSize="25sp" />
