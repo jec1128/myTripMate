@@ -39,7 +39,7 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.PlanLi
         holder.txtEnd.setText(planlist.get(position).getPlanEnd());
     }
 
-    public void addList(int position, PlanListModel model){
+    public void addList(PlanListModel model){
         planlist.add(model);
     }
 

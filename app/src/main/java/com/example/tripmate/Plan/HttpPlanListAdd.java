@@ -79,8 +79,8 @@ public class HttpPlanListAdd extends Activity {
                         String title = jsonObject.getString("title");
                         String start = jsonObject.getString("start");
                         String end = jsonObject.getString("end");
-                        PlanListModel planListModel = new PlanListModel(planCode, place, title, start, end);
-                        System.out.println(planListModel);
+                        //PlanListModel planListModel = new PlanListModel(planCode, place, title, start, end);
+                        //System.out.println(planListModel);
                         //listAdapter.addList(i, planListModel);
                     }
 

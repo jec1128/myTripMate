@@ -29,10 +29,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
@@ -176,19 +178,20 @@ public class AddListActivity extends AppCompatActivity {
                     String result = buffer.toString();
                     System.out.println(result);
 
-                    JSONArray jarray = null;
-                    jarray = new JSONObject(result).getJSONArray("addList");
+                    JSONArray jarray = new JSONObject(result).getJSONArray("addList");
 
-                    for (int i = 0; i < jarray.length(); i++) {
-                        JSONObject jsonObject = jarray.getJSONObject(i);
-                        String planCode = jsonObject.getString("plancode");
-                        String place = jsonObject.getString("place");
-                        String title = jsonObject.getString("title");
-                        String start = jsonObject.getString("start");
-                        String end = jsonObject.getString("end");
-                        PlanListModel planListModel = new PlanListModel(planCode, place, title, start, end);
-                        //System.out.println(planListModel);
-                    }
+                    PlanListAdapter listAdapter = new PlanListAdapter();
+                    JSONObject jsonObject = jarray.getJSONObject(0);
+
+                    PlanListModel planListModel = new PlanListModel();
+                    planListModel.setPlanCode(jsonObject.getString("plancode"));
+                    planListModel.setPlanStart(jsonObject.getString("start"));
+                    planListModel.setPlanEnd(jsonObject.getString("end"));
+                    planListModel.setPlanPlace(jsonObject.getString("place"));
+                    planListModel.setPlanTitle(jsonObject.getString("title"));
+                    listAdapter.addList(planListModel);
+                    //System.out.println(planListModel);
+
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
