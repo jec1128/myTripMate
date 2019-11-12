@@ -21,10 +21,7 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.PlanLi
 
     public void get(){
 
-
     }
-
-
 
     @Override
     public PlanListAdapter.PlanListViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
