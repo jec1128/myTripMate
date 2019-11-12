@@ -187,7 +187,7 @@ public class AddListActivity extends AppCompatActivity {
                         String start = jsonObject.getString("start");
                         String end = jsonObject.getString("end");
                         PlanListModel planListModel = new PlanListModel(planCode, place, title, start, end);
-                        System.out.println(planListModel);
+                        //System.out.println(planListModel);
                     }
                 } catch (MalformedURLException e) {
                     e.printStackTrace();

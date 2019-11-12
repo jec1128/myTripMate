@@ -38,7 +38,7 @@ public class fragmentActivity2  extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.rc_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
         recyclerView.setAdapter(listAdapter);
-        listAdapter.notifyDataSetChanged();
+        //listAdapter.notifyDataSetChanged();
 
         return view;
     }
