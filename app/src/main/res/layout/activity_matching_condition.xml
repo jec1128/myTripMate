@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/BoardUpdateActivity_layout"
+    android:id="@+id/MatchingConditionActivity_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -30,7 +30,7 @@
             </TextView>
 
             <EditText
-                android:id="@+id/BoardUpdateActivity_text_where"
+                android:id="@+id/BoardWriteActivity_text_where"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
@@ -49,31 +49,6 @@
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:text="내용"
-            android:textColor="#000000"
-            android:textSize="20sp"></TextView>
-
-        <EditText
-            android:id="@+id/BoardUpdateActivity_text_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:hint="자기 인적사항 및 소개"
-            android:textColor="#808080"
-            android:textColorHint="#808080"
-            android:textSize="15sp"
-            android:maxLength="1000"
-            android:maxHeight="200dp"
-            android:cursorVisible="false"
-            >
-
-        </EditText>
 
         <TextView
             android:layout_width="wrap_content"
@@ -85,7 +60,7 @@
             android:textSize="20sp"></TextView>
 
         <RadioGroup
-            android:id="@+id/BoardUpdateActivity_group_gender"
+            android:id="@+id/BoardWriteActivity_group_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -95,7 +70,7 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/BoardUpdateActivity_radio_man"
+                android:id="@+id/BoardWriteActivity_radio_man"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -103,7 +78,7 @@
                 android:textSize="18sp" />
 
             <RadioButton
-                android:id="@+id/BoardUpdateActivity_radio_woman"
+                android:id="@+id/BoardWriteActivity_radio_woman"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -111,7 +86,7 @@
                 android:textSize="18sp" />
 
             <RadioButton
-                android:id="@+id/BoardUpdateActivity_radio_all"
+                android:id="@+id/BoardWriteActivity_radio_all"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -135,7 +110,7 @@
                 android:textSize="20sp"></TextView>
 
             <EditText
-                android:id="@+id/BoardUpdateActivity_edittext_age_start"
+                android:id="@+id/BoardWriteActivity_edittext_age_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -145,17 +120,6 @@
 
             </EditText>
 
-            <EditText
-                android:id="@+id/BoardUpdateActivity_edittext_age_end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:hint="최대나이"
-                android:inputType="number"
-                android:cursorVisible="false"
-                >
-
-            </EditText>
 
         </LinearLayout>
 
@@ -175,7 +139,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/BoardUpdateActivity_edittext_date_start"
+                android:id="@+id/BoardWriteActivity_edittext_date_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -184,13 +148,13 @@
                 android:editable="false"
                 android:focusable="false"
                 android:inputType="date"
-                android:text="시작 날짜">
+                android:text="날짜">
 
             </EditText>
 
 
             <EditText
-                android:id="@+id/BoardUpdateActivity_edittext_time_start"
+                android:id="@+id/BoardWriteActivity_edittext_time_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -199,21 +163,11 @@
                 android:editable="false"
                 android:focusable="false"
                 android:inputType="time"
-                android:text="시작 시간">
+                android:text="시간">
 
             </EditText>
 
-            <EditText
-                android:id="@+id/BoardUpdateActivity_edittext_time_end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:clickable="true"
-                android:editable="false"
-                android:focusable="false"
-                android:inputType="time"
-                android:text="종료 시간"></EditText>
+
 
 
         </LinearLayout>
@@ -234,7 +188,7 @@
             android:orientation="horizontal">
 
             <RadioGroup
-                android:id="@+id/BoardUpdateActivity_trip_purpose"
+                android:id="@+id/BoardWriteActivity_trip_purose"
                 android:layout_width="328dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -244,7 +198,7 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/BoardUpdateActivity_radio_food"
+                    android:id="@+id/BoardWriteActivity_radio_food"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -254,7 +208,7 @@
                     android:textSize="18sp" />
 
                 <RadioButton
-                    android:id="@+id/BoardUpdateActivity_radio_tour"
+                    android:id="@+id/BoardWriteActivity_radio_tour"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -263,7 +217,7 @@
                     android:textSize="18sp" />
 
                 <RadioButton
-                    android:id="@+id/BoardUpdateActivity_radio_carfull"
+                    android:id="@+id/BoardWriteActivity_radio_carfull"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -272,7 +226,7 @@
                     android:textSize="18sp" />
 
                 <RadioButton
-                    android:id="@+id/BoardUpdateActivity_radio_picture"
+                    android:id="@+id/BoardWriteActivity_radio_picture"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -286,12 +240,12 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/BoardUpdateActivity_button_update"
+            android:id="@+id/BoardWriteActivity_button_write"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/bt_round"
-            android:text="글 수정">
+            android:text="글 쓰기">
 
         </Button>
 

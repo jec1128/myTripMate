@@ -46,7 +46,6 @@ public class BoardWriteActivity extends AppCompatActivity {
     private Date now;
     private Dialog dialog;
     private String nickname;
-    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +53,7 @@ public class BoardWriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_board_write);
         Intent intent = getIntent();
         nickname = intent.getExtras().getString("nickname");
-        type = intent.getExtras().getString("type");
+
 
         System.out.println("boardwriteactivity" + nickname);
 
@@ -176,8 +175,8 @@ public class BoardWriteActivity extends AppCompatActivity {
                         final String senddestination = destination.getText().toString();
 
                         final String sendcontent = content.getText().toString();
-                        String sendgender1 = null;
-                        String sendpurpose = null;
+                        String sendgender1 = "2";
+                        String sendpurpose = "맛집";
 
                         if (man.isChecked())
                             sendgender1 = "0";
@@ -186,9 +185,9 @@ public class BoardWriteActivity extends AppCompatActivity {
                         else if (all.isChecked())
                             sendgender1 = "2";
 
-                        if(food.isChecked())
-                            sendpurpose="맛집";
-                        else if(carfull.isChecked())
+                        if (food.isChecked())
+                            sendpurpose = "맛집";
+                        else if (carfull.isChecked())
                             sendpurpose = "카풀";
                         else if (picture.isChecked())
                             sendpurpose = "사진";
@@ -210,60 +209,38 @@ public class BoardWriteActivity extends AppCompatActivity {
                         date1 = date1.replace("일", "");
                         date = date1;
 
-                        if ("matching".equals(type)) {
+                        String result = null;
+                        HttpBoardWrite httpBoardWriteActivity = new HttpBoardWrite();
+                        HttpBoardWrite.sendTask send = httpBoardWriteActivity.new sendTask();
+                        try {
+                            result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, sendpurpose).get();
+                            if ("success".equals(result)) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(BoardWriteActivity.this);
+                                builder.setTitle("게시판").setMessage("게시글 등록이 완료되었습니다");
+                                final String finalDate = date;
+                                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        fragmentBoard.getInstance().removeAllItems();
+                                        fragmentBoard.getInstance().init();
+                                        onBackPressed();
+                                    }
+                                });
+                                dialog = builder.create();
+                                dialog.show();
 
-
-                            /*String result = null;
-                            HttpBoardMatching httpBoardMatching = new HttpBoardMatching();
-                            HttpBoardMatching.sendTask send = httpBoardMatching.new sendTask();
-                            try {
-                                    result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, sendpurpose).get();
-
-                                if ("success".equals(result)) {
-
-                                }
-
-
-                            } catch (ExecutionException | InterruptedException e) {
-                                e.printStackTrace();
-                            }*/
-                        } else {
-                            String result = null;
-                            HttpBoardWrite httpBoardWriteActivity = new HttpBoardWrite();
-                            HttpBoardWrite.sendTask send = httpBoardWriteActivity.new sendTask();
-                            try {
-                                result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, sendpurpose).get();
-                                if ("success".equals(result)) {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(BoardWriteActivity.this);
-                                    builder.setTitle("게시판").setMessage("게시글 등록이 완료되었습니다");
-                                    final String finalDate = date;
-                                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            //final BoardListAdapter adapter = BoardListAdapter.getInstance();
-                                            BoardListAdapter adapter = new BoardListAdapter();
-                                            adapter.removeAllItem();
-                                            adapter.httpwork();
-
-                                            onBackPressed();
-                                        }
-                                    });
-                                    dialog = builder.create();
-                                    dialog.show();
-
-                                } else {
-                                    alert("게시판", "다시 시도해 주세요");
-                                }
-
-                            } catch (ExecutionException | InterruptedException e) {
-                                e.printStackTrace();
+                            } else {
+                                alert("게시판", "다시 시도해 주세요");
                             }
 
+                        } catch (ExecutionException | InterruptedException e) {
+                            e.printStackTrace();
                         }
-
 
                     }
 
+
                 }
+
 
             }
         });

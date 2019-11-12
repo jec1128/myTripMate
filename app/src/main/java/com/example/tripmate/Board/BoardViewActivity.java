@@ -219,9 +219,8 @@ public class BoardViewActivity extends AppCompatActivity {
     public void onBackPressed(){
 
        // final BoardListAdapter adapter = BoardListAdapter.getInstance();
-        BoardListAdapter adapter = new BoardListAdapter();
-        adapter.removeAllItem();
-        adapter.httpwork();
+        fragmentBoard.getInstance().removeAllItems();
+        fragmentBoard.getInstance().init();
         super.onBackPressed();
     }
 }

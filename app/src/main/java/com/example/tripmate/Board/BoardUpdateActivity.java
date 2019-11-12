@@ -198,15 +198,15 @@ public class BoardUpdateActivity extends AppCompatActivity {
                             man = findViewById(R.id.BoardUpdateActivity_radio_man);
                             woman = findViewById(R.id.BoardUpdateActivity_radio_woman);
                             all = findViewById(R.id.BoardUpdateActivity_radio_all);
-                            tour = findViewById(R.id.BoardWriteActivity_radio_tour);
-                            carfull = findViewById(R.id.BoardWriteActivity_radio_carfull);
-                            picture = findViewById(R.id.BoardWriteActivity_radio_picture);
-                            food = findViewById(R.id.BoardWriteActivity_radio_food);
+                            tour = findViewById(R.id.BoardUpdateActivity_radio_tour);
+                            carfull = findViewById(R.id.BoardUpdateActivity_radio_carfull);
+                            picture = findViewById(R.id.BoardUpdateActivity_radio_picture);
+                            food = findViewById(R.id.BoardUpdateActivity_radio_food);
                             final String senddestination = destination.getText().toString();
 
                             final String sendcontent = content.getText().toString();
-                            String sendgender1 = null;
-                            String sendpurpose = null;
+                            String sendgender1 = "2";
+                            String sendpurpose = "맛집";
                             if (man.isChecked())
                                 sendgender1 = "0";
                             else if (woman.isChecked())
@@ -222,7 +222,7 @@ public class BoardUpdateActivity extends AppCompatActivity {
                                 sendpurpose = "사진";
                             else if (tour.isChecked())
                                 sendpurpose = "관광";
-                            final int sendgender = Integer.parseInt(sendgender1);
+
 
                             final String sendminage = age_start.getText().toString();
 
@@ -253,11 +253,12 @@ public class BoardUpdateActivity extends AppCompatActivity {
                                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             //final BoardListAdapter adapter = BoardListAdapter.getInstance();
-                                            BoardListAdapter adapter = new BoardListAdapter();
-                                            adapter.removeAllItem();
-                                            adapter.httpwork();
-                                            onBackPressed();
+                                            //fragmentBoard fragment = new fragmentBoard();
+                                            //fragment.init();
 
+                                            fragmentBoard.getInstance().removeAllItems();
+                                            fragmentBoard.getInstance().init();
+                                            onBackPressed();
                                         }
                                     });
                                     dialog = builder.create();
