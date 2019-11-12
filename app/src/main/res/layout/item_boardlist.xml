@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="70dp"
     android:orientation="vertical"
     android:background="@drawable/border_bottom">
 
@@ -73,6 +73,18 @@
         </ImageView>
 
         <TextView
+            android:id="@+id/boardlistitem_textview_purpose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="테마1"
+            android:textSize="20dp">
+
+        </TextView>
+
+        <TextView
             android:id="@+id/boardlistitem_textview_minage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -120,43 +132,5 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/boardlistitem_textview_thema1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="테마1"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp">
-
-        </TextView>
-
-        <TextView
-            android:id="@+id/boardlistitem_textview_thema2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="테마2"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="20dp">
-
-        </TextView>
-
-        <TextView
-            android:id="@+id/boardlistitem_textview_thema3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="테마3"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="20dp">
-
-        </TextView>
-
-    </LinearLayout>
 </LinearLayout>

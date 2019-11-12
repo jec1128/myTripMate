@@ -36,7 +36,7 @@ import java.util.TreeMap;
 public class fragmentChatroom extends Fragment {
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd hh:mm");
 
-
+    public fragmentChatroom() {}
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -174,5 +174,9 @@ public class fragmentChatroom extends Fragment {
             }
         }
 
+    }
+
+    public String getTitle() {
+        return "채팅리스트";
     }
 }

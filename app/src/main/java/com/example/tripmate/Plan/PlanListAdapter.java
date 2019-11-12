@@ -29,7 +29,8 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.PlanLi
     @Override
     public PlanListAdapter.PlanListViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
         LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
-        View view = layoutInflater.inflate(R.layout.plan_card, viewGroup, false);
+        //레이아웃 부분 원영이가 주면 수정하기
+        View view = layoutInflater.inflate(R.layout.fragment_main3, viewGroup, false);
         PlanListViewHolder holder = new PlanListViewHolder(view);
         return holder;
     }
@@ -55,11 +56,14 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.PlanLi
     public class PlanListViewHolder extends RecyclerView.ViewHolder {
         public TextView txtPlace, txtStart, txtEnd, txtTitle;
         public PlanListViewHolder(View view) {
+
             super(view);
+            /*
             txtPlace = (TextView)view.findViewById(R.id.tv_loc);
             txtStart = (TextView)view.findViewById(R.id.tv_startday);
             txtEnd = (TextView)view.findViewById(R.id.tv_endday);
             txtTitle = (TextView)view.findViewById(R.id.tv_title);
+            */
         }
     }
 

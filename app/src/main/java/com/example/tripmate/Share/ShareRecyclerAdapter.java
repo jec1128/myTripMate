@@ -20,11 +20,11 @@ import java.util.ArrayList;
 
 public class ShareRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-    private ArrayList<TripRouteDataInfo> tripRoute = null;
+    private ArrayList<TripRouteDataInfo> tripRoute;
 
     public ShareRecyclerAdapter(ArrayList<TripRouteDataInfo> dataList)
     {
-        tripRoute = dataList;
+        this.tripRoute = dataList;
     }
 
     @NonNull

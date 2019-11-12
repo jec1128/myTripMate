@@ -48,7 +48,7 @@ public class HttpBoardWrite extends Activity{
                     OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
                     String sendmsg = "nickname=" + strings[0]+"&destination="+strings[1]+"&content="+strings[2]+"&gender="+strings[3]
                             +"&minage="+strings[4]+"&maxage="+strings[5]+"&date="+strings[6]+"&starttime="+strings[7]+"&endtime="+strings[8]
-                            +"&thema1="+strings[9]+"&thema2="+strings[10]+"&thema3="+strings[11];
+                            +"&purpose="+strings[9];
                     os.write(sendmsg);
                     os.flush();
                     os.close();

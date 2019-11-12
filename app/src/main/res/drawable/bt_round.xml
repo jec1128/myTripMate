@@ -4,7 +4,11 @@
     <!-- 평상시 -->
     <item android:state_focused="false" android:state_pressed="false">
         <shape>
-            <solid android:color="#66a6ff" />
+            <gradient
+                android:startColor="#6EC8FD"
+                android:endColor="#66A6FF"
+                android:angle="0"/>
+
             <corners android:radius="20dp" />
         </shape>
     </item>

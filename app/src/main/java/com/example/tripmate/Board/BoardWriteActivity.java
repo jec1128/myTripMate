@@ -8,28 +8,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TimePicker;
+import android.widget.Toolbar;
 
-import com.example.tripmate.MainActivity;
 import com.example.tripmate.R;
-import com.example.tripmate.User.HttpUserRegister;
-import com.example.tripmate.User.RegisterActivity;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
@@ -49,6 +42,11 @@ public class BoardWriteActivity extends AppCompatActivity {
     private RadioButton man;
     private RadioButton woman;
     private RadioButton all;
+    private RadioButton carfull;
+    private RadioButton food;
+    private RadioButton tour;
+    private RadioButton picture;
+
     private Date now;
     private Dialog dialog;
     private String nickname;
@@ -153,13 +151,11 @@ public class BoardWriteActivity extends AppCompatActivity {
         });
 
 
-
-
         write = findViewById(R.id.BoardWriteActivity_button_write);
         write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(TextUtils.isEmpty(destination.getText()) ||
+                if (TextUtils.isEmpty(destination.getText()) ||
                         TextUtils.isEmpty(content.getText()) ||
                         TextUtils.isEmpty(age_start.getText()) ||
                         TextUtils.isEmpty(age_end.getText()) ||
@@ -167,150 +163,105 @@ public class BoardWriteActivity extends AppCompatActivity {
                         TextUtils.isEmpty(time_start.getText()) ||
                         TextUtils.isEmpty(time_end.getText())) {
                     alert("글 쓰기", "모든칸을 다 채워주세요");
-                }
-                else{
+                } else {
                     final int minage = Integer.parseInt(age_start.getText().toString());
                     final int maxage = Integer.parseInt(age_end.getText().toString());
-                    if (minage > maxage){
+                    if (minage > maxage) {
                         alert("글 쓰기", "최소나이가 최대나이보다 클 수 없습니다");
-                    }
-                    else{
-                        CheckBox cb1 = findViewById(R.id.BoardWriteActivity_check_food);
-                        CheckBox cb2 = findViewById(R.id.BoardWriteActivity_check_rest);
-                        CheckBox cb3 = findViewById(R.id.BoardWriteActivity_check_nature);
-                        CheckBox cb4 = findViewById(R.id.BoardWriteActivity_check_leisure);
-                        CheckBox cb5 = findViewById(R.id.BoardWriteActivity_check_walk);
-                        CheckBox cb6 = findViewById(R.id.BoardWriteActivity_check_biking);
+                    } else {
 
-                        int checkCount = 0;
+                        man = findViewById(R.id.BoardWriteActivity_radio_man);
+                        woman = findViewById(R.id.BoardWriteActivity_radio_woman);
+                        all = findViewById(R.id.BoardWriteActivity_radio_all);
+                        tour = findViewById(R.id.BoardWriteActivity_radio_tour);
+                        carfull = findViewById(R.id.BoardWriteActivity_radio_carfull);
+                        picture = findViewById(R.id.BoardWriteActivity_radio_picture);
+                        food = findViewById(R.id.BoardWriteActivity_radio_food);
+                        final String senddestination = destination.getText().toString();
 
-                        if (cb1.isChecked()) {
-                            checkCount++;
+                        final String sendcontent = content.getText().toString();
+                        String sendgender1 = null;
+                        String sendpurpose = null;
 
-                        }
-                        if (cb2.isChecked()) {
-                            checkCount++;
+                        if (man.isChecked())
+                            sendgender1 = "0";
+                        else if (woman.isChecked())
+                            sendgender1 = "1";
+                        else if (all.isChecked())
+                            sendgender1 = "2";
 
-                        }
-                        if (cb3.isChecked()) {
-                            checkCount++;
+                        if(food.isChecked())
+                            sendpurpose="맛집";
+                        else if(carfull.isChecked())
+                            sendpurpose = "카풀";
+                        else if (picture.isChecked())
+                            sendpurpose = "사진";
+                        else if (tour.isChecked())
+                            sendpurpose = "관광";
 
-                        }
-                        if (cb4.isChecked()) {
-                            checkCount++;
+                        final String sendminage = age_start.getText().toString();
 
-                        }
-                        if (cb5.isChecked()) {
-                            checkCount++;
-                        }
-                        if (cb6.isChecked()) {
-                            checkCount++;
-                        }
-                        final ArrayList<String> thema = new ArrayList<>(3);
-                        if (checkCount > 3 || checkCount == 0) {
-                            alert("체크 갯수 제한","1,2,3개만 입력하세요");
+                        final String sendmaxage = age_end.getText().toString();
+
+                        final String senddate = date_start.getText().toString();
+                        final String sendstarttime = time_start.getText().toString();
+                        final String sendendtime = time_end.getText().toString();
+
+                        final String date;
+                        String date1;
+                        date1 = senddate.replace("년", "-");
+                        date1 = date1.replace("월", "-");
+                        date1 = date1.replace("일", "");
+                        date = date1;
+
+                        if ("matching".equals(type)) {
+
+
+                            /*String result = null;
+                            HttpBoardMatching httpBoardMatching = new HttpBoardMatching();
+                            HttpBoardMatching.sendTask send = httpBoardMatching.new sendTask();
+                            try {
+                                    result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, sendpurpose).get();
+
+                                if ("success".equals(result)) {
+
+                                }
+
+
+                            } catch (ExecutionException | InterruptedException e) {
+                                e.printStackTrace();
+                            }*/
                         } else {
-                            man = findViewById(R.id.BoardWriteActivity_radio_man);
-                            woman = findViewById(R.id.BoardWriteActivity_radio_woman);
-                            all = findViewById(R.id.BoardWriteActivity_radio_all);
-
-                            final String senddestination = destination.getText().toString();
-
-                            final String sendcontent = content.getText().toString();
-                            String sendgender1 = null;
-                            if (man.isChecked())
-                                sendgender1 = "0";
-                            else if (woman.isChecked())
-                                sendgender1 = "1";
-                            else if (all.isChecked())
-                                sendgender1 = "2";
-                            final int sendgender = Integer.parseInt(sendgender1);
-                            final String sendminage = age_start.getText().toString();
-
-                            final String sendmaxage = age_end.getText().toString();
-
-                            final String senddate = date_start.getText().toString();
-                            final String sendstarttime = time_start.getText().toString();
-                            final String sendendtime = time_end.getText().toString();
-
-                            final String date;
-                            String date1;
-                            date1 = senddate.replace("년", "-");
-                            date1 = date1.replace("월", "-");
-                            date1 = date1.replace("일", "");
-                            date = date1;
+                            String result = null;
+                            HttpBoardWrite httpBoardWriteActivity = new HttpBoardWrite();
+                            HttpBoardWrite.sendTask send = httpBoardWriteActivity.new sendTask();
+                            try {
+                                result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, sendpurpose).get();
+                                if ("success".equals(result)) {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(BoardWriteActivity.this);
+                                    builder.setTitle("게시판").setMessage("게시글 등록이 완료되었습니다");
+                                    final String finalDate = date;
+                                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            //final BoardListAdapter adapter = BoardListAdapter.getInstance();
 
 
-                            if (cb1.isChecked() == true) thema.add(cb1.getText().toString());
-                            if (cb2.isChecked() == true) thema.add(cb2.getText().toString());
-                            if (cb3.isChecked() == true) thema.add(cb3.getText().toString());
-                            if (cb4.isChecked() == true) thema.add(cb4.getText().toString());
-                            if (cb5.isChecked() == true) thema.add(cb5.getText().toString());
-                            if (cb6.isChecked() == true) thema.add(cb6.getText().toString());
+                                            onBackPressed();
+                                        }
+                                    });
+                                    dialog = builder.create();
+                                    dialog.show();
 
-                            if ("write".equals(type)) {
-
-
-                                String result = null;
-                                HttpBoardMatching httpBoardMatching = new HttpBoardMatching();
-                                HttpBoardMatching.sendTask send = httpBoardMatching.new sendTask();
-                                try {
-                                    if (thema.size() == 1)
-                                        result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, thema.get(0), " ", " ").get();
-                                    else if (thema.size() == 2)
-                                        result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, thema.get(0), thema.get(1), " ").get();
-                                    else if (thema.size() == 3)
-                                        result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, thema.get(0), thema.get(1), thema.get(2)).get();
-
-                                    if ("success".equals(result)) {
-
-                                    }
-
-
-                                } catch (ExecutionException | InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
-                            else{
-                                String result = null;
-                                HttpBoardWrite httpBoardWriteActivity = new HttpBoardWrite();
-                                HttpBoardWrite.sendTask send = httpBoardWriteActivity.new sendTask();
-                                try {
-                                    if (thema.size() == 1)
-                                        result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, thema.get(0), " ", " ").get();
-                                    else if (thema.size() == 2)
-                                        result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, thema.get(0), thema.get(1), " ").get();
-                                    else if (thema.size() == 3)
-                                        result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, thema.get(0), thema.get(1), thema.get(2)).get();
-
-                                    if ("success".equals(result)) {
-                                        AlertDialog.Builder builder = new AlertDialog.Builder(BoardWriteActivity.this);
-                                        builder.setTitle("게시판").setMessage("게시글 등록이 완료되었습니다");
-                                        final String finalDate = date;
-                                        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                //final BoardListAdapter adapter = BoardListAdapter.getInstance();
-                                                BoardListAdapter adapter = new BoardListAdapter();
-                                                adapter.removeAllItem();
-                                                adapter.httpwork();
-
-                                                onBackPressed();
-                                            }
-                                        });
-                                        dialog = builder.create();
-                                        dialog.show();
-
-                                    } else {
-                                        alert("게시판", "다시 시도해 주세요");
-                                    }
-
-                                } catch (ExecutionException | InterruptedException e) {
-                                    e.printStackTrace();
+                                } else {
+                                    alert("게시판", "다시 시도해 주세요");
                                 }
 
+                            } catch (ExecutionException | InterruptedException e) {
+                                e.printStackTrace();
                             }
+
                         }
+
 
                     }
 
@@ -320,8 +271,8 @@ public class BoardWriteActivity extends AppCompatActivity {
         });
 
 
-
     }
+
     private void alert(String title, String content) {
         AlertDialog.Builder builder = new AlertDialog.Builder(BoardWriteActivity.this);
         builder.setTitle(title).setMessage(content);
@@ -331,6 +282,29 @@ public class BoardWriteActivity extends AppCompatActivity {
         });
         dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        ActionBar actionBar = getSupportActionBar();
+
+        // Custom Actionbar를 사용하기 위해 CustomEnabled을 true 시키고 필요 없는 것은 false 시킨다
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(false);            //액션바 아이콘을 업 네비게이션 형태로 표시합니다.
+        actionBar.setDisplayShowTitleEnabled(false);        //액션바에 표시되는 제목의 표시유무를 설정합니다.
+        actionBar.setDisplayShowHomeEnabled(false);            //홈 아이콘을 숨김처리합니다.
+
+        //layout을 가지고 와서 actionbar에 포팅을 시킵니다.
+        LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
+        View actionbar = inflater.inflate(R.layout.custom_actionbar, null);
+
+        actionBar.setCustomView(actionbar);
+
+        //액션바 양쪽 공백 없애기
+        Toolbar parent = (Toolbar)actionbar.getParent();
+        parent.setContentInsetsAbsolute(0,0);
+
+        return true;
     }
 }
 

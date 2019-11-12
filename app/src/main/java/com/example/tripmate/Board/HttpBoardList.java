@@ -1,10 +1,11 @@
 /* 내가 수정할 부분 */
-
+/* 게시물 내용 JSP에서 JSON 처리하여 String으로 넘겨받는 부분 */
 package com.example.tripmate.Board;
 
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.tripmate.Ip;
 
@@ -25,10 +26,10 @@ public class HttpBoardList extends Activity{
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     public class sendTask extends AsyncTask<String, Void, String> {
+
         public String doInBackground(String... strings) {
             try {
                 Ip a = new Ip();
@@ -37,6 +38,7 @@ public class HttpBoardList extends Activity{
                 //String url = "http://192.168.214.146:8080/TripMateServer/Board/ShowList.jsp";
 
                 URL obj = null;
+
                 try {
                     obj = new URL(url);
                     HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
@@ -61,6 +63,8 @@ public class HttpBoardList extends Activity{
                     BufferedReader br = new BufferedReader(new InputStreamReader(is));
                     String line;
                     StringBuffer response = new StringBuffer();
+
+
                     while ((line = br.readLine()) != null) {
                         response.append(line);
                         response.append(' ');
@@ -68,9 +72,10 @@ public class HttpBoardList extends Activity{
                     br.close();
 
                     String result = response.toString();
+
+                    Log.i("TTTTT",result);
+
                     return result;
-
-
 
                 } catch (IOException ex) {
                     ex.printStackTrace();

@@ -14,10 +14,7 @@ public class BoardListViewHolder extends RecyclerView.ViewHolder{
     public TextView destination;
     public TextView minage;
     public TextView maxage;
-    public TextView thema1;
-    public TextView thema2;
-    public TextView thema3;
-
+    public TextView purpose;
 
     public BoardListViewHolder(View view) {
         super(view);
@@ -28,8 +25,6 @@ public class BoardListViewHolder extends RecyclerView.ViewHolder{
         destination = view.findViewById(R.id.boardlistitem_textview_destination);
         minage = view.findViewById(R.id.boardlistitem_textview_minage);
         maxage = view.findViewById(R.id.boardlistitem_textview_maxage);
-        thema1 = view.findViewById(R.id.boardlistitem_textview_thema1);
-        thema2 = view.findViewById(R.id.boardlistitem_textview_thema2);
-        thema3 = view.findViewById(R.id.boardlistitem_textview_thema3);
+        purpose = view.findViewById(R.id.boardview_text_purpose);
     }
 }
