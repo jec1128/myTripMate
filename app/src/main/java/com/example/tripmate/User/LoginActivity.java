@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.GravityCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -160,5 +162,27 @@ public class LoginActivity extends Activity {
         });
         dialog = builder.create();
         dialog.show();
+    }
+    public void onBackPressed() {
+
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+            builder.setTitle("종료").setMessage("종료하시겠습니까?");
+            builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    ActivityCompat.finishAffinity(LoginActivity.this);
+                    System.runFinalizersOnExit(true);
+                    System.exit(0);
+                }
+            });
+            builder.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            dialog = builder.create();
+            dialog.show();
+
     }
 }

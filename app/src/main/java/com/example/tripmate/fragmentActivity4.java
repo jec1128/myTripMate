@@ -46,7 +46,7 @@ public class fragmentActivity4 extends Fragment {
         tabLayout = myFragment.findViewById(R.id.tabLayout);
 
 
-       // tabLayout.addTab(tabLayout.newTab().setIcon(icons[2]));
+        tabLayout.addTab(tabLayout.newTab().setIcon(icons[2]));
         tabLayout.addTab(tabLayout.newTab().setIcon(icons[0]));
         tabLayout.addTab(tabLayout.newTab().setIcon(icons[1]));
         //tabLayout.setupWithViewPager(viewPager);
