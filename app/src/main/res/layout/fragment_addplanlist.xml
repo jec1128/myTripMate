@@ -41,6 +41,7 @@
             android:layout_marginLeft="40dp"
             android:background="@android:color/transparent"
             android:hint="장소를 검색하세요"
+            android:clickable="true"
             android:lineSpacingExtra="100sp"
             android:textColor="#616161"
             android:textSize="18sp" />

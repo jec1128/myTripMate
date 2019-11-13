@@ -7,13 +7,13 @@ public class PlanListModel {
     String planStart;
     String planEnd;
 
-    /*public PlanListModel(String planCode, String planPlace, String planTitle, String planStart, String planEnd){
+    public PlanListModel(String planCode, String planPlace, String planTitle, String planStart, String planEnd){
         this.planCode = planCode;
         this.planPlace = planPlace;
         this.planTitle = planTitle;
         this.planStart = planStart;
         this.planEnd = planEnd;
-    }*/
+    }
 
     public String getPlanCode(){
         return planCode;

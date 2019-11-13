@@ -45,7 +45,6 @@ public class HttpPlanListAdd extends Activity {
                     conn.setDoOutput(true);
                     conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
-
                     OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
                     String sendMsg = "place=" + strings[0] + "&title=" + strings[1] + "&start=" + strings[2] + "&end=" + strings[3];
                     System.out.println(sendMsg);
@@ -53,48 +52,59 @@ public class HttpPlanListAdd extends Activity {
                     osw.flush();
                     osw.close();
 
-
                     InputStream is = conn.getInputStream();
-                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
                     String line;
-                    StringBuffer response = new StringBuffer();
-                    while ((line = br.readLine()) != null) {
-                        response.append(line);
-                        response.append(' ');
+                    StringBuffer buffer = new StringBuffer();
+                    while ((line = reader.readLine()) != null) {
+                        buffer.append(line);
+                        buffer.append(' ');
                     }
-                    br.close();
+                    reader.close();
 
-                    String result = response.toString();
+                    String result = buffer.toString();
                     System.out.println(result);
-                    //final PlanListAdapter listAdapter = PlanListAdapter.getInstance();
+                    String receiveMsg = parsedData(result);
+                    return receiveMsg;
 
-                    JSONArray jarray = null;
-                    jarray = new JSONObject(result).getJSONArray("addList");
-
-
-                    for (int i = 0; i < jarray.length(); i++) {
+                    /*JSONArray jarray = new JSONObject(result).getJSONArray("addList");
+                    ArrayList<PlanListModel> planlist = new ArrayList<>();
+                    PlanListAdapter listAdapter = new PlanListAdapter();
+                    for(int i = 0; i < jarray.length(); i++){
                         JSONObject jsonObject = jarray.getJSONObject(i);
-                        String planCode = jsonObject.getString("plancode");
+                        String code = jsonObject.getString("plancode");
                         String place = jsonObject.getString("place");
                         String title = jsonObject.getString("title");
                         String start = jsonObject.getString("start");
                         String end = jsonObject.getString("end");
-                        //PlanListModel planListModel = new PlanListModel(planCode, place, title, start, end);
-                        //System.out.println(planListModel);
-                        //listAdapter.addList(i, planListModel);
+                        PlanListModel model = new PlanListModel(code, place, title, start, end);
+                        planlist.add(model);
                     }
+                    listAdapter.addList(planlist);*/
 
 
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
-                } catch (JSONException e) {
+                } /*catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*/
             } catch (IOException e) {
                 e.printStackTrace();
             }
-                return null;
+            return null;
         }
     }
+    public String parsedData(String recvMsg){
+        JSONArray jarray = null;
+        try {
+            jarray = new JSONObject(recvMsg).getJSONArray("add");
+            JSONObject jsonObject = jarray.getJSONObject(0);
+            String receiveMsg = jsonObject.getString("msg");
+            return receiveMsg;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
+        return null;
+    }
 }
