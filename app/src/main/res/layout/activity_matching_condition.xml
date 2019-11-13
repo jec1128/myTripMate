@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/MatchingConditionActivity_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="어디로 여행가시나요?"
+                android:textColor="#000000"
+                android:textSize="20sp">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/MatchingConditionActivity_edittext_destination"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:hint="서울"
+                android:inputType="text"
+                android:privateImeOptions="defaultInputmode=korean"
+                android:singleLine="true"
+                android:textColor="#808080"
+                android:textColorHint="#808080"
+                android:textSize="20sp"
+                android:cursorVisible="false"
+                >
+
+            </EditText>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="상대방 성별"
+            android:textColor="#000000"
+            android:textSize="20sp"></TextView>
+
+        <RadioGroup
+            android:id="@+id/MatchingConditionActivity_group_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/MatchingConditionActivity_radio_man"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="남자"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/MatchingConditionActivity_radio_woman"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="여자"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/MatchingConditionActivity_radio_all"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="상관 없음"
+                android:textSize="18sp" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="상대방 나이"
+                android:textColor="#000000"
+                android:textSize="20sp"></TextView>
+
+            <EditText
+                android:id="@+id/MatchingConditionActivity_edittext_minage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:hint="최소나이"
+                android:inputType="number"
+                android:cursorVisible="false">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/MatchingConditionActivity_edittext_maxage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:hint="최대나이"
+                android:inputType="number"
+                android:cursorVisible="false">
+
+            </EditText>
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="여행 날짜 시간 선택"
+            android:textColor="#000000"
+            android:textSize="20sp"></TextView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/MatchingConditionActivity_edittext_date_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:editable="false"
+                android:focusable="false"
+                android:inputType="date"
+                android:text="날짜">
+
+            </EditText>
+
+
+            <EditText
+                android:id="@+id/MatchingConditionActivity_edittext_time_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:editable="false"
+                android:focusable="false"
+                android:inputType="time"
+                android:text="시간">
+
+            </EditText>
+
+
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="여행 목적 선택"
+            android:textColor="#000000"
+            android:textSize="20sp"></TextView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/MatchingConditionActivity_trip_purose"
+                android:layout_width="328dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/MatchingConditionActivity_radio_food"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:text="맛집"
+                    android:checked="true"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/MatchingConditionActivity_radio_tour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:text="관광"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/MatchingConditionActivity_radio_carfull"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:text="카풀"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/MatchingConditionActivity_radio_picture"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:text="사진"
+                    android:textSize="18sp" />
+            </RadioGroup>
+
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/MatchingConditionActivity_button_matching"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bt_round"
+            android:text="매칭 검색">
+
+        </Button>
+
+    </LinearLayout>
+</ScrollView>

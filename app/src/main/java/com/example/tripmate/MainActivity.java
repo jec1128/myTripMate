@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Navigation Drawer 생성 및 초기화
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        ImageView imageView = findViewById(R.id.user_Img);
+        ImageView imageView = findViewById(R.id.navigation_header_image_user);
 
         //하단 툴바 생성
         bottomNavigationView =(BottomNavigationView)findViewById(R.id.bottom_navigation);

@@ -19,6 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Board.Matching.MatchingActivity"></activity>
+        <activity android:name=".Board.Matching.MatchingConditionActivity" />
         <activity android:name=".Board.BoardUpdateActivity" />
         <activity android:name=".Board.BoardViewActivity" />
         <activity android:name=".Intro2Activity" />

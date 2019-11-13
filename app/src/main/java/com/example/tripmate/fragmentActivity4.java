@@ -26,6 +26,7 @@ public class fragmentActivity4 extends Fragment {
     private ViewPager viewPager;
     private int[] icons = new int []{R.drawable.img_tab_board,
             R.drawable.img_tab_chat,R.drawable.img_tab_friend};
+    private TabPagerAdapter pagerAdapter;
 
     @SuppressLint("ValidFragment")
     private fragmentActivity4(){}
@@ -33,7 +34,7 @@ public class fragmentActivity4 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myFragment = inflater.inflate(R.layout.fragment_main4, container, false);
-
+        FragmentManager cfManager = getChildFragmentManager();
         Bundle extra = this.getArguments();
         if(extra != null) {
             extra = getArguments();
@@ -55,7 +56,7 @@ public class fragmentActivity4 extends Fragment {
         // Initializing ViewPager
 
 
-        TabPagerAdapter pagerAdapter = new TabPagerAdapter(getFragmentManager(), tabLayout.getTabCount());
+        pagerAdapter = new TabPagerAdapter(cfManager, tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -65,10 +66,7 @@ public class fragmentActivity4 extends Fragment {
             public void onTabSelected(TabLayout.Tab tab) {
                 System.out.println("onTabSelected " + tab.getPosition());
                 viewPager.setCurrentItem(tab.getPosition());
-                if(tab.getPosition() == 1){
-                    fragmentBoard fragment = fragmentBoard.getInstance();
-                    fragment.doAdapter();
-                }
+
 
             }
 
@@ -96,5 +94,7 @@ public class fragmentActivity4 extends Fragment {
     public static String getNickname() {
         return nickname;
     }
+
+
 
 }
