@@ -69,9 +69,6 @@ public class fragmentActivity4 extends Fragment {
                 System.out.println("onTabSelected " + tab.getPosition());
                 viewPager.setCurrentItem(tab.getPosition());
 
-                if(tab.getPosition() == 1){
-                    refresh();
-                }
 
             }
 
@@ -100,8 +97,6 @@ public class fragmentActivity4 extends Fragment {
         return nickname;
     }
 
-    private void refresh() {
-        pagerAdapter.notifyDataSetChanged();
-    }
+
 
 }

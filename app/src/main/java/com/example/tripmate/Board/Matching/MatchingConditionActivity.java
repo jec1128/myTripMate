@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -17,8 +18,17 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TimePicker;
 
+import com.example.tripmate.Board.BoardListAdapter;
+import com.example.tripmate.Board.BoardModel;
+import com.example.tripmate.Board.BoardUpdateActivity;
+import com.example.tripmate.Board.HttpBoardList;
 import com.example.tripmate.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
@@ -30,9 +40,10 @@ public class MatchingConditionActivity extends AppCompatActivity {
     private EditText date_start;
     private EditText time_start;
     private EditText destination;
-    private EditText content;
-    private EditText age;
-    private Button write;
+
+    private EditText minage;
+    private EditText maxage;
+    private Button matching;
     private RadioButton man;
     private RadioButton woman;
     private RadioButton all;
@@ -43,23 +54,24 @@ public class MatchingConditionActivity extends AppCompatActivity {
     private Date now;
     private Dialog dialog;
     private String nickname;
-
+    private static ArrayList<BoardModel> dataList;
+    private static BoardListAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_board_write);
+        setContentView(R.layout.activity_matching_condition);
         Intent intent = getIntent();
         nickname = intent.getExtras().getString("nickname");
 
         System.out.println("MatchingCondition Activity" + nickname);
 
-        destination = findViewById(R.id.BoardWriteActivity_text_where);
-        content = findViewById(R.id.BoardWriteActivity_text_content);
-        age = findViewById(R.id.BoardWriteActivity_edittext_age_start);
+        destination = findViewById(R.id.MatchingConditionActivity_edittext_destination);
+        minage = findViewById(R.id.MatchingConditionActivity_edittext_minage);
+        maxage = findViewById(R.id.MatchingConditionActivity_edittext_maxage);
 
 
         final Calendar startDate = Calendar.getInstance();
-        date_start = (EditText) findViewById(R.id.BoardWriteActivity_edittext_date_start);
+        date_start = (EditText) findViewById(R.id.MatchingConditionActivity_edittext_date_start);
         date_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,7 +109,7 @@ public class MatchingConditionActivity extends AppCompatActivity {
 
         final Calendar mcurrentTime = Calendar.getInstance();
 
-        time_start = (EditText) findViewById(R.id.BoardWriteActivity_edittext_time_start);
+        time_start = (EditText) findViewById(R.id.MatchingConditionActivity_edittext_time_start);
         time_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,28 +131,28 @@ public class MatchingConditionActivity extends AppCompatActivity {
         });
 
 
-        write = findViewById(R.id.BoardWriteActivity_button_write);
-        write.setOnClickListener(new View.OnClickListener() {
+        matching = findViewById(R.id.MatchingConditionActivity_button_matching);
+        matching.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (TextUtils.isEmpty(destination.getText()) ||
-                        TextUtils.isEmpty(content.getText()) ||
-                        TextUtils.isEmpty(age.getText()) ||
+                        TextUtils.isEmpty(minage.getText()) ||
+                        TextUtils.isEmpty(maxage.getText()) ||
                         TextUtils.isEmpty(date_start.getText()) ||
                         TextUtils.isEmpty(time_start.getText())) {
                     alert("글 쓰기", "모든칸을 다 채워주세요");
                 } else {
-                    man = findViewById(R.id.BoardWriteActivity_radio_man);
-                    woman = findViewById(R.id.BoardWriteActivity_radio_woman);
-                    all = findViewById(R.id.BoardWriteActivity_radio_all);
-                    tour = findViewById(R.id.BoardWriteActivity_radio_tour);
-                    carfull = findViewById(R.id.BoardWriteActivity_radio_carfull);
-                    picture = findViewById(R.id.BoardWriteActivity_radio_picture);
-                    food = findViewById(R.id.BoardWriteActivity_radio_food);
+                    man = findViewById(R.id.MatchingConditionActivity_radio_man);
+                    woman = findViewById(R.id.MatchingConditionActivity_radio_woman);
+                    all = findViewById(R.id.MatchingConditionActivity_radio_all);
+                    tour = findViewById(R.id.MatchingConditionActivity_radio_tour);
+                    carfull = findViewById(R.id.MatchingConditionActivity_radio_carfull);
+                    picture = findViewById(R.id.MatchingConditionActivity_radio_picture);
+                    food = findViewById(R.id.MatchingConditionActivity_radio_food);
 
                     final String senddestination = destination.getText().toString();
-                    String sendgender1 = null;
-                    String sendpurpose = null;
+                    String sendgender1 = "2";
+                    String sendpurpose = "맛집";
 
                     if (man.isChecked())
                         sendgender1 = "0";
@@ -158,11 +170,10 @@ public class MatchingConditionActivity extends AppCompatActivity {
                     else if (tour.isChecked())
                         sendpurpose = "관광";
 
-                    final String sendage = age.getText().toString();
-
-
+                    final String sendminage = minage.getText().toString();
+                    final String sendmaxage = maxage.getText().toString();
                     final String senddate = date_start.getText().toString();
-                    final String sendstarttime = time_start.getText().toString();
+                    final String sendtime = time_start.getText().toString();
 
                     final String date;
                     String date1;
@@ -176,35 +187,36 @@ public class MatchingConditionActivity extends AppCompatActivity {
                     HttpMatchingCondition httpMatchingCondition = new HttpMatchingCondition();
                     HttpMatchingCondition.sendTask send = httpMatchingCondition.new sendTask();
                     try {
-                        result = send.execute(nickname, senddestination, sendgender1, sendage, senddate, sendstarttime, sendpurpose).get();
-                        //메시지와 함께 데이터까지 넘어와서 파싱해야함.
+                        result = send.execute(nickname, senddestination, sendgender1, sendminage,sendmaxage, senddate, sendtime, sendpurpose).get();
+                        //데이터까지 넘어와서 파싱해야함.
 
-
-
-                        if ("success".equals(result)) {
+                        // adapter = new BoardListAdapter(jsonParserForGetMatchinglist(result));
                             AlertDialog.Builder builder = new AlertDialog.Builder(MatchingConditionActivity.this);
-                            builder.setTitle("게시판").setMessage("게시글 등록이 완료되었습니다");
+                            builder.setTitle("매칭").setMessage("매칭이 완료되었습니다");
                             final String finalDate = date;
+                            final String finalResult = result;
                             builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     //final BoardListAdapter adapter = BoardListAdapter.getInstance();
                                   /*  BoardListAdapter adapter = new BoardListAdapter();
                                     adapter.removeAllItem();
-                                    adapter.httpwork();*/
+                                    adapter.httpwork();
 
-                                  onBackPressed();
+                                  onBackPressed();*/
+                                    Intent intent = new Intent(getApplicationContext(), MatchingActivity.class);
+                                    intent.putExtra("result", finalResult);
+                                    intent.putExtra("nickname",nickname);
+                                    startActivity(intent);
                                 }
                             });
                             dialog = builder.create();
                             dialog.show();
 
-                        } else {
-                            alert("게시판", "다시 시도해 주세요");
-                        }
-
-                    } catch (ExecutionException | InterruptedException e) {
+                        } catch (InterruptedException | ExecutionException e) {
                         e.printStackTrace();
                     }
+
+
 
                 }
 
@@ -227,5 +239,8 @@ public class MatchingConditionActivity extends AppCompatActivity {
         dialog = builder.create();
         dialog.show();
     }
+
+
+
 }
 

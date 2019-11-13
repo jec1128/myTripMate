@@ -6,14 +6,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-
 import com.example.tripmate.Board.fragmentBoard;
 import com.example.tripmate.Chat.fragmentChatroom;
 import com.example.tripmate.Chat.fragmentFriend;
 
-import java.util.ArrayList;
 
 //FragmentStatePagerAdapter
 public class TabPagerAdapter extends FragmentPagerAdapter {

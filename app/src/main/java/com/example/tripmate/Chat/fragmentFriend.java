@@ -1,3 +1,4 @@
+
 package com.example.tripmate.Chat;
 
 import android.app.ActivityOptions;
@@ -33,7 +34,7 @@ import java.util.List;
 
 public class fragmentFriend extends Fragment {
 
-    public fragmentFriend() {}
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -130,10 +131,6 @@ public class fragmentFriend extends Fragment {
                 textView = (TextView) view.findViewById(R.id.frienditem_textview);
             }
         }
-    }
-
-    public String getTitle() {
-        return "친구리스트";
     }
 
 }

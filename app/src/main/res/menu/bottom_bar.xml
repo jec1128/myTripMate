@@ -25,7 +25,7 @@
 
     <item
         android:id="@+id/action_home4"
-        android:title="Home3"
+        android:title="Home4"
         android:icon="@drawable/ic_launcher_icon_matching"
         >
     </item>

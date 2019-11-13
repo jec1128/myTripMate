@@ -46,7 +46,7 @@ public class MessageActivity extends AppCompatActivity {
     private EditText editText;
     private String uid;
     private String chatRoomUid;
-
+    private Boolean chat = false;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adater;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm");
@@ -68,8 +68,9 @@ public class MessageActivity extends AppCompatActivity {
                 ChatModel chatModel = new ChatModel();
                 chatModel.users.put(uid, true);
                 chatModel.users.put(destinatonUid, true);
+                chat = true;
 
-                if (chatRoomUid == null) {
+                if (chatRoomUid == null) { //방이없으면
                     button.setEnabled(false);
                     FirebaseDatabase.getInstance().getReference().child("chatrooms").push().setValue(chatModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -78,7 +79,7 @@ public class MessageActivity extends AppCompatActivity {
                         }
                     });
 
-                } else {
+                } else {  //방이 있으면
 
                     ChatModel.Comment comment = new ChatModel.Comment();
                     comment.uid = uid;
@@ -133,7 +134,7 @@ public class MessageActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("chatrooms").orderByChild("users/" + uid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot item : dataSnapshot.getChildren()) {
+               /* for (DataSnapshot item : dataSnapshot.getChildren()) {
                     ChatModel chatModel = item.getValue(ChatModel.class);
                     if (chatModel.users.containsKey(destinatonUid)) {
                         chatRoomUid = item.getKey();
@@ -141,6 +142,27 @@ public class MessageActivity extends AppCompatActivity {
                         recyclerView.setLayoutManager(new LinearLayoutManager(MessageActivity.this));
                         adater = new RecyclerViewAdapter();
                         recyclerView.setAdapter(adater);
+                    }
+                }*/
+                if(dataSnapshot.getValue() == null) {
+                    ChatModel newRoom = new ChatModel();
+                    newRoom.users.put(uid, true);
+                    newRoom.users.put(destinatonUid, true);
+                    FirebaseDatabase.getInstance().getReference().child("chatrooms").push().setValue(newRoom).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            checkChatRoom();
+                        }
+                    });
+                    return;
+                }
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
+                    ChatModel chatModel = item.getValue(ChatModel.class);
+                    if (chatModel.users.containsKey(destinatonUid) && chatModel.users.size() == 2) {
+                        chatRoomUid = item.getKey();
+                        button.setEnabled(true);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(MessageActivity.this));
+                        recyclerView.setAdapter(new RecyclerViewAdapter());
                     }
                 }
             }
@@ -268,7 +290,7 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        adater.notifyDataSetChanged();
+
         finish();
     }
 }

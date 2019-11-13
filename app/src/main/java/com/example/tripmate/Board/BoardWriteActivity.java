@@ -93,6 +93,7 @@ public class BoardWriteActivity extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                 int printmonth = month + 1;
                                 date_start.setText(year + "년" + printmonth + "월" + dayOfMonth + "일");
+                                date_start.setTextSize(14);
                                 startyear = year;
                                 startmonth = month;
                                 startday = dayOfMonth;
@@ -125,6 +126,7 @@ public class BoardWriteActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         time_start.setText(selectedHour + "시" + selectedMinute + "분");
+                        time_start.setTextSize(14);
                         startDate.set(startyear, startmonth, startday, selectedHour, selectedMinute);
                         // EditText에 출력할 형식 지정
                     }
@@ -147,6 +149,7 @@ public class BoardWriteActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         time_end.setText(selectedHour + "시" + selectedMinute + "분");
+                        time_end.setTextSize(14);
 
                         // EditText에 출력할 형식 지정
                     }
