@@ -63,7 +63,6 @@
             android:textColorHint="#ffffff"
             android:backgroundTint="#ffffff"/>
 
-
         <Button
             android:id="@+id/LoginActivity_button_login"
             android:layout_width="280dp"
@@ -74,6 +73,17 @@
             android:background="@drawable/round_style"
             android:text="Sing IN"
             style="?android:attr/borderlessButtonStyle"/>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:id="@+id/autoLoginCheck"
+            android:text="자동 로그인"
+            android:buttonTint="@color/colorWhite"
+            android:textColor="#fff"/>
+
 
     </LinearLayout>
 </LinearLayout>

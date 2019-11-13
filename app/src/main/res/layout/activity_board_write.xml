@@ -1,18 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/WriteBoardActivity_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#fff"
+            android:id="@+id/app_toolbar"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="동반자 찾기"
+                android:fontFamily="@font/notosans_regular"
+                android:textColor="#6EC8FD"
+                android:textSize="20dp"/>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center"
         android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp">
+        android:padding="20dp"
+        android:paddingTop="60dp"
+        android:paddingBottom="100dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -44,13 +75,13 @@
                 android:cursorVisible="false"
                 android:paddingBottom="15dp">
             </EditText>
-            
+
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="14dp"
                 android:src="@drawable/ic_img_board_write_location"/>
-            
+
 
         </FrameLayout>
 
@@ -58,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="인정사항 및 소개"
+            android:text="인적사항 및 소개"
             android:fontFamily="@font/notosans_regular"
             android:textSize="15dp"
             android:textColor="#616161"
@@ -155,16 +186,16 @@
                 android:layout_centerVertical="true"
                 android:text="~" />
 
-                <EditText
-                    android:id="@+id/BoardWriteActivity_edittext_age_end"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:cursorVisible="false"
-                    android:gravity="center"
-                    android:hint="최대나이"
-                    android:inputType="number"
-                    android:layout_alignParentRight = "true"
-                    android:padding="15dp"></EditText>
+            <EditText
+                android:id="@+id/BoardWriteActivity_edittext_age_end"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:cursorVisible="false"
+                android:gravity="center"
+                android:hint="최대나이"
+                android:inputType="number"
+                android:layout_alignParentRight = "true"
+                android:padding="15dp"></EditText>
 
 
         </RelativeLayout>
@@ -310,9 +341,13 @@
             android:layout_gravity="center"
             android:background="@drawable/bt_round"
             android:textColor="#fff"
+            android:layout_marginBottom="30dp"
             android:text="글 쓰기">
 
         </Button>
 
     </LinearLayout>
+
 </ScrollView>
+
+</LinearLayout>

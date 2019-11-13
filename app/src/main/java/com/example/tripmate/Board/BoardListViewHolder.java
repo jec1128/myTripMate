@@ -25,6 +25,6 @@ public class BoardListViewHolder extends RecyclerView.ViewHolder{
         destination = view.findViewById(R.id.boardlistitem_textview_destination);
         minage = view.findViewById(R.id.boardlistitem_textview_minage);
         maxage = view.findViewById(R.id.boardlistitem_textview_maxage);
-        purpose = view.findViewById(R.id.boardview_text_purpose);
+        purpose = view.findViewById(R.id.boardlistitem_textview_purpose);
     }
 }

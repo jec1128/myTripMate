@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -44,18 +45,20 @@ public class BoardViewActivity extends AppCompatActivity {
     private Dialog dialog1;
     private DatabaseReference mDatabase;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board_view);
 
         Intent intent = getIntent();
+
         myNickname = intent.getExtras().getString("nickname");
         System.out.println("boardviewActivity" + myNickname);
         boardCode = intent.getExtras().getString("boardcode");
         System.out.println("boardviewActivity" + boardCode);
 
-
+        Log.i("####","111");
         writerGenderAge = findViewById(R.id.boardview_text_writergenderage);
         purpose = findViewById(R.id.boardview_text_purpose);
 
@@ -66,13 +69,12 @@ public class BoardViewActivity extends AppCompatActivity {
         writingDate = findViewById(R.id.boardview_text_writingdate);
         content = findViewById(R.id.boardview_text_content);
         update = findViewById(R.id.boardview_button_update);
-        delete = findViewById(R.id.boardview_button_delete);
-        chat = findViewById(R.id.boardview_button_chat);
+        delete=findViewById(R.id.boardview_button_delete);
+        chat=findViewById(R.id.boardview_button_chat);
 
         HttpBoardView httpBoardViewActivity = new HttpBoardView();
         HttpBoardView.sendTask send = httpBoardViewActivity.new sendTask();
         String result = null;
-
         try {
             result = send.execute(boardCode).get();
         } catch (ExecutionException | InterruptedException e) {
@@ -81,6 +83,8 @@ public class BoardViewActivity extends AppCompatActivity {
         System.out.println(result);
 
         JSONArray jarray = null;
+
+
 
         try {
             jarray = new JSONObject(result).getJSONArray("view");
@@ -96,7 +100,7 @@ public class BoardViewActivity extends AppCompatActivity {
             final String scontent = jsonObject.getString("content");
 
             writerGenderAge.setText(swriterGenderAge);
-            purpose.setText(spurpose);
+             purpose.setText(spurpose);
             destination.setText(sdestination);
             mathcingGenderAge.setText(smatchingGenderAge);
             writerNickname.setText(swriter);
@@ -120,7 +124,8 @@ public class BoardViewActivity extends AppCompatActivity {
                         intent.putExtra("matchingDate",smatchingDate);
                         intent.putExtra("writingDate",swritingDate);
                         intent.putExtra("content",scontent);
-                        startActivity(intent);
+                         startActivity(intent);
+
                     }
                 });
                 delete.setVisibility(View.VISIBLE);
@@ -215,6 +220,9 @@ public class BoardViewActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
 
+       // final BoardListAdapter adapter = BoardListAdapter.getInstance();
+        fragmentBoard.getInstance().removeAllItems();
+        fragmentBoard.getInstance().init();
         super.onBackPressed();
     }
 }

@@ -5,8 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+//가장 처음에 접근하게 되는 인트로 페이지
+
 public class Intro1Activity extends Activity {
     Handler handler = new Handler();
+    Intent intent;
+
     Runnable r = new Runnable() {
         @Override
         public void run() {
@@ -21,6 +25,21 @@ public class Intro1Activity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro1); // xml과 java소스를 연결
+
+        if(SaveSharedPreference.getUserName(Intro1Activity.this).length() == 0) {
+            // call Login Activity
+            intent =  new Intent(getApplicationContext(), Intro2Activity.class);
+            startActivity(intent); // 다음화면으로 넘어가기
+            finish(); // Activity 화면 제거
+
+        } else {
+            // Call Next Activity
+            intent =  new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("STD_NUM", SaveSharedPreference.getUserName(this).toString());
+            startActivity(intent);
+            this.finish();
+        }
+
     } // end of onCreate
 
     @Override

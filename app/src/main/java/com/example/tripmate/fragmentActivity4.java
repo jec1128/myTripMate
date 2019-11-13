@@ -1,7 +1,6 @@
 package com.example.tripmate;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
@@ -12,11 +11,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.tripmate.Board.fragmentBoard;
 import com.example.tripmate.Chat.fragmentChatroom;
@@ -26,68 +23,53 @@ public class fragmentActivity4 extends Fragment {
     private static fragmentActivity4 instance;
     View myFragment;
     private TabLayout tabLayout;
-    TabPagerAdapter pagerAdapter;
     private ViewPager viewPager;
-    private int[] icons = new int []{
-            R.drawable.img_tab_board,
-            R.drawable.img_tab_chat,
-            R.drawable.img_tab_friend};
+    private int[] icons = new int []{R.drawable.img_tab_board,
+            R.drawable.img_tab_chat,R.drawable.img_tab_friend};
+    private TabPagerAdapter pagerAdapter;
 
     @SuppressLint("ValidFragment")
     private fragmentActivity4(){}
-
-    public static fragmentActivity4 getInstance() {
-        if(instance == null){
-            instance = new fragmentActivity4();
-            return instance;
-        }
-        return instance;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         myFragment = inflater.inflate(R.layout.fragment_main4, container, false);
         FragmentManager cfManager = getChildFragmentManager();
-
         Bundle extra = this.getArguments();
         if(extra != null) {
             extra = getArguments();
             nickname = extra.getString("nickname");
         }
-
         System.out.println("fragment4 " + nickname);
 
         viewPager = myFragment.findViewById(R.id.Viewpager);
         tabLayout = myFragment.findViewById(R.id.tabLayout);
 
-        tabLayout.addTab(tabLayout.newTab().setIcon(icons[0]));
-        tabLayout.addTab(tabLayout.newTab().setIcon(icons[1]));
-        tabLayout.addTab(tabLayout.newTab().setIcon(icons[2]));
+        tabLayout.addTab(tabLayout.newTab().setText("동반자 추천 매칭"));
+        tabLayout.addTab(tabLayout.newTab().setText("메이트 찾기"));
+        tabLayout.addTab(tabLayout.newTab().setText("채팅하기"));
 
-        //tabLayout.setupWithViewPager(viewPager);
+        //tabLayout.addTab(tabLayout.newTab().setIcon(icons[2]));
+        //tabLayout.addTab(tabLayout.newTab().setIcon(icons[0]));
+        //tabLayout.addTab(tabLayout.newTab().setIcon(icons[1]));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+
+        // Initializing ViewPager
+
+
         pagerAdapter = new TabPagerAdapter(cfManager, tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         // Set TabSelectedListener
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
                 System.out.println("onTabSelected " + tab.getPosition());
                 viewPager.setCurrentItem(tab.getPosition());
 
                 if(tab.getPosition() == 1){
-                    fragmentBoard fragment = new fragmentBoard();
                     refresh();
                 }
 
@@ -103,10 +85,17 @@ public class fragmentActivity4 extends Fragment {
 
             }
         });
-
         return myFragment;
     }
 
+
+   public static fragmentActivity4 getInstance() {
+        if(instance == null){
+            instance = new fragmentActivity4();
+            return instance;
+        }
+        return instance;
+    }
     public static String getNickname() {
         return nickname;
     }

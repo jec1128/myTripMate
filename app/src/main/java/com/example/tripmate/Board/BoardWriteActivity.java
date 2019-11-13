@@ -10,16 +10,16 @@ import android.os.Bundle;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TimePicker;
-import android.widget.Toolbar;
 
 import com.example.tripmate.R;
 
@@ -50,7 +50,6 @@ public class BoardWriteActivity extends AppCompatActivity {
     private Date now;
     private Dialog dialog;
     private String nickname;
-    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +57,16 @@ public class BoardWriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_board_write);
         Intent intent = getIntent();
         nickname = intent.getExtras().getString("nickname");
-        type = intent.getExtras().getString("type");
 
         System.out.println("boardwriteactivity" + nickname);
+
+        //툴바 생성 및 셋팅하는 부분
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.img_trip_btn);
+
 
         destination = findViewById(R.id.BoardWriteActivity_text_where);
         content = findViewById(R.id.BoardWriteActivity_text_content);
@@ -180,8 +186,8 @@ public class BoardWriteActivity extends AppCompatActivity {
                         final String senddestination = destination.getText().toString();
 
                         final String sendcontent = content.getText().toString();
-                        String sendgender1 = null;
-                        String sendpurpose = null;
+                        String sendgender1 = "2";
+                        String sendpurpose = "맛집";
 
                         if (man.isChecked())
                             sendgender1 = "0";
@@ -190,9 +196,9 @@ public class BoardWriteActivity extends AppCompatActivity {
                         else if (all.isChecked())
                             sendgender1 = "2";
 
-                        if(food.isChecked())
-                            sendpurpose="맛집";
-                        else if(carfull.isChecked())
+                        if (food.isChecked())
+                            sendpurpose = "맛집";
+                        else if (carfull.isChecked())
                             sendpurpose = "카풀";
                         else if (picture.isChecked())
                             sendpurpose = "사진";
@@ -214,63 +220,52 @@ public class BoardWriteActivity extends AppCompatActivity {
                         date1 = date1.replace("일", "");
                         date = date1;
 
-                        if ("matching".equals(type)) {
+                        String result = null;
+                        HttpBoardWrite httpBoardWriteActivity = new HttpBoardWrite();
+                        HttpBoardWrite.sendTask send = httpBoardWriteActivity.new sendTask();
+                        try {
+                            result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, sendpurpose).get();
+                            if ("success".equals(result)) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(BoardWriteActivity.this);
+                                builder.setTitle("게시판").setMessage("게시글 등록이 완료되었습니다");
+                                final String finalDate = date;
+                                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        fragmentBoard.getInstance().removeAllItems();
+                                        fragmentBoard.getInstance().init();
+                                        onBackPressed();
+                                    }
+                                });
+                                dialog = builder.create();
+                                dialog.show();
 
-
-                            /*String result = null;
-                            HttpBoardMatching httpBoardMatching = new HttpBoardMatching();
-                            HttpBoardMatching.sendTask send = httpBoardMatching.new sendTask();
-                            try {
-                                    result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, sendpurpose).get();
-
-                                if ("success".equals(result)) {
-
-                                }
-
-
-                            } catch (ExecutionException | InterruptedException e) {
-                                e.printStackTrace();
-                            }*/
-                        } else {
-                            String result = null;
-                            HttpBoardWrite httpBoardWriteActivity = new HttpBoardWrite();
-                            HttpBoardWrite.sendTask send = httpBoardWriteActivity.new sendTask();
-                            try {
-                                result = send.execute(nickname, senddestination, sendcontent, sendgender1, sendminage, sendmaxage, senddate, sendstarttime, sendendtime, sendpurpose).get();
-                                if ("success".equals(result)) {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(BoardWriteActivity.this);
-                                    builder.setTitle("게시판").setMessage("게시글 등록이 완료되었습니다");
-                                    final String finalDate = date;
-                                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            //final BoardListAdapter adapter = BoardListAdapter.getInstance();
-
-
-                                            onBackPressed();
-                                        }
-                                    });
-                                    dialog = builder.create();
-                                    dialog.show();
-
-                                } else {
-                                    alert("게시판", "다시 시도해 주세요");
-                                }
-
-                            } catch (ExecutionException | InterruptedException e) {
-                                e.printStackTrace();
+                            } else {
+                                alert("게시판", "다시 시도해 주세요");
                             }
 
+                        } catch (ExecutionException | InterruptedException e) {
+                            e.printStackTrace();
                         }
 
-
                     }
+
 
                 }
 
             }
         });
 
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void alert(String title, String content) {
@@ -284,27 +279,6 @@ public class BoardWriteActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        ActionBar actionBar = getSupportActionBar();
 
-        // Custom Actionbar를 사용하기 위해 CustomEnabled을 true 시키고 필요 없는 것은 false 시킨다
-        actionBar.setDisplayShowCustomEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(false);            //액션바 아이콘을 업 네비게이션 형태로 표시합니다.
-        actionBar.setDisplayShowTitleEnabled(false);        //액션바에 표시되는 제목의 표시유무를 설정합니다.
-        actionBar.setDisplayShowHomeEnabled(false);            //홈 아이콘을 숨김처리합니다.
-
-        //layout을 가지고 와서 actionbar에 포팅을 시킵니다.
-        LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
-        View actionbar = inflater.inflate(R.layout.custom_actionbar, null);
-
-        actionBar.setCustomView(actionbar);
-
-        //액션바 양쪽 공백 없애기
-        Toolbar parent = (Toolbar)actionbar.getParent();
-        parent.setContentInsetsAbsolute(0,0);
-
-        return true;
-    }
 }
 

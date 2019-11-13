@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     Button open_close;
     DrawerLayout drawerLayout;
     Dialog dialog;
+    private SharedPreferences appData;
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private fragmentActivity1 fragment1 = new fragmentActivity1();
@@ -47,10 +50,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
-        String nickname = intent.getExtras().getString("nickname");
-        System.out.println("MainActivity " + nickname);
+        String nickname = "";
+
+        if(intent == null) {
+            nickname = intent.getExtras().getString("nickname");
+            System.out.println("MainActivity " + nickname);
+        } else {
+            nickname = SaveSharedPreference.getNickName(this).toString();
+        }
+
         final Bundle bundle = new Bundle();
         bundle.putString("nickname",nickname);
+
+
+        Log.i("cccccccc",nickname);
 
         //첫 화면 지정
         FragmentTransaction transaction = fragmentManager.beginTransaction();

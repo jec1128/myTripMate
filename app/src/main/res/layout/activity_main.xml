@@ -69,7 +69,8 @@
                 android:layout_alignBottom="@+id/frameLayout"
                 android:layout_gravity="start"
                 android:background="?android:attr/windowBackground"
-                app:menu="@menu/bottom_bar">
+                app:menu="@menu/bottom_bar"
+                app:labelVisibilityMode="unlabeled">
             </android.support.design.widget.BottomNavigationView>
 
 
@@ -79,17 +80,13 @@
         <android.support.design.widget.NavigationView
             android:id="@+id/nv_main_navigation_root"
             android:layout_width="wrap_content"
-            android:layout_height="600dp"
+            android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:layout_marginTop="?attr/actionBarSize"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/navigation_header"
             app:menu="@menu/navigation_menu">
 
         </android.support.design.widget.NavigationView>
-
-
-
 
     </android.support.v4.widget.DrawerLayout>
 </android.support.constraint.ConstraintLayout>

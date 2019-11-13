@@ -24,8 +24,9 @@ public class fragmentActivity1  extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainFragment = inflater.inflate(R.layout.fragment_main1, container, false);
 
-        textBtn = (ImageButton)mainFragment.findViewById(R.id.et_sch);
 
+        //검색창을 누르면 나타나는 버튼
+        textBtn = (ImageButton)mainFragment.findViewById(R.id.et_sch);
         textBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override

@@ -10,11 +10,13 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tripmate.MainActivity;
 import com.example.tripmate.R;
+import com.example.tripmate.SaveSharedPreference;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -35,6 +37,7 @@ public class LoginActivity extends Activity {
     private String myuid;
     private String email;
     private String nickname;
+    private CheckBox checkBox;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
 
@@ -46,6 +49,9 @@ public class LoginActivity extends Activity {
         id = findViewById(R.id.LoginActivity_text_id);
         password = findViewById(R.id.LoginActivity_text_password);
 
+        checkBox = (CheckBox) findViewById(R.id.autoLoginCheck);
+
+
         login = findViewById(R.id.LoginActivity_button_login);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +61,7 @@ public class LoginActivity extends Activity {
                 } else {
                     String sendid = id.getText().toString();
                     String sendpassword = password.getText().toString();
+
 
                     try {
                         HttpUserLogin httpUserDataActivity = new HttpUserLogin();
@@ -82,6 +89,7 @@ public class LoginActivity extends Activity {
                         if ("success".equals(receiveMsg)) {
                             firebaseAuth = FirebaseAuth.getInstance();
                             //firebaseAuth.signOut();  로그아웃하는부분;
+
                             loginEvent();
 
                             authStateListener = new FirebaseAuth.AuthStateListener() {
@@ -96,10 +104,17 @@ public class LoginActivity extends Activity {
                             builder.setTitle("로그인").setMessage("로그인 성공했습니다");
                             builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
+
+                                    if (checkBox.isChecked()) {
+                                        SaveSharedPreference.setUserName(getApplicationContext(), id.getText().toString());
+                                        SaveSharedPreference.setUserName(getApplicationContext(), nickname);
+                                    }
+
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     intent.putExtra("nickname",nickname);
                                     startActivity(intent);
                                     finish();
+
                                 }
                             });
                             dialog = builder.create();

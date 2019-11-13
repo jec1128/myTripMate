@@ -35,16 +35,14 @@ public class TabPagerAdapter extends FragmentPagerAdapter {
         bundle.putString("nickname",nickname);
 
         fragmentFriend tabFragment1 = new fragmentFriend();
-        fragmentBoard tabFragment2 = new fragmentBoard();
+        fragmentBoard tabFragment2 = fragmentBoard.getInstance();
         fragmentChatroom tabFragment3 = new fragmentChatroom();
 
         switch (position) {
             case 0:
-
                 return tabFragment1;
 
             case 1:
-
                 tabFragment2.setArguments(bundle);
                 return tabFragment2;
 

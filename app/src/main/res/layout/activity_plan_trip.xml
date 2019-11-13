@@ -34,8 +34,9 @@
             android:maxWidth="6.3dp"
             android:maxHeight="10.8dp"
             android:scaleType="fitCenter"
-            android:background="@android:color/transparent"
-            android:src="@drawable/img_trip_btn"/>
+            android:background="@android:color/transparent" />
+            <!--android:src="@drawable/img_trip_show"-->
+
 
         <View
             android:layout_width="wrap_content"

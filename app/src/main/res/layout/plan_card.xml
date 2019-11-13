@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:ignore="NamespaceTypo">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="111dp"
+            android:layout_height="2dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="7dp"
+            android:background="#bcbcbc" />
+
+        <TextView
+            android:id="@+id/tv_plist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:gravity="center"
+            android:lineSpacingExtra="43sp"
+            android:text="2019년 10월"
+            android:textColor="#bcbcbc"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="111dp"
+            android:layout_height="2dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="7dp"
+            android:background="#bcbcbc" />
+
+
+    </LinearLayout>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="334dp"
+        android:layout_height="107dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="10dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:clickable="true" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="7dp"
+                android:layout_height="107dp"
+                android:background="#999" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_loc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="18dp"
+                    android:lineSpacingExtra="100sp"
+
+                    android:textColor="#3b3b3b"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="18dp"
+                    android:lineSpacingExtra="100sp"
+                    android:text="가는 여정"
+                    android:textColor="#3b3b3b"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_startday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="49dp"
+                android:lineSpacingExtra="106sp"
+
+                android:textColor="#444444"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/tv_startday"
+                android:layout_alignRight="@+id/tv_startday"
+                android:layout_marginTop="49dp"
+                android:layout_marginEnd="-15dp"
+                android:layout_marginRight="-15dp"
+                android:lineSpacingExtra="106sp"
+                android:text="~"
+                android:textColor="#444444"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_endday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/tv_startday"
+                android:layout_alignRight="@+id/tv_startday"
+                android:layout_marginTop="49dp"
+                android:layout_marginEnd="-84dp"
+                android:layout_marginRight="-84dp"
+                android:lineSpacingExtra="106sp"
+
+                android:textColor="#444444"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="71dp"
+                android:lineSpacingExtra="40sp"
+
+                android:textColor="#616161"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginLeft="242dp"
+                android:layout_marginTop="43dp"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:maxWidth="54dp"
+                android:maxHeight="34dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_card_member" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginLeft="217dp"
+                android:layout_marginTop="45dp"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:maxWidth="32dp"
+                android:maxHeight="31dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_card_plusmem" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginLeft="306.6dp"
+                android:layout_marginTop="14.1dp"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:maxWidth="6.3dp"
+                android:maxHeight="10.8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_plan_showplan" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

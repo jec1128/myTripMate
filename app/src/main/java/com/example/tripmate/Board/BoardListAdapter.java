@@ -64,11 +64,24 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListViewHolder> 
         viewHolder.textnickname.setText(boardList.get(position).getNickname());
         viewHolder.date.setText(boardList.get(position).getMatchdate());
         viewHolder.destination.setText(boardList.get(position).getDestination());
-        //viewHolder.purpose.setText(boardList.get(position).getPurpose());
+        viewHolder.purpose.setText(boardList.get(position).getPurpose());
         viewHolder.minage.setText(String.valueOf(boardList.get(position).getMinage()));
         viewHolder.maxage.setText(String.valueOf(boardList.get(position).getMaxage()));
 
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { ;
+                Intent intent = new Intent(view.getContext(), BoardViewActivity.class);
+                //fragmentBoard fragment = new fragmentBoard();
+                //nickname = fragment.getNickname();
+                nickname= fragmentBoard.getInstance().getNickname();
+                System.out.println("click listener : " + nickname);
+                intent.putExtra("nickname", nickname);
+                intent.putExtra("boardcode", boardCode);
 
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

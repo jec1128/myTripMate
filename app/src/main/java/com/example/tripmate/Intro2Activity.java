@@ -9,14 +9,19 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 
 import com.example.tripmate.User.LoginActivity;
 import com.example.tripmate.User.RegisterActivity;
 
 public class Intro2Activity extends Activity {
     private Dialog dialog;
+    private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro2);
 

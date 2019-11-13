@@ -1,4 +1,4 @@
-package com.example.tripmate.User;
+package com.example.tripmate.Board.Matching;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.tripmate.Ip;
-import com.example.tripmate.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,9 +18,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-public class HttpUserLogin extends Activity {
-
+public class HttpMatchingCondition extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -32,7 +29,8 @@ public class HttpUserLogin extends Activity {
             try {
                 Ip i = new Ip();
                 String ip = i.getIP();
-                String url = "http://"+ip+":8080/TripMateServer/User/Login.jsp";
+                String url = "http://"+ip+":8080/TripMateServer/Board/Matching.jsp";
+
 
                 URL obj = null;
                 try {
@@ -48,19 +46,16 @@ public class HttpUserLogin extends Activity {
                     conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
                     OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
-                    String sendmsg = "id=" + strings[0] + "&password=" + strings[1];
-
+                    String sendmsg = "nickname=" + strings[0]+"&destination="+strings[1]+"&gender="+strings[2]+
+                           "&age="+strings[3]+"&date="+strings[4]+"&starttime="+strings[5]+"&purpose="+strings[6];
                     os.write(sendmsg);
                     os.flush();
                     os.close();
 
-                    int retCode = conn.getResponseCode();
                     InputStream is = conn.getInputStream();
-
                     BufferedReader br = new BufferedReader(new InputStreamReader(is));
                     String line;
                     StringBuffer response = new StringBuffer();
-
                     while ((line = br.readLine()) != null) {
                         response.append(line);
                         response.append(' ');
@@ -68,8 +63,8 @@ public class HttpUserLogin extends Activity {
                     br.close();
 
                     String result = response.toString();
-                    Log.i("aaaaa",result);
                     return result;
+
 
 
                 } catch (IOException ex) {
@@ -81,5 +76,10 @@ public class HttpUserLogin extends Activity {
             }
             return null;
         }
+
+
     }
+
+
+
 }

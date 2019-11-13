@@ -4,10 +4,8 @@
 package com.example.tripmate.Board;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+
+import com.example.tripmate.Board.Matching.MatchingConditionActivity;
 import com.example.tripmate.R;
 
 import org.json.JSONArray;
@@ -26,22 +28,36 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 
-public class fragmentBoard extends Fragment {
-
+public class fragmentBoard extends Fragment implements View.OnClickListener {
+    private static fragmentBoard instance;
     private View boardFragment;
     private FloatingActionButton write;
     private FloatingActionButton matching;
     private static String nickname;
-    private RecyclerView recyclerView;
-    private BoardListAdapter adapter;
-    private ArrayList<BoardModel> dataList;
+    private static RecyclerView recyclerView;
+    private static BoardListAdapter adapter;
+    private static ArrayList<BoardModel> dataList;
 
-    public fragmentBoard() {}
+    //버튼
+    private Animation fab_open, fab_close;
+    private Boolean isFabOpen = false;
+    private FloatingActionButton fab, fab1, fab2;
 
+    @SuppressLint("ValidFragment")
+    private fragmentBoard() { }
+
+    public static fragmentBoard getInstance() {
+        if (instance == null) {
+            instance = new fragmentBoard();
+            return instance;
+        }
+        return instance;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         boardFragment = inflater.inflate(R.layout.fragment_board, container, false);
+        recyclerView = boardFragment.findViewById(R.id.boardfragment_recyclerview);
 
         Log.i("몇번불릴까","111111");
         init();
@@ -54,30 +70,38 @@ public class fragmentBoard extends Fragment {
             System.out.println("fragment board : " + nickname);
         }
 
+        //버튼 애니메이션을 위한 부분
+        fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
 
+        fab = (FloatingActionButton) boardFragment.findViewById(R.id.fab);
+        fab1 = (FloatingActionButton) boardFragment.findViewById(R.id.boardfragment_button_write);
+        fab2 = (FloatingActionButton) boardFragment.findViewById(R.id.boardfragment_button_matching);
 
-        write = boardFragment.findViewById(R.id.boardfragment_button_write);
+        fab.setOnClickListener(this);
+        fab1.setOnClickListener(this);
+        fab2.setOnClickListener(this);
 
-        /*
-        write.setOnClickListener(new View.OnClickListener() {
+        //write = boardFragment.findViewById(R.id.boardfragment_button_write);
+        fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), BoardWriteActivity.class);
                 intent.putExtra("nickname", nickname);
                 startActivity(intent);
-
             }
         });
 
-        matching = boardFragment.findViewById(R.id.boardfragment_button_matching);
-        matching.setOnClickListener(new View.OnClickListener() {
+       // matching = boardFragment.findViewById(R.id.boardfragment_button_matching);
+        fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                Intent intent = new Intent(getActivity(), MatchingConditionActivity.class);
+                intent.putExtra("nickname", nickname);
+                startActivity(intent);
             }
         });
-*/
+
         return boardFragment;
     }
 
@@ -85,13 +109,45 @@ public class fragmentBoard extends Fragment {
         return nickname;
     }
 
-    private void init() {
+    //버튼 애니메이션을 위한 부분
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.fab:
+                anim();
+                break;
+            case R.id.boardfragment_button_write:
+                anim();
+                break;
+            case R.id.boardfragment_button_matching:
+                anim();
+                break;
+        }
+    }
 
-        RecyclerView recyclerView = boardFragment.findViewById(R.id.boardfragment_recyclerview);
-       // Log.i("1111","dddddddddd");
+    public void anim() {
+        if (isFabOpen) {
+            fab1.startAnimation(fab_close);
+            fab2.startAnimation(fab_close);
+            fab1.setClickable(false);
+            fab2.setClickable(false);
+            isFabOpen = false;
+        } else {
+            fab1.startAnimation(fab_open);
+            fab2.startAnimation(fab_open);
+            fab1.setClickable(true);
+            fab2.setClickable(true);
+            isFabOpen = true;
+        }
+    }
+
+    //리사이클러뷰 초기화
+    public void init() {
+        // Log.i("1111","dddddddddd");
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-       // Log.i("22222","dddddddddd");
+        // Log.i("22222","dddddddddd");
         adapter = new BoardListAdapter(jsonParserForGetData());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -144,6 +200,10 @@ public class fragmentBoard extends Fragment {
 
     public String getTitle() {
         return "보드리스트";
+    }
+
+    public void removeAllItems(){
+        dataList.clear();
     }
 
 }
