@@ -13,14 +13,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tripmate.R;
+import com.skt.Tmap.TMapTapi;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class LocationListViewAdapter extends BaseAdapter {
+public class LocationListViewAdapter extends BaseAdapter  {
     private ArrayList<LocationListViewItem> items = new ArrayList<>();
     Bitmap bitmap;
 
@@ -47,6 +49,7 @@ public class LocationListViewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         final int pos = position;
         final Context context= parent.getContext();
+
         if(convertView==null)
         {
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -56,6 +59,7 @@ public class LocationListViewAdapter extends BaseAdapter {
         TextView title = (TextView)convertView.findViewById(R.id.list_title);
         TextView addr = (TextView)convertView.findViewById(R.id.list_addr);
         TextView tel = (TextView)convertView.findViewById(R.id.list_tel);
+        TextView dist = (TextView)convertView.findViewById(R.id.list_dist);
 
         ImageView firstimage = (ImageView)convertView.findViewById(R.id.list_firstimage);
 
@@ -63,6 +67,8 @@ public class LocationListViewAdapter extends BaseAdapter {
         title.setText(item.getTitle());
         addr.setText(item.getAddress1());
         tel.setText(item.getTel());
+        dist.setText(Double.toString(item.getDist()/1000)+"km");
+
 
         Thread mThread = new Thread(){
             @Override
@@ -98,16 +104,33 @@ public class LocationListViewAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void addItem(String title, String address1, String firstimage, String tel)
+    public void addItem(String title, String address1, String firstimage, String tel,int dist, double mapx ,double mapy)
     {
         LocationListViewItem item = new LocationListViewItem();
         item.setTitle(title);
         item.setAddress1(address1);
         item.setFirstimage(firstimage);
         item.setTel(tel);
+        item.setDist(dist);
+        item.setMapx(mapx);
+        item.setMapy(mapy);
         items.add(item);
     }
 
+    public void sort()
+    {
+        Collections.sort(items);
+    }
 
+/*
+    public void onClick(View v) {
+        int position = (Integer) v.getTag();
+        Object object = getItem(position);
 
+        TMapTapi tMapTapi = new TMapTapi();
+        for(int i =0; i<items.size(); i++) {
+            tMapTapi.invokeNavigate("목적지", (float) items.get(i).getItem_mapx(),(float) items.get(i).getItem_mapy(),0,true);
+        }
+    }
+*/
 }
