@@ -1,6 +1,8 @@
 package com.example.tripmate.Location;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,17 +18,25 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.example.tripmate.R;
+import com.skt.Tmap.TMapTapi;
 import com.skt.Tmap.TMapView;
 import com.skt.Tmap.TMapCircle;
 import com.skt.Tmap.TMapGpsManager;
@@ -40,6 +50,8 @@ import android.content.Intent;
 
 import com.example.tripmate.Location.LocationDataInfo;
 import com.example.tripmate.Location.LocationInfoAPI;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -71,7 +83,15 @@ public class NearLocationFragment extends Fragment implements TMapGpsManager.onL
     private LocationListViewAdapter adapter;
     private ListView listView;
 
+    private ArrayList<LocationDataInfo> arrayList;
+
+    private Button SettingButton;
+    //int seekNumber =0;
+    //int typeNumber;
+    //int radiusChange;
+
     private boolean isPerGranted = false;
+    private boolean isitclicked = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,6 +125,31 @@ public class NearLocationFragment extends Fragment implements TMapGpsManager.onL
         //gpsMarker.setProvider(gpsMarker.NETWORK_PROVIDER); //연결된 인터넷으로 현위치를 받음 , 실내일때 유용
         //gpsMarker.setProvider(gpsMarker.GPS_PROVIDER); //GPS로 현위치를 받음
 
+        // DisplayMetrics dm = getContext().getApplicationContext().getResources().getDisplayMetrics();
+        // int width = dm.widthPixels;
+        // int height = dm.heightPixels;
+
+
+
+        //locationDialog = new LocationSettingDialog(getContext());
+        // WindowManager.LayoutParams wm = locationDialog.getWindow().getAttributes(); //다이얼로그 높이 너비 설정
+        // wm.copyFrom(locationDialog.getWindow().getAttributes());
+        //  wm.width = width/2;
+        // wm.height = height/2;
+/*
+        SettingButton = v.findViewById(R.id.SettingButton);
+        SettingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("세팅 버튼을 누름");
+                ShowDialog();
+
+            }
+        });
+
+*/
+
+
         searchButton= v.findViewById(R.id.SearchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,9 +159,24 @@ public class NearLocationFragment extends Fragment implements TMapGpsManager.onL
             }
         });
 
+
         adapter = new LocationListViewAdapter();
         listView = (ListView)v.findViewById(R.id.location_list);
         listView.setAdapter(adapter);
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            public void onItemClick(AdapterView<?> parent, View v,int position, long id)
+            {
+                TMapTapi tMapTapi = new TMapTapi(getContext());
+                for(int i =0; i<position; i++) {
+                    tMapTapi.invokeNavigate("목적지", (float) arrayList.get(position).getMapX(),(float) arrayList.get(position).getMapY(),0,true);
+                }
+
+
+            }
+        });
 
         onSwitchButtonClick1(v); //리스트뷰전환 버튼 클릭이벤트 추가
         onSwitchButtonClick2(v); //맵뷰전환 버튼 클릭이벤트 추가
@@ -214,7 +274,7 @@ public class NearLocationFragment extends Fragment implements TMapGpsManager.onL
                 tMapMarkerItem2.setPosition(0.5f, 0.5f); //마커의 중심점을 중앙,하단으로 설정
                 tMapMarkerItem2.setTMapPoint(tMapPoint); //마커의 좌표지정
                 tMapMarkerItem2.setName("현재 위치"); //마커의 타이틀 지정
-                tMapView.setZoomLevel(13); //줌레벨
+                tMapView.setZoomLevel(11); //줌레벨
                 tMapView.setIconVisibility(false); //현위치 아이콘표시
                 tMapView.addMarkerItem("tMapMarkerItem2", tMapMarkerItem2); //지도에 마커추가
                 tMapView.setCenterPoint(longitude,latitude,true);
@@ -228,6 +288,8 @@ public class NearLocationFragment extends Fragment implements TMapGpsManager.onL
                 tMapCircle.setRadiusVisible(true);
                 tMapView.addTMapCircle("범위",tMapCircle);
 
+
+                isitclicked =true;
 
                 Toast toast = Toast.makeText(getContext(), "현재 위치 조회완료", Toast.LENGTH_LONG);
                 toast.show();
@@ -260,59 +322,195 @@ public class NearLocationFragment extends Fragment implements TMapGpsManager.onL
     }
 
     public void addTMapMarkerItem() { //마커 추가
-        Log.i("ddddd","지금출력되고있다z");
-
-        new Thread(new Runnable() {
-            public void run() {
-                ArrayList<LocationDataInfo> arrayList = new ArrayList<LocationDataInfo>();
-                LocationInfoAPI api = new LocationInfoAPI();
-
-
-                arrayList.addAll(api.getLocationInfo(tMapPoint.getLongitude(),tMapPoint.getLatitude(),10000));
-
-                for (int i = 0; i < arrayList.size(); i++) {
-
-                    TMapMarkerItem tMapMarkerItem3 = new TMapMarkerItem();//지도 마커 표시 변수 (api 클래스)
-                    Bitmap icon = BitmapFactory.decodeResource(v.getContext().getResources(), R.drawable.custom_marker2);
-
-                    tMapMarkerItem3.setTMapPoint(new TMapPoint(arrayList.get(i).getMapY(), arrayList.get(i).getMapX()));
-
-                    tMapMarkerItem3.setIcon(icon); //아이콘 지정
-
-                    tMapMarkerItem3.setName(arrayList.get(i).getTitle());
-                    tMapMarkerItem3.setVisible(TMapMarkerItem.VISIBLE);
-
-                    adapter.addItem(arrayList.get(i).getTitle(),  arrayList.get(i).getAddress1(), arrayList.get(i).getFirstimage(), arrayList.get(i).getTel());
-                    tMapView.addMarkerItem(arrayList.get(i).getTitle(), tMapMarkerItem3);
+        if(isitclicked == false){
+            Toast toast = Toast.makeText(getContext(), "먼저 현재 위치를 조회하십시오", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        else {
+            new Thread(new Runnable() {
+                public void run() {
+                    arrayList = new ArrayList<LocationDataInfo>();
+                    LocationInfoAPI api = new LocationInfoAPI();
 
 
-                    Log.i("uuuuuu",arrayList.get(i).getTitle());
-                    Log.i("uuuuuu",Double.toString(arrayList.get(i).getMapX()));
-                    Log.i("uuuuuu",Double.toString(arrayList.get(i).getMapY()));
+                    arrayList.addAll(api.getLocationInfo(tMapPoint.getLongitude(), tMapPoint.getLatitude(), 10000));
+
+                    for (int i = 0; i < arrayList.size(); i++) {
+
+                        TMapMarkerItem tMapMarkerItem3 = new TMapMarkerItem();//지도 마커 표시 변수 (api 클래스)
+                        Bitmap icon = BitmapFactory.decodeResource(v.getContext().getResources(), R.drawable.custom_marker2);
+
+                        tMapMarkerItem3.setTMapPoint(new TMapPoint(arrayList.get(i).getMapY(), arrayList.get(i).getMapX()));
+
+                        tMapMarkerItem3.setIcon(icon); //아이콘 지정
+
+                        tMapMarkerItem3.setName(arrayList.get(i).getTitle());
+                        tMapMarkerItem3.setVisible(TMapMarkerItem.VISIBLE);
+
+                        tMapMarkerItem3.setCalloutTitle(arrayList.get(i).getTitle());
+                        tMapMarkerItem3.setCalloutSubTitle(Double.toString(arrayList.get(i).getDist() / 1000) + "km");
+                        tMapMarkerItem3.setCanShowCallout(true);
+
+
+                        adapter.addItem(arrayList.get(i).getTitle(), arrayList.get(i).getAddress1(), arrayList.get(i).getFirstimage(), arrayList.get(i).getTel(), arrayList.get(i).getDist(), arrayList.get(i).getMapX(), arrayList.get(i).getMapY());
+                        adapter.sort();
+
+                        tMapView.addMarkerItem(arrayList.get(i).getTitle(), tMapMarkerItem3);
+
+                        double distance = getDistance(tMapPoint.getLatitude(), tMapPoint.getLongitude(), arrayList.get(i).getMapY(), arrayList.get(i).getMapX());
+
+                        Log.i("uuuuuu", arrayList.get(i).getTitle());
+                        Log.i("uuuuuu", Double.toString(arrayList.get(i).getMapX()));
+                        Log.i("uuuuuu", Double.toString(arrayList.get(i).getMapY()));
+                        Log.i("uuuuuu", Double.toString(distance));
+                        Log.i("uuuuuu", Double.toString(arrayList.get(i).getDist() / 1000));
+                    }
 
                 }
+            }).start();
 
-            }
-        }).start();
-
-
+        }
     }
 
 
+
 /*
-    public void onSearchButtonClick(View v){
-        searchButton= v.findViewById(R.id.SearchButton);
-        searchButton.setOnClickListener(new View.OnClickListener() {
+    public void ShowDialog(){
+        LayoutInflater dialog = LayoutInflater.from(getContext());
+        final View locationDialog = dialog.inflate(R.layout.location_setting_dialog, null);
+        final Dialog myDialog = new Dialog(getContext());
+
+        final RadioGroup radioGroup;
+        final Button submit;
+        final Button cancel;
+        final SeekBar seekBar;
+        final TextView outcome;
+
+        final RadioButton radio1;
+        final RadioButton radio2;
+        final RadioButton radio3;
+        final RadioButton radio4;
+        final RadioButton radio5;
+        final RadioButton radio6;
+
+        final int typeNumber;
+
+
+        myDialog.setTitle("Setting");
+        myDialog.setContentView(locationDialog);
+        myDialog.show();
+
+        submit = (Button) locationDialog.findViewById(R.id.submitButton);
+        cancel = (Button) locationDialog.findViewById(R.id.cancelButton);
+        radioGroup = (RadioGroup) locationDialog.findViewById(R.id.radioGroup1);
+        seekBar = (SeekBar) locationDialog.findViewById(R.id.seekBar);
+        outcome = (TextView) locationDialog.findViewById(R.id.outcomeText);
+
+        radio1 = (RadioButton)locationDialog.findViewById(R.id.radio1);
+        radio2 = (RadioButton)locationDialog.findViewById(R.id.radio2);
+        radio3 = (RadioButton)locationDialog.findViewById(R.id.radio3);
+        radio4 = (RadioButton)locationDialog.findViewById(R.id.radio4);
+        radio5 = (RadioButton)locationDialog.findViewById(R.id.radio5);
+        radio6 = (RadioButton)locationDialog.findViewById(R.id.radio6);
+
+
+        if(radio1.isChecked()){
+            typeNumber = 12;
+        }
+        else if(radio2.isChecked()){
+            typeNumber = 39;
+        }
+        else if(radio3.isChecked()){
+            typeNumber = 32;
+        }
+        else if(radio4.isChecked()){
+            typeNumber = 38;
+        }
+        else if(radio5.isChecked()){
+            typeNumber = 15;
+        }
+        else if(radio6.isChecked()){
+            typeNumber = 14;
+        }
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                System.out.println("search 버튼을 누름");
-                addTMapMarkerItem();
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.radio1:
+                        typeNumber = 12;
+                        break;
+                    case R.id.rb_blue:
+                        container.setBackgroundColor(Color.rgb(0, 0, 255));
+                        break;
+                    case R.id.rb_green:
+                        container.setBackgroundColor(Color.rgb(0, 255, 0));
+                        break;
+
+                }
+            }
+        });
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                seekNumber = seekBar.getProgress();
+                outcome.setText(new StringBuilder().append(seekNumber));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                seekNumber = seekBar.getProgress(); //식바의 움직임이 시작될 때 실행될 사항
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                seekNumber = seekBar.getProgress(); //식바의 움직임이 멈출다면 실행될 사항
             }
         });
 
 
-       }
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.cancel();
+            }
+        });
+
+
+
+
+
+    }
+
 */
+/*
+public void ShowDialog(){
+    LocationSettingDialog dialog = new LocationSettingDialog(getContext());
+    dialog.setDialogListener(new LocationSettingDialog.CustomDialogListener() {
+        @Override
+        public void onSubmitClicked(int typeNumber, int rad) {
+            Toast toast = Toast.makeText(getContext(), Integer.toString(typeNumber), Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+        @Override
+        public void onCancelClicked() {
+
+        }
+    });
+    dialog.show();
+}
+*/
+
 }
 
 
@@ -320,33 +518,5 @@ public class NearLocationFragment extends Fragment implements TMapGpsManager.onL
 
 
 
-
-
-/*
-        new Thread(new Runnable() {
-            public void run() {
-                    arrayList = new ArrayList<>();
-                    api = new LocationInfoAPI();
-
-                    arrayList.addAll(api.getLocationInfo(128.3924367,36.1456621));
-
-                            Bitmap bitmap = BitmapFactory.decodeResource(v.getContext().getResources(), R.drawable.custom_marker2);
-
-                            for (int i = 0; i < arrayList.size(); i++) {
-                                TMapMarkerItem item = new TMapMarkerItem(); //지도 마커 표시 변수 (api 클래스)
-
-                                    item.setTMapPoint(new TMapPoint(arrayList.get(i).getMapX(), arrayList.get(i).getMapY()));
-
-                                    item.setIcon(bitmap); //아이콘 지정
-                                    item.setVisible(TMapMarkerItem.VISIBLE);
-                                    item.setName(arrayList.get(i).getTitle());
-
-                                   tMapView.addMarkerItem(String.valueOf(arrayList.get(i).getTitle()), item);
-                            }
-
-            }
-        }).start();
-
-        */
 
 

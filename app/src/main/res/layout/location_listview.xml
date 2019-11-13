@@ -26,8 +26,9 @@
                 android:id="@+id/list_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
+                android:textSize="17dp"
                 android:textColor="#ffffff"
+                android:layout_marginLeft="1dp"
                 android:textStyle="bold">
             </TextView>
 
@@ -35,6 +36,7 @@
                 android:id="@+id/list_addr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
                 android:textColor="#ffffff"
                 >
             </TextView>
@@ -42,7 +44,20 @@
                 android:id="@+id/list_tel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
                 android:textColor="#ffffff"
+                >
+            </TextView>
+            <TextView
+                android:id="@+id/list_dist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_marginTop="66dp"
+                android:layout_marginRight="6dp"
+                android:layout_gravity="right"
                 >
             </TextView>
         </LinearLayout>
