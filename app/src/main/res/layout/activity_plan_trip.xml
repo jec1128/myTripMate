@@ -17,6 +17,7 @@
             android:background="#ffffff" />
 
         <TextView
+            android:id="@+id/place_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
@@ -108,7 +109,7 @@
     <LinearLayout
         android:id="@+id/ln_tmap"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_height="323dp"
         android:orientation="vertical">
 
     </LinearLayout>
