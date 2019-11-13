@@ -11,7 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.example.tripmate.Board.fragmentBoard;
 import com.example.tripmate.Chat.fragmentChatroom;
-import com.example.tripmate.Chat.fragmentFriend;
+/*import com.example.tripmate.Chat.fragmentFriend;*/
 
 import java.util.ArrayList;
 
@@ -34,19 +34,19 @@ public class TabPagerAdapter extends FragmentPagerAdapter {
         Bundle bundle = new Bundle();
         bundle.putString("nickname",nickname);
 
-        fragmentFriend tabFragment1 = new fragmentFriend();
+       // fragmentFriend tabFragment1 = new fragmentFriend();
         fragmentBoard tabFragment2 = fragmentBoard.getInstance();
         fragmentChatroom tabFragment3 = new fragmentChatroom();
 
         switch (position) {
-            case 0:
-                return tabFragment1;
+         /*   case 0:
+                return tabFragment1;*/
 
-            case 1:
+            case 0:
                 tabFragment2.setArguments(bundle);
                 return tabFragment2;
 
-            case 2:
+            case 1:
                 return tabFragment3;
 
             default:

@@ -50,13 +50,13 @@ public class fragmentChatroom extends Fragment {
         return view;
     }
 
-    class ChatroomFragmentRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public class ChatroomFragmentRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private List<ChatModel> chatModels = new ArrayList<>();
         private String uid;
         private ArrayList<String> destinationUsers = new ArrayList<>();
 
-        public ChatroomFragmentRecyclerViewAdapter() {
+        private ChatroomFragmentRecyclerViewAdapter() {
             uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
             if(uid != null) {
                 FirebaseDatabase.getInstance().getReference().child("chatrooms").orderByChild("users/" + uid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {

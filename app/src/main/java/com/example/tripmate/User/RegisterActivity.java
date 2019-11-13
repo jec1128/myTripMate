@@ -97,8 +97,11 @@ public class RegisterActivity extends Activity {
                         if ("success".equals(result)) {
                             id_validate = true;
                             alert("아이디 입력", "아이디 중복검사 완료");
-                        } else {
-                            alert("아이디 입력", "사용할 수 없는 아이디입니다.");
+                        } else if("error".equals(result)){
+                            alert("아이디 입력", "다시한번 시도해주세요.");
+                        }
+                        else{
+                            alert("아이디 입력", "아이디를 바꿔주세요.");
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

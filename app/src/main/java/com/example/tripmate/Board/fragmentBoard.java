@@ -72,7 +72,6 @@ public class fragmentBoard extends Fragment {
 
         write = boardFragment.findViewById(R.id.boardfragment_button_write);
 
-
         write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,18 +102,14 @@ public class fragmentBoard extends Fragment {
 
     public void init() {
 
-
-        // Log.i("1111","dddddddddd");
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        // Log.i("22222","dddddddddd");
-        adapter = new BoardListAdapter(jsonParserForGetData());
+        adapter = new BoardListAdapter(jsonParserForGetBoardlist());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(linearLayoutManager);
     }
 
     //제이슨 파싱해서 데이터 리스트 얻어오는 부분
-    public ArrayList<BoardModel> jsonParserForGetData() {
+    private ArrayList<BoardModel> jsonParserForGetBoardlist() {
 
         HttpBoardList httpBoardDataActivity = new HttpBoardList();
         HttpBoardList.sendTask send = httpBoardDataActivity.new sendTask();

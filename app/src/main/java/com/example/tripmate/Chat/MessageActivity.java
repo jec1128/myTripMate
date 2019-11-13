@@ -69,7 +69,8 @@ public class MessageActivity extends AppCompatActivity {
                 chatModel.users.put(uid, true);
                 chatModel.users.put(destinatonUid, true);
 
-                if (chatRoomUid == null) {
+
+                if (chatRoomUid == null) { //방이없으면
                     button.setEnabled(false);
                     FirebaseDatabase.getInstance().getReference().child("chatrooms").push().setValue(chatModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -78,7 +79,7 @@ public class MessageActivity extends AppCompatActivity {
                         }
                     });
 
-                } else {
+                } else {  //방이 있으면
 
                     ChatModel.Comment comment = new ChatModel.Comment();
                     comment.uid = uid;
@@ -268,7 +269,7 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        adater.notifyDataSetChanged();
+
         finish();
     }
 }

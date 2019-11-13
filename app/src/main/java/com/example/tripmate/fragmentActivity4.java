@@ -46,7 +46,7 @@ public class fragmentActivity4 extends Fragment {
         tabLayout = myFragment.findViewById(R.id.tabLayout);
 
 
-        tabLayout.addTab(tabLayout.newTab().setIcon(icons[2]));
+       // tabLayout.addTab(tabLayout.newTab().setIcon(icons[2]));
         tabLayout.addTab(tabLayout.newTab().setIcon(icons[0]));
         tabLayout.addTab(tabLayout.newTab().setIcon(icons[1]));
         //tabLayout.setupWithViewPager(viewPager);
@@ -67,9 +67,6 @@ public class fragmentActivity4 extends Fragment {
                 System.out.println("onTabSelected " + tab.getPosition());
                 viewPager.setCurrentItem(tab.getPosition());
 
-                if(tab.getPosition() == 1){
-                    refresh();
-                }
 
             }
 
@@ -98,8 +95,6 @@ public class fragmentActivity4 extends Fragment {
         return nickname;
     }
 
-    private void refresh() {
-        pagerAdapter.notifyDataSetChanged();
-    }
+
 
 }

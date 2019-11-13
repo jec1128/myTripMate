@@ -30,7 +30,7 @@
             </TextView>
 
             <EditText
-                android:id="@+id/BoardWriteActivity_text_where"
+                android:id="@+id/MatchingConditionActivity_edittext_destination"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
@@ -60,7 +60,7 @@
             android:textSize="20sp"></TextView>
 
         <RadioGroup
-            android:id="@+id/BoardWriteActivity_group_gender"
+            android:id="@+id/MatchingConditionActivity_group_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -70,7 +70,7 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/BoardWriteActivity_radio_man"
+                android:id="@+id/MatchingConditionActivity_radio_man"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -78,7 +78,7 @@
                 android:textSize="18sp" />
 
             <RadioButton
-                android:id="@+id/BoardWriteActivity_radio_woman"
+                android:id="@+id/MatchingConditionActivity_radio_woman"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -86,7 +86,7 @@
                 android:textSize="18sp" />
 
             <RadioButton
-                android:id="@+id/BoardWriteActivity_radio_all"
+                android:id="@+id/MatchingConditionActivity_radio_all"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -110,11 +110,22 @@
                 android:textSize="20sp"></TextView>
 
             <EditText
-                android:id="@+id/BoardWriteActivity_edittext_age_start"
+                android:id="@+id/MatchingConditionActivity_edittext_minage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:hint="최소나이"
+                android:inputType="number"
+                android:cursorVisible="false">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/MatchingConditionActivity_edittext_maxage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:hint="최대나이"
                 android:inputType="number"
                 android:cursorVisible="false">
 
@@ -139,7 +150,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/BoardWriteActivity_edittext_date_start"
+                android:id="@+id/MatchingConditionActivity_edittext_date_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -154,7 +165,7 @@
 
 
             <EditText
-                android:id="@+id/BoardWriteActivity_edittext_time_start"
+                android:id="@+id/MatchingConditionActivity_edittext_time_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -188,7 +199,7 @@
             android:orientation="horizontal">
 
             <RadioGroup
-                android:id="@+id/BoardWriteActivity_trip_purose"
+                android:id="@+id/MatchingConditionActivity_trip_purose"
                 android:layout_width="328dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -198,7 +209,7 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/BoardWriteActivity_radio_food"
+                    android:id="@+id/MatchingConditionActivity_radio_food"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -208,7 +219,7 @@
                     android:textSize="18sp" />
 
                 <RadioButton
-                    android:id="@+id/BoardWriteActivity_radio_tour"
+                    android:id="@+id/MatchingConditionActivity_radio_tour"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -217,7 +228,7 @@
                     android:textSize="18sp" />
 
                 <RadioButton
-                    android:id="@+id/BoardWriteActivity_radio_carfull"
+                    android:id="@+id/MatchingConditionActivity_radio_carfull"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -226,7 +237,7 @@
                     android:textSize="18sp" />
 
                 <RadioButton
-                    android:id="@+id/BoardWriteActivity_radio_picture"
+                    android:id="@+id/MatchingConditionActivity_radio_picture"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -240,12 +251,12 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/BoardWriteActivity_button_write"
+            android:id="@+id/MatchingConditionActivity_button_matching"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/bt_round"
-            android:text="글 쓰기">
+            android:text="매칭 검색">
 
         </Button>
 
