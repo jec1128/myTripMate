@@ -13,11 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.tripmate.Main.MainSearchListActivity;
+import com.example.tripmate.Plan.HttpPlanRouteList;
 
 public class fragmentActivity1  extends Fragment {
 
     View mainFragment;
     ImageButton textBtn;
+    ImageButton memberAdd;
 
     @Nullable
     @Override
@@ -33,6 +35,18 @@ public class fragmentActivity1  extends Fragment {
             public void onClick(View v)
             {
                 Intent intent1 = new Intent(getActivity(), MainSearchListActivity.class);
+                startActivity(intent1);
+            }
+        });
+
+        //검색창을 누르면 나타나는 버튼
+        memberAdd = (ImageButton)mainFragment.findViewById(R.id.main_member_add_btn);
+        memberAdd.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent1 = new Intent(getActivity(), HttpPlanRouteList.class);
                 startActivity(intent1);
             }
         });

@@ -28,6 +28,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.tripmate.Location.NearLocationFragment;
+import com.example.tripmate.Plan.HttpPlanRouteList;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -35,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     Button open_close;
     DrawerLayout drawerLayout;
     Dialog dialog;
-    private SharedPreferences appData;
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private fragmentActivity1 fragment1 = new fragmentActivity1();
@@ -49,18 +49,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //아이디 및 닉네임 각 페이지에 전송
         Intent intent = getIntent();
         String nickname = "";
+        String userid = "";
 
         if(intent == null) {
             nickname = intent.getExtras().getString("nickname");
+            userid = intent.getExtras().getString("userid");
             System.out.println("MainActivity " + nickname);
         } else {
             nickname = SaveSharedPreference.getNickName(this).toString();
+            userid = SaveSharedPreference.getUserName(this).toString();
         }
+
+
 
         final Bundle bundle = new Bundle();
         bundle.putString("nickname",nickname);
+        bundle.putString("userid",userid);
+
 
 
         Log.i("cccccccc",nickname);
@@ -120,12 +128,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
 
-
                 return true;
             }
 
 
         });
+
     } //onCreate
 
     //메뉴 연동
@@ -175,4 +183,5 @@ public class MainActivity extends AppCompatActivity {
             dialog.show();
         }
     }
+
 }

@@ -15,17 +15,24 @@ import android.view.ViewGroup;
 import com.example.tripmate.Plan.AddListActivity;
 import com.example.tripmate.Plan.PlanListAdapter;
 import com.example.tripmate.Plan.PlanListModel;
+import com.example.tripmate.Plan.PlanTripActivity;
 
 import java.util.ArrayList;
 
 public class fragmentActivity2  extends Fragment {
     private RecyclerView recyclerView;
     private PlanListAdapter listAdapter;
-    private ArrayList<PlanListModel> planlist;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main2, container, false);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.rc_list);
+
+        listAdapter = new PlanListAdapter();
+        listAdapter.getList();
+        recyclerView.setAdapter(listAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
 
         final FloatingActionButton addBt = (FloatingActionButton)view.findViewById(R.id.fab_addlist);
         addBt.setOnClickListener(new View.OnClickListener() {
@@ -35,16 +42,7 @@ public class fragmentActivity2  extends Fragment {
                 startActivity(intent1);
             }
         });
-        recyclerView = (RecyclerView) view.findViewById(R.id.rc_list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
-        recyclerView.setAdapter(listAdapter);
-        listAdapter.notifyDataSetChanged();
 
         return view;
     }
-
-
-
-
-
 }

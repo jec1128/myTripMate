@@ -114,6 +114,7 @@ public class LoginActivity extends Activity {
 
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     intent.putExtra("nickname",nickname);
+                                    intent.putExtra("userid",id.getText().toString());
                                     startActivity(intent);
                                     finish();
 

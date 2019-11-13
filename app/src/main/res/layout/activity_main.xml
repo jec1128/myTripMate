@@ -72,8 +72,6 @@
                 app:menu="@menu/bottom_bar"
                 app:labelVisibilityMode="unlabeled">
             </android.support.design.widget.BottomNavigationView>
-
-
         </RelativeLayout>
 
         <!-- 사이드 메뉴 -->

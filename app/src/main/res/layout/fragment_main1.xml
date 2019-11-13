@@ -194,7 +194,7 @@
                             android:layout_marginTop="15dp">
 
                             <ImageButton
-                                android:id="@+id/imageButton2"
+                                android:id="@+id/main_member_add_btn"
                                 android:layout_width="42dp"
                                 android:layout_height="42dp"
                                 android:layout_alignParentLeft="true"
