@@ -43,6 +43,7 @@
                 android:textColorHint="#BCBCBC"
                 android:textSize="20dp"
                 android:paddingLeft="40dp"
+                android:fontFamily="@font/notosans_regular"
                 android:cursorVisible="false"
                 android:paddingBottom="15dp">
             </EditText>
