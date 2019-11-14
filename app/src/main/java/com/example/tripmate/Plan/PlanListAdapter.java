@@ -62,7 +62,7 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.PlanLi
     }
 
     @Override
-    public PlanListAdapter.PlanListViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
+    public PlanListViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
         LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
         View view = layoutInflater.inflate(R.layout.plan_card, viewGroup, false);
         PlanListViewHolder holder = new PlanListViewHolder(view);
@@ -71,8 +71,8 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.PlanLi
 
 
     @Override
-    public void onBindViewHolder(PlanListAdapter.PlanListViewHolder holder, int position) {
-        int cardposit = position;
+    public void onBindViewHolder(PlanListViewHolder holder, int position) {
+        final int cardposit = position;
         final PlanListViewHolder planListViewHolder = (PlanListViewHolder) holder;
         final String code = planlist.get(cardposit).getPlanCode();
         planListViewHolder.txtPlace.setText(planlist.get(cardposit).getPlanPlace());
@@ -83,8 +83,10 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.PlanLi
         planListViewHolder.imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String place = planlist.get(cardposit).getPlanPlace();
                 Intent intent = new Intent(v.getContext(), PlanTripActivity.class);
                 intent.putExtra("plancode", code);
+                intent.putExtra("place", place);
                 v.getContext().startActivity(intent);
             }
         });

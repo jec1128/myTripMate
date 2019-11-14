@@ -50,8 +50,9 @@ public class MessageActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adater;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm");
-
+    private String destinationNickname;
     private UserModel destinationUserModel;
+    private TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +60,11 @@ public class MessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message);
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();  //채팅을 요구 하는 아아디 즉 단말기에 로그인된 UID
         destinatonUid = getIntent().getStringExtra("destinationUid"); // 채팅을 당하는 아이디
+        destinationNickname = getIntent().getStringExtra("destinationNickname");
         button = (Button) findViewById(R.id.messageActivity_button);
         editText = (EditText) findViewById(R.id.messageActivity_editText);
+        title = findViewById(R.id.MessageActivity_title);
+        title.setText(destinationNickname);
         recyclerView = (RecyclerView) findViewById(R.id.messageActivity_reclclerview);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,17 +138,18 @@ public class MessageActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("chatrooms").orderByChild("users/" + uid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-               /* for (DataSnapshot item : dataSnapshot.getChildren()) {
-                    ChatModel chatModel = item.getValue(ChatModel.class);
-                    if (chatModel.users.containsKey(destinatonUid)) {
-                        chatRoomUid = item.getKey();
-                        button.setEnabled(true);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(MessageActivity.this));
-                        adater = new RecyclerViewAdapter();
-                        recyclerView.setAdapter(adater);
-                    }
-                }*/
-                if(dataSnapshot.getValue() == null) {
+                 /* for (DataSnapshot item : dataSnapshot.getChildren()) {
+                        ChatModel chatModel = item.getValue(ChatModel.class);
+                        if (chatModel.users.containsKey(destinatonUid)) {
+                            chatRoomUid = item.getKey();
+                            button.setEnabled(true);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(MessageActivity.this));
+                            adater = new RecyclerViewAdapter();
+                            recyclerView.setAdapter(adater);
+                        }
+                    }*/
+
+                if(dataSnapshot.getValue() == null){
                     ChatModel newRoom = new ChatModel();
                     newRoom.users.put(uid, true);
                     newRoom.users.put(destinatonUid, true);
@@ -156,6 +161,7 @@ public class MessageActivity extends AppCompatActivity {
                     });
                     return;
                 }
+
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
                     ChatModel chatModel = item.getValue(ChatModel.class);
                     if (chatModel.users.containsKey(destinatonUid) && chatModel.users.size() == 2) {

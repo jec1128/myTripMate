@@ -196,6 +196,7 @@ public class BoardViewActivity extends AppCompatActivity {
                             System.out.println("boardviewactivity result " + result);
                             Intent intent = new Intent(view.getContext(), MessageActivity.class);
                             intent.putExtra("destinationUid",result);
+                            intent.putExtra("destinationNickname",swriter);
                             startActivity(intent);
 
                         } catch (ExecutionException | InterruptedException e) {

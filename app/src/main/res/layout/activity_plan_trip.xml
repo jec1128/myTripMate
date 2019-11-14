@@ -17,6 +17,7 @@
             android:background="#ffffff" />
 
         <TextView
+            android:id="@+id/place_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
@@ -35,7 +36,7 @@
             android:maxHeight="10.8dp"
             android:scaleType="fitCenter"
             android:background="@android:color/transparent" />
-            <!--android:src="@drawable/img_trip_show"-->
+        <!--android:src="@drawable/img_trip_show"-->
 
 
         <View
@@ -79,16 +80,18 @@
             android:src="@drawable/img_planlist_plus" />
 
         <TextView
+            android:id="@+id/tv_tripadd"
             android:layout_width="97dp"
             android:layout_height="24dp"
-            android:layout_marginTop="61dp"
             android:layout_marginLeft="250dp"
-            android:textSize="11sp"
-            android:textColor="#858585"
-            android:lineSpacingExtra="40sp"
+            android:layout_marginTop="61dp"
+            android:background="@drawable/planlist_round"
             android:gravity="center"
+            android:clickable="true"
+            android:lineSpacingExtra="40sp"
             android:text="      일정추가하기"
-            android:background="@drawable/planlist_round"/>
+            android:textColor="#858585"
+            android:textSize="11sp" />
 
         <ImageButton
             android:layout_width="10dp"
@@ -106,7 +109,7 @@
     <LinearLayout
         android:id="@+id/ln_tmap"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_height="323dp"
         android:orientation="vertical">
 
     </LinearLayout>

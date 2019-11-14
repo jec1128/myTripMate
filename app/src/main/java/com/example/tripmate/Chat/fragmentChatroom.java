@@ -93,7 +93,6 @@ public class fragmentChatroom extends Fragment {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
 
-
             final CustomViewHolder customViewHolder = (CustomViewHolder)holder;
             String destinationUid = null;
 
@@ -102,11 +101,13 @@ public class fragmentChatroom extends Fragment {
                 if(!user.equals(uid)){
                     destinationUid = user;
                     destinationUsers.add(destinationUid);
+
                 }
             }
             FirebaseDatabase.getInstance().getReference().child("users").child(destinationUid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
+
                     UserModel userModel =  dataSnapshot.getValue(UserModel.class);
                     Glide.with(customViewHolder.itemView.getContext())
                             .load(userModel.getProfileImageUrl())
@@ -114,6 +115,8 @@ public class fragmentChatroom extends Fragment {
                             .into(customViewHolder.imageView);
 
                     customViewHolder.textView_title.setText(userModel.getUserName());
+
+
 
                 }
 
@@ -127,15 +130,19 @@ public class fragmentChatroom extends Fragment {
 
             Map<String,ChatModel.Comment> commentMap = new TreeMap<>(Collections.reverseOrder());
             commentMap.putAll(chatModels.get(position).comments);
-            String lastMessageKey = (String) commentMap.keySet().toArray()[0];
-            customViewHolder.textView_last_message.setText(chatModels.get(position).comments.get(lastMessageKey).message);
-
+            String lastMessageKey= null;
+            if(chatModels.size() >= 1) {
+                lastMessageKey = (String) commentMap.keySet().toArray()[0];
+                customViewHolder.textView_last_message.setText(chatModels.get(position).comments.get(lastMessageKey).message);
+            }
             customViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
                     Intent intent = new Intent(view.getContext(), MessageActivity.class);
                     intent.putExtra("destinationUid",destinationUsers.get(position));
+                    intent.putExtra("destinationNickname","aaaaaa");
+                   // System.out.println("destinationNickname" + customViewHolder.textView_title.toString());
                     startActivity(intent);
 
 
@@ -144,11 +151,12 @@ public class fragmentChatroom extends Fragment {
 
 
 
-
-            long unixTime = (long) chatModels.get(position).comments.get(lastMessageKey).timestamp;
-            Date date = new Date(unixTime);
-            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
-            customViewHolder.textView_timestamp.setText(simpleDateFormat.format(date));
+            if(lastMessageKey == null) {
+                long unixTime = (long) chatModels.get(position).comments.get(lastMessageKey).timestamp;
+                Date date = new Date(unixTime);
+                simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+                customViewHolder.textView_timestamp.setText(simpleDateFormat.format(date));
+            }
 
         }
 

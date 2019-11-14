@@ -109,6 +109,7 @@ public class fragmentFriend extends Fragment {
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), MessageActivity.class);
                     intent.putExtra("destinationUid", userModels.get(position).getUid());
+                    intent.putExtra("destinationNickname",userModels.get(position).getUserName());
                     ActivityOptions activityOptions = null;
                     activityOptions = ActivityOptions.makeCustomAnimation(view.getContext(), R.anim.fromright, R.anim.toleft);
                     startActivity(intent, activityOptions.toBundle());

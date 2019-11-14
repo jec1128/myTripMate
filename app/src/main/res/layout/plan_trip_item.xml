@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/item_list"
+        android:layout_width="match_parent"
+        android:layout_height="87dp"
+        android:background="@drawable/border_bottom">
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingLeft="83dp"
+            android:text="금오공대"
+            android:lineSpacingExtra="-0.6sp"
+            android:textColor="#243f4a"
+            android:textSize="15sp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="365dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:maxWidth="30dp"
+            android:maxHeight="30dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_trip_menu" />
+
+        <TextView
+            android:id="@+id/trip_memo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"/>
+
+        <Button
+            android:id="@+id/memo_add"
+            android:layout_width="wrap_content"
+            android:layout_height="31dp"
+            android:layout_marginLeft="300dp"
+            android:layout_marginTop="45dp"
+            android:text="메모추가"
+            android:lineSpacingExtra="-0.6sp"
+            android:textSize="10sp" />
+
+
+
+
+
+    </RelativeLayout>
+</LinearLayout>

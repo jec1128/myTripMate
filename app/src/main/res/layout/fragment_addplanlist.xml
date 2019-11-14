@@ -41,6 +41,7 @@
             android:layout_marginLeft="40dp"
             android:background="@android:color/transparent"
             android:hint="장소를 검색하세요"
+            android:clickable="true"
             android:lineSpacingExtra="100sp"
             android:textColor="#616161"
             android:textSize="18sp" />
@@ -187,127 +188,127 @@
 
             </FrameLayout>
         </LinearLayout>
-<!--
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <!--
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
-                android:layout_marginTop="26dp"
-                android:lineSpacingExtra="38sp"
-                android:text="일정 시작 시간"
-                android:textColor="#616161"
-                android:textSize="13sp"
-                android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:layout_marginTop="26dp"
+                        android:lineSpacingExtra="38sp"
+                        android:text="일정 시작 시간"
+                        android:textColor="#616161"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="125dp"
-                android:layout_marginTop="26dp"
-                android:lineSpacingExtra="38sp"
-                android:text="일정 종료 시간"
-                android:textColor="#616161"
-                android:textSize="13sp"
-                android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="125dp"
+                        android:layout_marginTop="26dp"
+                        android:lineSpacingExtra="38sp"
+                        android:text="일정 종료 시간"
+                        android:textColor="#616161"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
 
-        </LinearLayout>
+                </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <View
-                    android:layout_width="137dp"
-                    android:layout_height="34dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/planlist_round"/>
-
-                <ImageButton
-                    android:id="@+id/imgbt_starttime"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="107dp"
-                    android:layout_marginTop="16dp"
-                    android:background="#03FFFFFF"
-                    android:maxWidth="14dp"
-                    android:maxHeight="14dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/img_plan_add_date" />
+                    android:layout_gravity="center">
 
-                <TextView
-                    android:id="@+id/tv_starttime"
-                    android:layout_width="57dp"
-                    android:layout_height="19dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="18dp"
-                    android:gravity="center_horizontal"
-                    android:letterSpacing="0.05"
-                    android:lineSpacingExtra="38sp"
-                    android:textColor="#5d5d5d"
-                    android:textSize="11sp" />
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-            </FrameLayout>
+                        <View
+                            android:layout_width="137dp"
+                            android:layout_height="34dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/planlist_round"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="18dp"
-                android:lineSpacingExtra="38sp"
-                android:text="TO"
-                android:textColor="#bcbcbc"
-                android:textSize="13sp"
-                android:textStyle="bold" />
+                        <ImageButton
+                            android:id="@+id/imgbt_starttime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="107dp"
+                            android:layout_marginTop="16dp"
+                            android:background="#03FFFFFF"
+                            android:maxWidth="14dp"
+                            android:maxHeight="14dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/img_plan_add_date" />
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/tv_starttime"
+                            android:layout_width="57dp"
+                            android:layout_height="19dp"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginTop="18dp"
+                            android:gravity="center_horizontal"
+                            android:letterSpacing="0.05"
+                            android:lineSpacingExtra="38sp"
+                            android:textColor="#5d5d5d"
+                            android:textSize="11sp" />
 
-                <View
-                    android:layout_width="137dp"
-                    android:layout_height="34dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="22dp"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/planlist_round"/>
+                    </FrameLayout>
 
-                <ImageButton
-                    android:id="@+id/imgbt_endtime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="130dp"
-                    android:layout_marginTop="16dp"
-                    android:background="#03FFFFFF"
-                    android:maxWidth="14dp"
-                    android:maxHeight="14dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/img_plan_add_date" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="18dp"
+                        android:lineSpacingExtra="38sp"
+                        android:text="TO"
+                        android:textColor="#bcbcbc"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tv_endtime"
-                    android:layout_width="57dp"
-                    android:layout_height="19dp"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginTop="18dp"
-                    android:gravity="center_horizontal"
-                    android:letterSpacing="0.05"
-                    android:lineSpacingExtra="38sp"
-                    android:textColor="#5d5d5d"
-                    android:textSize="11sp" />
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-            </FrameLayout>
-        </LinearLayout>
-        -->
+                        <View
+                            android:layout_width="137dp"
+                            android:layout_height="34dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="22dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/planlist_round"/>
+
+                        <ImageButton
+                            android:id="@+id/imgbt_endtime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="130dp"
+                            android:layout_marginTop="16dp"
+                            android:background="#03FFFFFF"
+                            android:maxWidth="14dp"
+                            android:maxHeight="14dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/img_plan_add_date" />
+
+                        <TextView
+                            android:id="@+id/tv_endtime"
+                            android:layout_width="57dp"
+                            android:layout_height="19dp"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="18dp"
+                            android:gravity="center_horizontal"
+                            android:letterSpacing="0.05"
+                            android:lineSpacingExtra="38sp"
+                            android:textColor="#5d5d5d"
+                            android:textSize="11sp" />
+
+                    </FrameLayout>
+                </LinearLayout>
+                -->
 
         <Button
             android:id="@+id/bt_ok"

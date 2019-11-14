@@ -65,9 +65,9 @@ public class MatchingConditionActivity extends AppCompatActivity {
 
         System.out.println("MatchingCondition Activity" + nickname);
 
-        destination = findViewById(R.id.MatchingConditionActivity_edittext_destination);
-        minage = findViewById(R.id.MatchingConditionActivity_edittext_minage);
-        maxage = findViewById(R.id.MatchingConditionActivity_edittext_maxage);
+        destination = findViewById(R.id.MatchingConditionActivity_text_where);
+        minage = findViewById(R.id.MatchingConditionActivity_edittext_age_start);
+        maxage = findViewById(R.id.MatchingConditionActivity_edittext_age_end);
 
 
         final Calendar startDate = Calendar.getInstance();
