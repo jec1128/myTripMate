@@ -39,6 +39,7 @@
         <activity android:name=".User.LoginActivity" />
         <activity android:name=".Main.MainSearchListActivity" />
         <activity android:name=".Main.MainKeywordActivity" />
+        <activity android:name=".Plan.PlanKeywordActivity" />
         <activity android:name=".Plan.AddListActivity" />
         <activity android:name=".Plan.PlanTripActivity" />
         <activity android:name=".Plan.PlanSearchActivity" />

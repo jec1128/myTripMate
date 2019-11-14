@@ -128,11 +128,12 @@ public class AddListActivity extends AppCompatActivity {
 
                 HttpPlanListAdd httpPlanListAdd = new HttpPlanListAdd();
                 HttpPlanListAdd.SendTask sendTask = httpPlanListAdd.new SendTask();
+                PlanListAdapter listAdapter = new PlanListAdapter();
                 String result = null;
                 try {
                     result = sendTask.execute(sendplace, sendtitle, sendstart, sendend).get();
                     if("success".equals(result)){
-                        PlanListAdapter listAdapter = new PlanListAdapter();
+
                         //listAdapter.removeAllItem();
                         listAdapter.getList();
                         //listAdapter.notifyDataSetChanged();
@@ -145,6 +146,7 @@ public class AddListActivity extends AppCompatActivity {
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
+                listAdapter.notifyDataSetChanged();
             }
         });
     }
