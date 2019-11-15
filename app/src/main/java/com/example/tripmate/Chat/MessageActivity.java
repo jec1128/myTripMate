@@ -46,13 +46,13 @@ public class MessageActivity extends AppCompatActivity {
     private EditText editText;
     private String uid;
     private String chatRoomUid;
-    private Boolean chat = false;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adater;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm");
     private String destinationNickname;
     private UserModel destinationUserModel;
     private TextView title;
+    private boolean state = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +72,7 @@ public class MessageActivity extends AppCompatActivity {
                 ChatModel chatModel = new ChatModel();
                 chatModel.users.put(uid, true);
                 chatModel.users.put(destinatonUid, true);
-                chat = true;
+                state = true;
 
                 if (chatRoomUid == null) { //방이없으면
                     button.setEnabled(false);
@@ -296,7 +296,10 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-
+        if(state){
+            fragmentChatroom chatroom = fragmentChatroom.getInstance();
+            chatroom.init();
+        }
         finish();
     }
 }
