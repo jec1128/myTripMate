@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -27,7 +28,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.tripmate.Location.NearLocationFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     Toolbar toolbar;
     BottomNavigationView bottomNavigationView;
     Button open_close;
@@ -46,11 +47,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = getIntent();
+       /* Intent intent = getIntent();
         String nickname = intent.getExtras().getString("nickname");
         System.out.println("MainActivity " + nickname);
         final Bundle bundle = new Bundle();
         bundle.putString("nickname",nickname);
+*/
+
+        String nickname = "";
+        String userid = "";
+        nickname = SaveSharedPreference.getNickName(this).toString();
+        userid = SaveSharedPreference.getUserName(this).toString();
+        System.out.println("mainActivity : " + nickname + "  " + userid);
 
         //첫 화면 지정
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -70,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
         //Navigation Drawer 생성 및 초기화
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         ImageView imageView = findViewById(R.id.navigation_header_image_user);
-
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nv_main_navigation_root);
+        navigationView.setNavigationItemSelectedListener(this);
         //하단 툴바 생성
         bottomNavigationView =(BottomNavigationView)findViewById(R.id.bottom_navigation);
 
@@ -97,8 +106,6 @@ public class MainActivity extends AppCompatActivity {
                         transaction.replace(R.id.frameLayout, fragment3).commitAllowingStateLoss();
                         break;
                     case R.id.action_home4:
-                        fragment4.setArguments(bundle);
-                        System.out.println("mainactivity  4번째 누름");
                         transaction.replace(R.id.frameLayout, fragment4).commitAllowingStateLoss();
                         break;
                     case R.id.action_home5:
@@ -160,5 +167,41 @@ public class MainActivity extends AppCompatActivity {
             dialog = builder.create();
             dialog.show();
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        int id = menuItem.getItemId();
+
+        if (id == R.id.navigation_item_notice) {
+            // Handle the camera action
+        } else if (id == R.id.navigation_item_qna) {
+
+        } else if (id == R.id.navigation_item_recommand) {
+
+        } else if (id == R.id.navigation_item_logout) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("로그아웃 확인").setMessage("로그아웃 하시겠습니까?");
+            builder.setPositiveButton("네", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(MainActivity.this,Intro1Activity.class);
+                    SaveSharedPreference.clearUserName(getApplicationContext());
+                    startActivity(intent);
+                }
+            });
+            builder.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            dialog = builder.create();
+            dialog.show();
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

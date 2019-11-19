@@ -23,11 +23,9 @@ public class TabPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        String nickname = fragmentActivity4.getNickname();
-        System.out.println("tabpageradapter  " + nickname);
-
+       /* String nickname = fragmentActivity4.getNickname();
         Bundle bundle = new Bundle();
-        bundle.putString("nickname",nickname);
+        bundle.putString("nickname",nickname);*/
 
         //fragmentFriend tabFragment1 = new fragmentFriend();
         fragmentBoard tabFragment2 = fragmentBoard.getInstance();
@@ -38,7 +36,7 @@ public class TabPagerAdapter extends FragmentPagerAdapter {
                 return tabFragment1;*/
 
             case 0:
-                tabFragment2.setArguments(bundle);
+                //tabFragment2.setArguments(bundle);
                 return tabFragment2;
 
             case 1:

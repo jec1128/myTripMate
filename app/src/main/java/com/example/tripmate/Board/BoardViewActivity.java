@@ -98,7 +98,7 @@ public class BoardViewActivity extends AppCompatActivity {
             final String scontent = jsonObject.getString("content");
 
             writerGenderAge.setText(swriterGenderAge);
-             purpose.setText(spurpose);
+            purpose.setText(spurpose);
             destination.setText(sdestination);
             mathcingGenderAge.setText(smatchingGenderAge);
             writerNickname.setText(swriter);
@@ -221,6 +221,7 @@ public class BoardViewActivity extends AppCompatActivity {
 
        // final BoardListAdapter adapter = BoardListAdapter.getInstance();
         fragmentBoard.getInstance().removeAllItems();
+        fragmentBoard.getInstance().setRefreshCount(1);
         fragmentBoard.getInstance().init();
         super.onBackPressed();
     }

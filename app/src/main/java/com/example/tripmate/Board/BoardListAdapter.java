@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tripmate.R;
+import com.example.tripmate.SaveSharedPreference;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,7 +61,6 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListViewHolder> 
         } else {
             viewHolder.gender.setImageResource(gender[2]);
         }
-        Log.i("TDB", "ddddddddddddddd");
         viewHolder.textnickname.setText(boardList.get(position).getNickname());
         viewHolder.date.setText(boardList.get(position).getMatchdate());
         viewHolder.destination.setText(boardList.get(position).getDestination());

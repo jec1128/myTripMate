@@ -18,7 +18,9 @@ import android.widget.RadioButton;
 import android.widget.TimePicker;
 
 import com.example.tripmate.R;
+import com.example.tripmate.SaveSharedPreference;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
@@ -42,7 +44,7 @@ public class BoardWriteActivity extends AppCompatActivity {
     private RadioButton food;
     private RadioButton tour;
     private RadioButton picture;
-
+    private ArrayList<String> detinationList;
     private Date now;
     private Dialog dialog;
     private String nickname;
@@ -51,16 +53,22 @@ public class BoardWriteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board_write);
-        Intent intent = getIntent();
+      /*  Intent intent = getIntent();
         nickname = intent.getExtras().getString("nickname");
-
-
-        System.out.println("boardwriteactivity" + nickname);
+        System.out.println("boardwriteactivity : " + nickname);*/
+        nickname = SaveSharedPreference.getNickName(this).toString();
 
         destination = findViewById(R.id.BoardWriteActivity_text_where);
+        destination.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         content = findViewById(R.id.BoardWriteActivity_text_content);
         age_start = findViewById(R.id.BoardWriteActivity_edittext_age_start);
         age_end = findViewById(R.id.BoardWriteActivity_edittext_age_end);
+
 
 
         final Calendar startDate = Calendar.getInstance();
@@ -224,6 +232,7 @@ public class BoardWriteActivity extends AppCompatActivity {
                                 builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         fragmentBoard.getInstance().removeAllItems();
+                                        fragmentBoard.getInstance().setRefreshCount(1);
                                         fragmentBoard.getInstance().init();
                                         onBackPressed();
                                     }
@@ -261,5 +270,6 @@ public class BoardWriteActivity extends AppCompatActivity {
         dialog = builder.create();
         dialog.show();
     }
+
 }
 

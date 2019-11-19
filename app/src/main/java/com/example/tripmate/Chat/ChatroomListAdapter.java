@@ -28,7 +28,7 @@ import java.util.TreeMap;
 import java.util.concurrent.ExecutionException;
 
 public class ChatroomListAdapter extends RecyclerView.Adapter<ChatroomListViewHolder> {
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm");
     private List<ChatModel> chatModels = new ArrayList<>();
     private String uid;
     private ArrayList<String> destinationUsers = new ArrayList<>();
@@ -111,7 +111,7 @@ public class ChatroomListAdapter extends RecyclerView.Adapter<ChatroomListViewHo
             customViewHolder.textView_last_message.setText(chatModels.get(position).comments.get(lastMessageKey).message);
             //TimeStamp
             simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
-            long unixTime = (long) chatModels.get(position).comments.get(lastMessageKey).timestamp;
+            long unixTime = (long) chatModels.get(position).comments.get(lastMessageKey).timestamp ;
             Date date = new Date(unixTime);
             customViewHolder.textView_timestamp.setText(simpleDateFormat.format(date));
 

@@ -75,5 +75,15 @@
             android:text="Sing IN"
             style="?android:attr/borderlessButtonStyle"/>
 
+        <CheckBox
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="#fff"
+            android:layout_marginTop="30dp"
+            android:text="자동 로그인"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/autoLoginCheck"
+            android:buttonTint="#ffffff"/>
+
     </LinearLayout>
 </LinearLayout>

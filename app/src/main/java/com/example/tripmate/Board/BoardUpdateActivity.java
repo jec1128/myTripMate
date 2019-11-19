@@ -260,6 +260,7 @@ public class BoardUpdateActivity extends AppCompatActivity {
                                             //fragment.init();
 
                                             fragmentBoard.getInstance().removeAllItems();
+                                            fragmentBoard.getInstance().setRefreshCount(1);
                                             fragmentBoard.getInstance().init();
                                             onBackPressed();
                                         }
