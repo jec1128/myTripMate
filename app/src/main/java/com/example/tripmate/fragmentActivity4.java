@@ -66,6 +66,10 @@ public class fragmentActivity4 extends Fragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+              /*  if(tab.getPosition() == 0) {
+                    fragmentBoard.setRefreshCount(1);
+                    fragmentBoard.getInstance().init();
+                }*/
             }
 
             @Override

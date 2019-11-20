@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.example.tripmate.Board.fragmentBoard;
 import com.example.tripmate.Location.NearLocationFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private fragmentActivity4 fragment4 = fragmentActivity4.getInstance();
     private NearLocationFragment fragment5 = new NearLocationFragment();
 
+    private int fragment4count = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +108,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         transaction.replace(R.id.frameLayout, fragment3).commitAllowingStateLoss();
                         break;
                     case R.id.action_home4:
+                        if (fragment4count != 0 ){
+                            fragmentBoard.setRefreshCount(0);
+                            fragmentBoard.getInstance().init();
+                        }
                         transaction.replace(R.id.frameLayout, fragment4).commitAllowingStateLoss();
+                        fragment4count++;
                         break;
                     case R.id.action_home5:
                         transaction.replace(R.id.frameLayout, fragment5).commitNowAllowingStateLoss();

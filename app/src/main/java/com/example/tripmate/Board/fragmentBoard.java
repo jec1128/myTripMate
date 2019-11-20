@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 
 import com.example.tripmate.SaveSharedPreference;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
+
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -45,8 +46,10 @@ public class fragmentBoard extends Fragment implements SwipyRefreshLayout.OnRefr
     private static ArrayList<BoardModel> dataList;
     private static int refreshCount = 1;
     private SwipyRefreshLayout swipeRefreshLayout;
+
     @SuppressLint("ValidFragment")
-    private fragmentBoard() { }
+    private fragmentBoard() {
+    }
 
     public static fragmentBoard getInstance() {
         if (instance == null) {
@@ -69,9 +72,9 @@ public class fragmentBoard extends Fragment implements SwipyRefreshLayout.OnRefr
         dataList = new ArrayList<>();
         init();
         //이전 화면에서 닉네임 얻어오기
-        Bundle extra = this.getArguments();
+        /*Bundle extra = this.getArguments();
 
-       /* if (extra != null) {
+        if(extra != null) {
             extra = getArguments();
             nickname = extra.getString("nickname");
             System.out.println("fragment board : " + nickname);
@@ -118,9 +121,6 @@ public class fragmentBoard extends Fragment implements SwipyRefreshLayout.OnRefr
     }
 
 
-
-
-
     //제이슨 파싱해서 데이터 리스트 얻어오는 부분
     private ArrayList<BoardModel> jsonParserForGetBoardlist() {
 
@@ -157,7 +157,7 @@ public class fragmentBoard extends Fragment implements SwipyRefreshLayout.OnRefr
                 return dataList;
             }
         } catch (ExecutionException | InterruptedException | JSONException e) {
-            Log.i("database","111111111");
+            Log.i("database", "111111111");
             e.printStackTrace();
         }
 
@@ -168,16 +168,17 @@ public class fragmentBoard extends Fragment implements SwipyRefreshLayout.OnRefr
         return "보드리스트";
     }
 
-    public void removeAllItems(){
+    public void removeAllItems() {
         dataList.clear();
     }
+
     @Override
     public void onRefresh(SwipyRefreshLayoutDirection direction) {
         init();
         swipeRefreshLayout.setRefreshing(false);
 
         //swipeRefreshLayout.computeScroll();
-        recyclerView.scrollToPosition(300 + 350*refreshCount);
+        //recyclerView.scrollToPosition(300 + 350*refreshCount);
     }
 
 }

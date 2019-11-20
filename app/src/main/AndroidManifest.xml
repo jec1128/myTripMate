@@ -31,9 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Board.BoardWriteActivity"
-            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Board.BoardWriteActivity" />
         <activity android:name=".Chat.MessageActivity" />
         <activity android:name=".User.RegisterActivity" />
         <activity android:name=".User.LoginActivity" />
@@ -43,6 +41,9 @@
         <activity android:name=".Plan.AddListActivity" />
         <activity android:name=".Plan.PlanTripActivity" />
         <activity android:name=".Plan.PlanSearchActivity" />
+        <activity android:name=".Board.PlaceSearchActivity" />
+        <activity android:name=".Board.PlaceSearchActivity2" />
+        <activity android:name=".Board.Matching.PlaceSearchActivity3" />
         <activity android:name=".MainActivity" />
 
         <uses-library

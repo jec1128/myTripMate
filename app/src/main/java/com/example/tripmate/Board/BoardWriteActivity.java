@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,12 +12,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.example.tripmate.Plan.AddListActivity;
+import com.example.tripmate.Plan.PlanSearchActivity;
 import com.example.tripmate.R;
 import com.example.tripmate.SaveSharedPreference;
 
@@ -62,6 +67,10 @@ public class BoardWriteActivity extends AppCompatActivity {
         destination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Intent intent = new Intent(view.getContext(), PlaceSearchActivity.class);
+                //v.getContext().startActivity(intent);
+                startActivityForResult(intent, Code.requestCode);
 
             }
         });
@@ -269,6 +278,15 @@ public class BoardWriteActivity extends AppCompatActivity {
         });
         dialog = builder.create();
         dialog.show();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent){
+        if(requestCode == BoardWriteActivity.Code.requestCode && resultCode == BoardWriteActivity.Code.resultCode)
+            destination.setText(resultIntent.getStringExtra("place"));
+    }
+    public static class Code{
+        public static int requestCode = 100;
+        public static int resultCode = 1;
     }
 
 }

@@ -35,16 +35,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:hint="서울"
-                android:inputType="text"
-                android:privateImeOptions="defaultInputmode=korean"
-                android:singleLine="true"
+                android:hint="장소를 검색하세요"
+                android:clickable="true"
+                android:focusable="false"
                 android:textColor="#808080"
                 android:textColorHint="#BCBCBC"
                 android:textSize="20dp"
                 android:paddingLeft="40dp"
                 android:cursorVisible="false"
                 android:paddingBottom="15dp">
+
             </EditText>
 
             <ImageView
@@ -52,6 +52,7 @@
                 android:layout_height="35dp"
                 android:layout_marginTop="14dp"
                 android:src="@drawable/ic_img_board_write_location"/>
+
 
 
         </FrameLayout>

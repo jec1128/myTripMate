@@ -21,7 +21,9 @@ import android.widget.TimePicker;
 import com.example.tripmate.Board.BoardListAdapter;
 import com.example.tripmate.Board.BoardModel;
 import com.example.tripmate.Board.BoardUpdateActivity;
+import com.example.tripmate.Board.BoardWriteActivity;
 import com.example.tripmate.Board.HttpBoardList;
+import com.example.tripmate.Board.PlaceSearchActivity2;
 import com.example.tripmate.R;
 
 import org.json.JSONArray;
@@ -69,7 +71,16 @@ public class MatchingConditionActivity extends AppCompatActivity {
         minage = findViewById(R.id.MatchingConditionActivity_edittext_age_start);
         maxage = findViewById(R.id.MatchingConditionActivity_edittext_age_end);
 
+        destination.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Intent intent = new Intent(view.getContext(), PlaceSearchActivity3.class);
+                //v.getContext().startActivity(intent);
+                startActivityForResult(intent, Code.requestCode);
+
+            }
+        });
         final Calendar startDate = Calendar.getInstance();
         date_start = (EditText) findViewById(R.id.MatchingConditionActivity_edittext_date_start);
         date_start.setOnClickListener(new View.OnClickListener() {
@@ -240,6 +251,14 @@ public class MatchingConditionActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent){
+        if(requestCode == MatchingConditionActivity.Code.requestCode && resultCode == MatchingConditionActivity.Code.resultCode)
+            destination.setText(resultIntent.getStringExtra("place"));
+    }
+    public static class Code{
+        public static int requestCode = 100;
+        public static int resultCode = 1;
+    }
 
 
 }

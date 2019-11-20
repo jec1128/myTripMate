@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TimePicker;
 
+import com.example.tripmate.Plan.AddListActivity;
+import com.example.tripmate.Plan.PlanSearchActivity;
 import com.example.tripmate.R;
 
 import java.util.ArrayList;
@@ -81,6 +83,17 @@ public class BoardUpdateActivity extends AppCompatActivity {
 
         destination = findViewById(R.id.BoardUpdateActivity_text_where);
         destination.setText(sdestination);
+
+        destination.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(view.getContext(), PlaceSearchActivity2.class);
+                //v.getContext().startActivity(intent);
+                startActivityForResult(intent, Code.requestCode);
+
+            }
+        });
         content = findViewById(R.id.BoardUpdateActivity_text_content);
         content.setText(scontent);
         age_start = findViewById(R.id.BoardUpdateActivity_edittext_age_start);
@@ -287,6 +300,16 @@ public class BoardUpdateActivity extends AppCompatActivity {
 
 
     }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent){
+        if(requestCode == BoardUpdateActivity.Code.requestCode && resultCode == BoardUpdateActivity.Code.resultCode)
+            destination.setText(resultIntent.getStringExtra("place"));
+    }
+    public static class Code{
+        public static int requestCode = 100;
+        public static int resultCode = 1;
+    }
+
     private void alert(String title, String content) {
         AlertDialog.Builder builder = new AlertDialog.Builder(BoardUpdateActivity.this);
         builder.setTitle(title).setMessage(content);
