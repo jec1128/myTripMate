@@ -2,7 +2,12 @@ package com.example.tripmate.TourAPI;
 
 /*API ������ ��� ���� Ŭ����*/
 
-public class TripDataInfo {
+import java.io.Serializable;
+
+public class TripDataInfo implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	String address1;
 	String address2;
 	String imgURL;

@@ -1,10 +1,7 @@
-/* 대구 -> 관광지리스트 보여주는 어뎁터 */
-
-package com.example.tripmate.Main;
+package com.example.tripmate.Plan.DesignClassFile;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,20 +9,19 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.tripmate.Plan.PlanTripActivity;
 import com.example.tripmate.R;
 import com.example.tripmate.TourAPI.TripDataInfo;
 
 import java.util.ArrayList;
 
-import static android.app.Activity.RESULT_OK;
-
-public class KeywordListAdapter extends BaseAdapter  {
+public class PlanKeywordListAdapter extends BaseAdapter {
     public ArrayList<TripDataInfo> listViewItemList = new ArrayList<TripDataInfo>();
+    private ItemClickListener mItemClickListener;
 
-    public KeywordListAdapter() {
+    public PlanKeywordListAdapter() {
     }
 
     @Override
@@ -41,6 +37,10 @@ public class KeywordListAdapter extends BaseAdapter  {
     @Override
     public long getItemId(int i) {
         return 0;
+    }
+
+    public void addItemClickListener(ItemClickListener listener) {
+        mItemClickListener = listener;
     }
 
     @Override
@@ -59,6 +59,7 @@ public class KeywordListAdapter extends BaseAdapter  {
         TextView textTitle = (TextView) convertView.findViewById(R.id.textTitle);
         TextView text_adress = (TextView) convertView.findViewById(R.id.text_adress);
         TextView content_title = (TextView) convertView.findViewById(R.id.content_title);
+        Button placeAddBtn = (Button) convertView.findViewById(R.id.trip_add_btn);
 
         //Data Seet(listViewItemList)에서 position에 위치한 데이터 참조 획득
         final TripDataInfo listViewItem = listViewItemList.get(position);
@@ -79,7 +80,17 @@ public class KeywordListAdapter extends BaseAdapter  {
         text_adress.setText(listViewItem.getAddress1());
         content_title.setText("관광명소");
 
-       return convertView;
+        Button button1 = (Button) convertView.findViewById(R.id.trip_add_btn) ;
+        button1.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mItemClickListener != null) {
+                    mItemClickListener.onItemClick(pos);
+                }
+            }
+        });
+
+        return convertView;
     }
 
     public void addItem(String title, String address1, String address2, String url, String location) {
@@ -97,4 +108,8 @@ public class KeywordListAdapter extends BaseAdapter  {
 
     }
 
+    //리스너를 위한 인터페이스
+    public interface ItemClickListener {
+        void onItemClick(int position);
+    }
 }

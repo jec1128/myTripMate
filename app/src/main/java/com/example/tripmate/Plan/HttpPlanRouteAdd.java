@@ -1,7 +1,6 @@
 package com.example.tripmate.Plan;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +8,9 @@ import android.util.Log;
 import com.example.tripmate.Ip;
 import com.example.tripmate.SaveSharedPreference;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,27 +19,26 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.concurrent.ExecutionException;
 
-public class HttpPlanRouteList extends Activity {
+public class HttpPlanRouteAdd extends Activity {
+
+    static String nickName;
+    static String userID;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    public class sendTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
+    class SendTask extends AsyncTask<String, Void, String> {
+
         public String doInBackground(String... strings) {
             try {
                 Ip i = new Ip();
                 String ip = i.getIP();
-                String url = "http://" + ip + ":8080/TripMateServer/Plan/PlanRouteSelect.jsp";
-                //String url = "http://192.168.214.146:8080/TripMateServer/Board/Update.jsp";
+                String url = "http://" + ip + ":8080/TripMateServer/Plan/PlanRouteInsert.jsp";
 
                 URL urlText = null;
+
                 try {
                     urlText = new URL(url);
                     HttpURLConnection conn = (HttpURLConnection) urlText.openConnection();
@@ -51,8 +51,14 @@ public class HttpPlanRouteList extends Activity {
                     conn.setDoOutput(true);
                     conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
+
+
                     OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
-                    String sendmsg = "userid=" + strings[0];
+                    String sendmsg = "userid=" + strings[0] + "&plancode=" + strings[1] +
+                                     "&plandate=" + strings[2] + "&title=" + strings[3] + "&locationx=" + strings[4] +
+                                     "&locationy=" + strings[5] + "&memo=" + strings[6] + "&index=" + strings[7] + "&state=" + strings[8];
+
+                    Log.i("23423423423",sendmsg);
                     os.write(sendmsg);
                     os.flush();
                     os.close();
@@ -71,10 +77,10 @@ public class HttpPlanRouteList extends Activity {
                     br.close();
 
                     String result = response.toString();
+                    System.out.println(result);
+                    String receiveMsg = parsedData(result);
 
-                    Log.i("planRoute",result);
-
-                    return result;
+                    return receiveMsg;
 
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -86,5 +92,19 @@ public class HttpPlanRouteList extends Activity {
 
             return null;
         }
+    }
+
+    public String parsedData(String recvMsg){
+        JSONArray jarray = null;
+        try {
+            jarray = new JSONObject(recvMsg).getJSONArray("update");
+            JSONObject jsonObject = jarray.getJSONObject(0);
+            String receiveMsg = jsonObject.getString("msg");
+            return receiveMsg;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

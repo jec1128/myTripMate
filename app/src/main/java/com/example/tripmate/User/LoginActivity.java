@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -109,12 +110,13 @@ public class LoginActivity extends Activity {
 
                                     if (checkBox.isChecked()) {
                                         SaveSharedPreference.setUserName(getApplicationContext(), id.getText().toString());
-                                        SaveSharedPreference.setUserName(getApplicationContext(), nickname);
+                                        SaveSharedPreference.setNickName(getApplicationContext(), nickname);
                                     }
 
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     intent.putExtra("nickname",nickname);
                                     intent.putExtra("userid",id.getText().toString());
+
                                     startActivity(intent);
                                     finish();
 

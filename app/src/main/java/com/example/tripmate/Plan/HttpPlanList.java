@@ -26,6 +26,7 @@ public class HttpPlanList extends Activity {
                 Ip a = new Ip();
                 String ip = a.getIP();
                 String url = "http://"+ip+":8080/TripMateServer/Plan/ListView.jsp";
+                //String url = "http://192.168.214.146:8080/TripMateServer/Board/ShowList.jsp";
 
                 URL obj = null;
                 try {
@@ -41,7 +42,7 @@ public class HttpPlanList extends Activity {
                     conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
                     OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
-                    String sendmsg = "num=" + strings[0];
+                    String sendmsg = "nickname=" + strings[0];
                     os.write(sendmsg);
                     os.flush();
                     os.close();
@@ -61,6 +62,9 @@ public class HttpPlanList extends Activity {
                     String result = response.toString();
                     System.out.println("result"+result);
                     return result;
+
+
+
 
                 } catch (IOException ex) {
                     ex.printStackTrace();

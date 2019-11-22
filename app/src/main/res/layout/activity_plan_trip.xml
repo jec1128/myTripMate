@@ -9,14 +9,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-
-
         <View
             android:layout_width="wrap_content"
             android:layout_height="49dp"
             android:background="#ffffff" />
 
         <TextView
+            android:id="@+id/place_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
@@ -27,16 +26,16 @@
             android:text="ddd"/>
 
         <ImageButton
-            android:layout_width="wrap_content"
+            android:id="@+id/trip_back"
+            android:layout_width="56dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="17.6dp"
             android:layout_marginTop="20dp"
+            android:background="@android:color/transparent"
             android:maxWidth="6.3dp"
             android:maxHeight="10.8dp"
-            android:scaleType="fitCenter"
-            android:background="@android:color/transparent" />
-            <!--android:src="@drawable/img_trip_show"-->
-
+            android:scaleType="fitStart"
+            android:src="@drawable/img_trip_show" />
 
         <View
             android:layout_width="wrap_content"
@@ -47,7 +46,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="21dp"
+            android:layout_marginLeft="19dp"
             android:layout_marginTop="65dp"
             android:letterSpacing="-0.1"
             android:lineSpacingExtra="33sp"
@@ -59,18 +58,18 @@
             android:layout_width="97dp"
             android:layout_height="24dp"
             android:layout_marginTop="61dp"
-            android:layout_marginLeft="110dp"
+            android:layout_marginLeft="90dp"
             android:textSize="11sp"
             android:textColor="#858585"
             android:lineSpacingExtra="40sp"
             android:gravity="center"
-            android:text="      일정같이짜기"
+            android:text="     일정같이짜기"
             android:background="@drawable/planlist_round"/>
 
-        <ImageButton
+        <ImageView
             android:layout_width="10dp"
             android:layout_height="10dp"
-            android:layout_marginLeft="120dp"
+            android:layout_marginLeft="100dp"
             android:layout_marginTop="68dp"
             android:background="@android:color/transparent"
             android:maxWidth="10dp"
@@ -82,20 +81,45 @@
             android:id="@+id/tv_tripadd"
             android:layout_width="97dp"
             android:layout_height="24dp"
-            android:layout_marginLeft="250dp"
+            android:layout_marginLeft="200dp"
             android:layout_marginTop="61dp"
             android:background="@drawable/planlist_round"
-            android:gravity="center"
             android:clickable="true"
+            android:gravity="center"
             android:lineSpacingExtra="40sp"
-            android:text="      일정추가하기"
+            android:text="     일정추가하기"
             android:textColor="#858585"
             android:textSize="11sp" />
 
-        <ImageButton
+        <ImageView
             android:layout_width="10dp"
             android:layout_height="10dp"
-            android:layout_marginLeft="260dp"
+            android:layout_marginLeft="210dp"
+            android:layout_marginTop="68dp"
+            android:background="@android:color/transparent"
+            android:maxWidth="10dp"
+            android:maxHeight="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img_planlist_plus" />
+
+        <TextView
+            android:id="@+id/tv_costadd"
+            android:layout_width="80dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="310dp"
+            android:layout_marginTop="61dp"
+            android:background="@drawable/planlist_round"
+            android:clickable="true"
+            android:gravity="center"
+            android:lineSpacingExtra="40sp"
+            android:text="    가계부"
+            android:textColor="#858585"
+            android:textSize="11sp" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="320dp"
             android:layout_marginTop="68dp"
             android:background="@android:color/transparent"
             android:maxWidth="10dp"
@@ -108,15 +132,57 @@
     <LinearLayout
         android:id="@+id/ln_tmap"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_height="200dp"
         android:orientation="vertical">
 
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/lv_trip"
+    <!-- 수정한 부분 -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/lv_trip"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:scrollbars="vertical">
+
+            </android.support.v7.widget.RecyclerView>
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/fab_result_btn"
+            android:layout_width="216dp"
+            android:layout_height="36dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
+            android:text="Done"
+            android:textSize="13sp"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="38sp"
+            android:background="@drawable/bt_round"/>
+
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp" />
+
 
 
 </LinearLayout>

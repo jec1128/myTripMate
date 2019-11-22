@@ -4,11 +4,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -20,17 +18,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.example.tripmate.Location.NearLocationFragment;
-import com.example.tripmate.Plan.HttpPlanRouteList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener
+{
     Toolbar toolbar;
     BottomNavigationView bottomNavigationView;
     Button open_close;
@@ -54,22 +48,23 @@ public class MainActivity extends AppCompatActivity {
         String nickname = "";
         String userid = "";
 
+        nickname = SaveSharedPreference.getNickName(this).toString();
+        userid = SaveSharedPreference.getUserName(this).toString();
+
+        /*
         if(intent == null) {
-            nickname = intent.getExtras().getString("nickname");
-            userid = intent.getExtras().getString("userid");
-            System.out.println("MainActivity " + nickname);
+            //nickname = intent.getExtras().getString("nickname");
+            //userid = intent.getExtras().getString("userid");
+            //Log.i("Mainacitivityaaaaa",userid);
         } else {
-            nickname = SaveSharedPreference.getNickName(this).toString();
-            userid = SaveSharedPreference.getUserName(this).toString();
+
         }
 
-
+        */
 
         final Bundle bundle = new Bundle();
         bundle.putString("nickname",nickname);
         bundle.putString("userid",userid);
-
-
 
         Log.i("cccccccc",nickname);
 
@@ -91,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
         //Navigation Drawer 생성 및 초기화
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         ImageView imageView = findViewById(R.id.navigation_header_image_user);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nv_main_navigation_root);
+        navigationView.setNavigationItemSelectedListener(this);
 
         //하단 툴바 생성
         bottomNavigationView =(BottomNavigationView)findViewById(R.id.bottom_navigation);
@@ -184,4 +182,39 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        int id = menuItem.getItemId();
+
+        if (id == R.id.navigation_item_notice) {
+            // Handle the camera action
+        } else if (id == R.id.navigation_item_qna) {
+
+        } else if (id == R.id.navigation_item_recommand) {
+
+        } else if (id == R.id.navigation_item_logout) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("로그아웃 확인").setMessage("로그아웃 하시겠습니까?");
+            builder.setPositiveButton("네", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(MainActivity.this,Intro1Activity.class);
+                    SaveSharedPreference.clearUserName(getApplicationContext());
+                    startActivity(intent);
+                }
+            });
+            builder.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            dialog = builder.create();
+            dialog.show();
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 }

@@ -49,8 +49,6 @@ public class ShareRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public int getItemCount() {
-        String a = String.valueOf(tripRoute.size());
-        Log.i("TDB", a);
         return tripRoute.size();
     }
 }

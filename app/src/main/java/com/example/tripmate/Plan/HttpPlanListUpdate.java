@@ -3,7 +3,6 @@ package com.example.tripmate.Plan;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 
 import com.example.tripmate.Ip;
 
@@ -19,9 +18,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 
-public class HttpPlanListAdd extends Activity {
+public class HttpPlanListUpdate extends Activity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
     }
@@ -31,7 +29,7 @@ public class HttpPlanListAdd extends Activity {
             try {
                 Ip a = new Ip();
                 String ip = a.getIP();
-                String url = "http://" + ip + ":8080/TripMateServer/Plan/AddOk.jsp";
+                String url = "http://" + ip + ":8080/TripMateServer/Plan/ListUpdate.jsp";
                 URL obj = null;
                 try {
                     obj = new URL(url);
@@ -46,7 +44,7 @@ public class HttpPlanListAdd extends Activity {
                     conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
                     OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
-                    String sendMsg = "nickname=" + strings[0] + "&place=" + strings[1] + "&title=" + strings[2] + "&start=" + strings[3] + "&end=" + strings[4];
+                    String sendMsg = "plancode=" + strings[0] + "&place=" + strings[1] + "&title=" + strings[2] + "&start=" + strings[3] + "&end=" + strings[4];
                     System.out.println(sendMsg);
                     osw.write(sendMsg);
                     osw.flush();
@@ -67,22 +65,6 @@ public class HttpPlanListAdd extends Activity {
                     String receiveMsg = parsedData(result);
                     return receiveMsg;
 
-                    /*JSONArray jarray = new JSONObject(result).getJSONArray("addList");
-                    ArrayList<PlanListModel> planlist = new ArrayList<>();
-                    PlanListAdapter listAdapter = new PlanListAdapter();
-                    for(int i = 0; i < jarray.length(); i++){
-                        JSONObject jsonObject = jarray.getJSONObject(i);
-                        String code = jsonObject.getString("plancode");
-                        String place = jsonObject.getString("place");
-                        String title = jsonObject.getString("title");
-                        String start = jsonObject.getString("start");
-                        String end = jsonObject.getString("end");
-                        PlanListModel model = new PlanListModel(code, place, title, start, end);
-                        planlist.add(model);
-                    }
-                    listAdapter.addList(planlist);*/
-
-
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } /*catch (JSONException e) {
@@ -97,7 +79,7 @@ public class HttpPlanListAdd extends Activity {
     public String parsedData(String recvMsg){
         JSONArray jarray = null;
         try {
-            jarray = new JSONObject(recvMsg).getJSONArray("add");
+            jarray = new JSONObject(recvMsg).getJSONArray("update");
             JSONObject jsonObject = jarray.getJSONObject(0);
             String receiveMsg = jsonObject.getString("msg");
             return receiveMsg;

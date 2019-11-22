@@ -18,7 +18,8 @@
         <RelativeLayout
             android:id="@+id/linearLayoutTmap"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <Button
                 android:id="@+id/tmap_navigation"
@@ -31,31 +32,34 @@
                 android:text="네비게이션 안내"
                 android:visibility="gone" />
 
+
             <Button
                 android:id="@+id/switchListButton"
-                android:layout_width="260dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="30dp"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/bt_round"
+                android:layout_marginLeft="270dp"
+                android:layout_marginTop="70dp"
+                android:background="@drawable/list_change_button"
+                android:textColor="#FFFFFF"
+
                 android:onClick="onSwitchButtonClick"
-                android:text="리스트보기"
-                android:drawableStart="@drawable/ic_launcher_icon_list"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="80dp"
-                android:textColor="#FFFFFF" />
+                android:text="ListView" />
 
             <Button
                 android:id="@+id/SearchButton"
-                android:layout_width="381dp"
-                android:layout_height="32dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="80dp"
-                android:background="@drawable/img_main_serchbar"
-                android:gravity="center_vertical"
-                android:textColor="#FFFFFF" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="70dp"
+                android:background="@drawable/list_change_button"
+                android:textColor="#FFFFFF"
+
+                android:onClick="onSearchButtonClick"
+                android:text="Search" />
+
+
+
+
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab"
@@ -63,14 +67,16 @@
                 android:layout_height="100dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginEnd="17dp"
-                android:layout_marginBottom="155dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="80dp"
                 android:background="@color/colorAccent"
                 android:clickable="true"
                 android:focusable="true"
+
                 app:srcCompat="@drawable/ic_round_my_location_24px"
                 tools:layout_editor_absoluteX="318dp"
                 tools:layout_editor_absoluteY="530dp" />
+
 
         </RelativeLayout>
 

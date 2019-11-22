@@ -1,21 +1,15 @@
 /* 관광지 리스트를 보여주는 화면 */
 
-package com.example.tripmate.Main;
+package com.example.tripmate.Plan;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
-import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.tripmate.Plan.DesignClassFile.PlanKeywordListAdapter;
 import com.example.tripmate.R;
 import com.example.tripmate.TourAPI.TripDataInfo;
 import com.example.tripmate.TourAPI.TripInfoAPI;
@@ -23,31 +17,35 @@ import com.example.tripmate.TourAPI.TripInfoAPI;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainKeywordActivity extends AppCompatActivity {
+public class PlanTripKeywordActivity extends AppCompatActivity implements PlanKeywordListAdapter.ItemClickListener{
+
     private List<TripDataInfo> list = new ArrayList(); // 데이터를 넣은 리스트변수
     private ListView listView;          // 검색을 보여줄 리스트변수
-    private KeywordListAdapter adapter;      // 리스트뷰에 연결할 아답터
+    private PlanKeywordListAdapter adapter;      // 리스트뷰에 연결할 아답터
     private ArrayList<TripDataInfo> arraylist;
     private TripInfoAPI api;
     private TextView textview;
+    private Button placeAddBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_keyword_search);
 
+        /* 검색 값 셋팅 부분 */
+        Intent intent = getIntent(); /*데이터 수신*/
+        final String keyword = intent.getStringExtra("tripplace"); /*String형*/
+
         ListView listview;
-        final KeywordListAdapter adapter;
+        final PlanKeywordListAdapter adapter;
 
         //Adapter 생성
-        adapter = new KeywordListAdapter();
+        adapter = new PlanKeywordListAdapter();
 
         listview = (ListView) findViewById(R.id.mainListViewer);
         listview.setAdapter(adapter);
 
-        /* 검색 값 셋팅 부분 */
-        Intent intent = getIntent(); /*데이터 수신*/
-        final String keyword = intent.getStringExtra("keyword"); /*String형*/
-        Log.i("332423423",keyword);
+        adapter.addItemClickListener(this);
         arraylist = new ArrayList<>();
 
         textview = (TextView)findViewById(R.id.top_title);
@@ -72,7 +70,14 @@ public class MainKeywordActivity extends AppCompatActivity {
             }
         }).start();
 
+
     }
 
-
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent();
+        intent.putExtra("itemInfo", arraylist.get(position));
+        setResult(RESULT_OK, intent);
+        finish();
+    }
 }

@@ -8,31 +8,33 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tripmate.Plan.AddListActivity;
-import com.example.tripmate.Plan.PlanListAdapter;
-import com.example.tripmate.Plan.PlanListModel;
-import com.example.tripmate.Plan.PlanTripActivity;
+import com.example.tripmate.Plan.DesignClassFile.PlanListAdapter;
+import com.example.tripmate.Plan.DataClassFile.PlanListModel;
+import com.example.tripmate.Plan.SelectPlanList;
 
 import java.util.ArrayList;
 
 public class fragmentActivity2  extends Fragment {
-    private RecyclerView recyclerView;
-    private PlanListAdapter listAdapter;
+
+    private ArrayList<PlanListModel> planlist;
+    private PlanListAdapter adapter;
+    private View view;
+    private String nickname;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main2, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.rc_list);
+        view = inflater.inflate(R.layout.fragment_main2, container, false);
+        nickname = SaveSharedPreference.getNickName(getContext()).toString();
 
-        listAdapter = new PlanListAdapter();
-        listAdapter.getList();
-        recyclerView.setAdapter(listAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
+        init();
 
         final FloatingActionButton addBt = (FloatingActionButton)view.findViewById(R.id.fab_addlist);
         addBt.setOnClickListener(new View.OnClickListener() {
@@ -45,4 +47,16 @@ public class fragmentActivity2  extends Fragment {
 
         return view;
     }
+
+    private void init() {
+        RecyclerView recyclerView = view.findViewById(R.id.rc_list);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        SelectPlanList data = new SelectPlanList();
+
+        adapter = new PlanListAdapter(data.getList(nickname));
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        adapter.notifyDataSetChanged();
+    }
+
 }

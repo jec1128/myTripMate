@@ -138,6 +138,12 @@ public class LocationInfoAPI {
                     info.setTel(tripObject.getString("tel"));
                 }
 
+                if(tripObject.isNull("dist")) {
+                    info.setDist(0);
+                } else {
+                    info.setDist(tripObject.getInt("dist"));
+                }
+
                 dto.add(info);
 
 
