@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import com.example.tripmate.Board.fragmentBoard;
 import com.example.tripmate.Chat.fragmentChatroom;
-import com.example.tripmate.Chat.fragmentFriend;
 
 
 //FragmentStatePagerAdapter
@@ -24,25 +23,23 @@ public class TabPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        String nickname = fragmentActivity4.getNickname();
-        System.out.println("tabpageradapter  " + nickname);
-
+       /* String nickname = fragmentActivity4.getNickname();
         Bundle bundle = new Bundle();
-        bundle.putString("nickname",nickname);
+        bundle.putString("nickname",nickname);*/
 
-        fragmentFriend tabFragment1 = new fragmentFriend();
+        //fragmentFriend tabFragment1 = new fragmentFriend();
         fragmentBoard tabFragment2 = fragmentBoard.getInstance();
-        fragmentChatroom tabFragment3 = new fragmentChatroom();
+        fragmentChatroom tabFragment3 = fragmentChatroom.getInstance();
 
         switch (position) {
-            case 0:
-                return tabFragment1;
+          /*  case 0:
+                return tabFragment1;*/
 
-            case 1:
-                tabFragment2.setArguments(bundle);
+            case 0:
+                //tabFragment2.setArguments(bundle);
                 return tabFragment2;
 
-            case 2:
+            case 1:
                 return tabFragment3;
 
             default:

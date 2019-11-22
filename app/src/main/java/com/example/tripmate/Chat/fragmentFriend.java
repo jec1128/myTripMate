@@ -1,3 +1,4 @@
+/*
 
 package com.example.tripmate.Chat;
 
@@ -55,33 +56,33 @@ public class fragmentFriend extends Fragment {
         public PeopleFragmentRecyclerViewAdapter() {
             userModels = new ArrayList<>();
 
-            myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            FirebaseDatabase.getInstance().getReference().child("users").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    userModels.clear();
+            if (FirebaseAuth.getInstance().getCurrentUser().getUid() != null) {
+                myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                FirebaseDatabase.getInstance().getReference().child("users").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        userModels.clear();
 
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        UserModel userModel = snapshot.getValue(UserModel.class);
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            UserModel userModel = snapshot.getValue(UserModel.class);
 
-                        if ((userModel.getUid()).equals(myUid)) {
-                            continue;
+                            if ((userModel.getUid()).equals(myUid)) {
+                                continue;
+                            }
+                            userModels.add(userModel);
                         }
-                        userModels.add(userModel);
+                        notifyDataSetChanged();
+
                     }
-                    notifyDataSetChanged();
 
-                }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
 
-                }
-            });
-
-
+            }
         }
-
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_friend, parent, false);
@@ -109,6 +110,7 @@ public class fragmentFriend extends Fragment {
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), MessageActivity.class);
                     intent.putExtra("destinationUid", userModels.get(position).getUid());
+                    intent.putExtra("destinationNickname",userModels.get(position).getUserName());
                     ActivityOptions activityOptions = null;
                     activityOptions = ActivityOptions.makeCustomAnimation(view.getContext(), R.anim.fromright, R.anim.toleft);
                     startActivity(intent, activityOptions.toBundle());
@@ -134,3 +136,4 @@ public class fragmentFriend extends Fragment {
     }
 
 }
+*/

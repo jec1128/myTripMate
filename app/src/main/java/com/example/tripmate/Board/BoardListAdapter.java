@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tripmate.R;
+import com.example.tripmate.SaveSharedPreference;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,7 +61,6 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListViewHolder> 
         } else {
             viewHolder.gender.setImageResource(gender[2]);
         }
-        Log.i("TDB", "ddddddddddddddd");
         viewHolder.textnickname.setText(boardList.get(position).getNickname());
         viewHolder.date.setText(boardList.get(position).getMatchdate());
         viewHolder.destination.setText(boardList.get(position).getDestination());
@@ -70,7 +70,8 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListViewHolder> 
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { ;
+            public void onClick(View view) {
+
                 Intent intent = new Intent(view.getContext(), BoardViewActivity.class);
                 //fragmentBoard fragment = new fragmentBoard();
                 //nickname = fragment.getNickname();
@@ -78,11 +79,12 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListViewHolder> 
                 System.out.println("click listener : " + nickname);
                 intent.putExtra("nickname", nickname);
                 intent.putExtra("boardcode", boardCode);
-
                 view.getContext().startActivity(intent);
             }
         });
     }
+
+
 
     @Override
     public int getItemCount() {

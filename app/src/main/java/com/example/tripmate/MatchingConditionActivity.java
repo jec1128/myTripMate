@@ -1,4 +1,4 @@
-package com.example.tripmate.Board.Matching;
+package com.example.tripmate;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -23,6 +23,9 @@ import com.example.tripmate.Board.BoardModel;
 import com.example.tripmate.Board.BoardUpdateActivity;
 import com.example.tripmate.Board.BoardWriteActivity;
 import com.example.tripmate.Board.HttpBoardList;
+import com.example.tripmate.Board.Matching.HttpMatchingCondition;
+import com.example.tripmate.Board.Matching.MatchingActivity;
+import com.example.tripmate.Board.Matching.PlaceSearchActivity3;
 import com.example.tripmate.Board.PlaceSearchActivity2;
 import com.example.tripmate.R;
 
@@ -195,7 +198,7 @@ public class MatchingConditionActivity extends AppCompatActivity {
 
 
                     String result = null;
-                    HttpMatchingCondition httpMatchingCondition = new HttpMatchingCondition();
+                    com.example.tripmate.Board.Matching.HttpMatchingCondition httpMatchingCondition = new com.example.tripmate.Board.Matching.HttpMatchingCondition();
                     HttpMatchingCondition.sendTask send = httpMatchingCondition.new sendTask();
                     try {
                         result = send.execute(nickname, senddestination, sendgender1, sendminage,sendmaxage, senddate, sendtime, sendpurpose).get();

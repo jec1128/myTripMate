@@ -4,25 +4,28 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.example.tripmate.Plan.AddListActivity;
+import com.example.tripmate.Plan.PlanSearchActivity;
 import com.example.tripmate.R;
+import com.example.tripmate.SaveSharedPreference;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
@@ -46,7 +49,7 @@ public class BoardWriteActivity extends AppCompatActivity {
     private RadioButton food;
     private RadioButton tour;
     private RadioButton picture;
-
+    private ArrayList<String> detinationList;
     private Date now;
     private Dialog dialog;
     private String nickname;
@@ -55,23 +58,26 @@ public class BoardWriteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board_write);
-        Intent intent = getIntent();
+      /*  Intent intent = getIntent();
         nickname = intent.getExtras().getString("nickname");
-
-        System.out.println("boardwriteactivity" + nickname);
-
-        //툴바 생성 및 셋팅하는 부분
-        Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.img_trip_btn);
-
+        System.out.println("boardwriteactivity : " + nickname);*/
+        nickname = SaveSharedPreference.getNickName(this).toString();
 
         destination = findViewById(R.id.BoardWriteActivity_text_where);
+        destination.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(view.getContext(), PlaceSearchActivity.class);
+                //v.getContext().startActivity(intent);
+                startActivityForResult(intent, Code.requestCode);
+
+            }
+        });
         content = findViewById(R.id.BoardWriteActivity_text_content);
         age_start = findViewById(R.id.BoardWriteActivity_edittext_age_start);
         age_end = findViewById(R.id.BoardWriteActivity_edittext_age_end);
+
 
 
         final Calendar startDate = Calendar.getInstance();
@@ -235,6 +241,7 @@ public class BoardWriteActivity extends AppCompatActivity {
                                 builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         fragmentBoard.getInstance().removeAllItems();
+                                        fragmentBoard.getInstance().setRefreshCount(1);
                                         fragmentBoard.getInstance().init();
                                         onBackPressed();
                                     }
@@ -255,20 +262,11 @@ public class BoardWriteActivity extends AppCompatActivity {
 
                 }
 
+
             }
         });
 
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
-                finish();
-                return true;
-            }
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void alert(String title, String content) {
@@ -282,6 +280,14 @@ public class BoardWriteActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent){
+        if(requestCode == Code.requestCode && resultCode == Code.resultCode)
+            destination.setText(resultIntent.getStringExtra("place"));
+    }
+    public static class Code{
+        public static int requestCode = 100;
+        public static int resultCode = 1;
+    }
 
 }
 

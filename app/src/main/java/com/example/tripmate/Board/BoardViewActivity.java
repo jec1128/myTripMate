@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -52,13 +51,12 @@ public class BoardViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_board_view);
 
         Intent intent = getIntent();
-
         myNickname = intent.getExtras().getString("nickname");
         System.out.println("boardviewActivity" + myNickname);
         boardCode = intent.getExtras().getString("boardcode");
         System.out.println("boardviewActivity" + boardCode);
 
-        Log.i("####","111");
+
         writerGenderAge = findViewById(R.id.boardview_text_writergenderage);
         purpose = findViewById(R.id.boardview_text_purpose);
 
@@ -100,7 +98,7 @@ public class BoardViewActivity extends AppCompatActivity {
             final String scontent = jsonObject.getString("content");
 
             writerGenderAge.setText(swriterGenderAge);
-             purpose.setText(spurpose);
+            purpose.setText(spurpose);
             destination.setText(sdestination);
             mathcingGenderAge.setText(smatchingGenderAge);
             writerNickname.setText(swriter);
@@ -198,6 +196,7 @@ public class BoardViewActivity extends AppCompatActivity {
                             System.out.println("boardviewactivity result " + result);
                             Intent intent = new Intent(view.getContext(), MessageActivity.class);
                             intent.putExtra("destinationUid",result);
+                            intent.putExtra("destinationNickname",swriter);
                             startActivity(intent);
 
                         } catch (ExecutionException | InterruptedException e) {
@@ -222,6 +221,7 @@ public class BoardViewActivity extends AppCompatActivity {
 
        // final BoardListAdapter adapter = BoardListAdapter.getInstance();
         fragmentBoard.getInstance().removeAllItems();
+        fragmentBoard.getInstance().setRefreshCount(1);
         fragmentBoard.getInstance().init();
         super.onBackPressed();
     }

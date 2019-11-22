@@ -35,23 +35,22 @@ public class fragmentActivity4 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myFragment = inflater.inflate(R.layout.fragment_main4, container, false);
         FragmentManager cfManager = getChildFragmentManager();
+
         Bundle extra = this.getArguments();
-        if(extra != null) {
+      /*  if(extra != null) {
             extra = getArguments();
             nickname = extra.getString("nickname");
         }
-        System.out.println("fragment4 " + nickname);
+        System.out.println("fragment4 : " + nickname);*/
 
         viewPager = myFragment.findViewById(R.id.Viewpager);
         tabLayout = myFragment.findViewById(R.id.tabLayout);
 
-        tabLayout.addTab(tabLayout.newTab().setText("동반자 추천 매칭"));
-        tabLayout.addTab(tabLayout.newTab().setText("메이트 찾기"));
-        tabLayout.addTab(tabLayout.newTab().setText("채팅하기"));
 
         //tabLayout.addTab(tabLayout.newTab().setIcon(icons[2]));
-        //tabLayout.addTab(tabLayout.newTab().setIcon(icons[0]));
-        //tabLayout.addTab(tabLayout.newTab().setIcon(icons[1]));
+        tabLayout.addTab(tabLayout.newTab().setIcon(icons[0]));
+        tabLayout.addTab(tabLayout.newTab().setIcon(icons[1]));
+        //tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
 
@@ -66,10 +65,11 @@ public class fragmentActivity4 extends Fragment {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                System.out.println("onTabSelected " + tab.getPosition());
                 viewPager.setCurrentItem(tab.getPosition());
-
-
+              /*  if(tab.getPosition() == 0) {
+                    fragmentBoard.setRefreshCount(1);
+                    fragmentBoard.getInstance().init();
+                }*/
             }
 
             @Override
@@ -86,7 +86,7 @@ public class fragmentActivity4 extends Fragment {
     }
 
 
-   public static fragmentActivity4 getInstance() {
+    public static fragmentActivity4 getInstance() {
         if(instance == null){
             instance = new fragmentActivity4();
             return instance;

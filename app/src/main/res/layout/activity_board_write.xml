@@ -1,39 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/WriteBoardActivity_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
-
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#fff"
-            android:id="@+id/app_toolbar"
-            xmlns:android="http://schemas.android.com/apk/res/android">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="동반자 찾기"
-                android:fontFamily="@font/notosans_regular"
-                android:textColor="#6EC8FD"
-                android:textSize="20dp"/>
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
-
-
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -64,16 +35,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:hint="서울"
-                android:inputType="text"
-                android:privateImeOptions="defaultInputmode=korean"
-                android:singleLine="true"
+                android:hint="장소를 검색하세요"
+                android:clickable="true"
+                android:focusable="false"
                 android:textColor="#808080"
                 android:textColorHint="#BCBCBC"
                 android:textSize="20dp"
                 android:paddingLeft="40dp"
                 android:cursorVisible="false"
                 android:paddingBottom="15dp">
+
             </EditText>
 
             <ImageView
@@ -81,6 +52,7 @@
                 android:layout_height="35dp"
                 android:layout_marginTop="14dp"
                 android:src="@drawable/ic_img_board_write_location"/>
+
 
 
         </FrameLayout>
@@ -126,7 +98,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
             android:orientation="horizontal">
 
             <RadioButton
@@ -240,7 +211,7 @@
                 android:editable="false"
                 android:focusable="false"
                 android:inputType="time"
-                android:text="원하는 시간"
+                android:text="시작 시간"
                 android:textColor="#808080"
                 android:textColorHint="#BCBCBC"
                 android:padding="15dp"
@@ -334,7 +305,7 @@
 
         <Button
             android:id="@+id/BoardWriteActivity_button_write"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_width="154dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/notosans_bold"
@@ -347,7 +318,4 @@
         </Button>
 
     </LinearLayout>
-
 </ScrollView>
-
-</LinearLayout>
