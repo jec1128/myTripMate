@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,8 +19,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TimePicker;
 
-import com.example.tripmate.Plan.AddListActivity;
-import com.example.tripmate.Plan.PlanSearchActivity;
 import com.example.tripmate.R;
 
 import java.util.ArrayList;
@@ -268,14 +267,15 @@ public class BoardUpdateActivity extends AppCompatActivity {
                                     builder.setTitle("게시판").setMessage("게시글 수정이 완료되었습니다");
                                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
-                                            //final BoardListAdapter adapter = BoardListAdapter.getInstance();
-                                            //fragmentBoard fragment = new fragmentBoard();
-                                            //fragment.init();
 
-                                            fragmentBoard.getInstance().removeAllItems();
+
+                                            /*fragmentBoard.getInstance().removeAllItems();
                                             fragmentBoard.getInstance().setRefreshCount(1);
-                                            fragmentBoard.getInstance().init();
+                                            fragmentBoard.getInstance().init();*/
+
+
                                             onBackPressed();
+
                                         }
                                     });
                                     dialog = builder.create();
@@ -302,7 +302,7 @@ public class BoardUpdateActivity extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent){
-        if(requestCode == BoardUpdateActivity.Code.requestCode && resultCode == BoardUpdateActivity.Code.resultCode)
+        if(requestCode == Code.requestCode && resultCode == Code.resultCode)
             destination.setText(resultIntent.getStringExtra("place"));
     }
     public static class Code{

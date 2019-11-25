@@ -22,35 +22,53 @@
 
     </com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/boardfragment_button_matching"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_alignParentStart="true"
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="30dp"
-        android:background="@color/colorAccent"
-        android:clickable="true"
-        android:focusable="true"
-        app:srcCompat="@drawable/img_board_matching"
-        app:fabSize="normal"
-        tools:layout_editor_absoluteX="318dp"
-        tools:layout_editor_absoluteY="530dp" />
+        android:layout_alignParentRight="true">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/boardfragment_button_write"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        android:background="@color/colorAccent"
-        android:clickable="true"
-        android:focusable="true"
-        app:srcCompat="@drawable/img_board_write_button"
-        tools:layout_editor_absoluteX="318dp"
-        tools:layout_editor_absoluteY="530dp" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/boardfragment_button_write"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="160dp"
+            android:layout_marginRight="15sp"
+            android:src="@drawable/img_board_write_button"
+            android:visibility="invisible"
+            android:clickable="true"
+            android:focusable="true"
+            app:background="@drawable/basic_gradation"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp" />
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/boardfragment_button_matching"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="90dp"
+            android:layout_marginRight="15sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/img_board_matching"
+            android:visibility="invisible"
+            app:background="@drawable/basic_gradation"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_margin="15sp"
+            android:background="@drawable/basic_gradation"
+            android:src="@drawable/ic_img_board_floting_btn" />
+    </FrameLayout>
 
 </RelativeLayout>

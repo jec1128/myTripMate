@@ -46,7 +46,7 @@ public class HttpPlanListAdd extends Activity {
                     conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
                     OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
-                    String sendMsg = "place=" + strings[0] + "&title=" + strings[1] + "&start=" + strings[2] + "&end=" + strings[3];
+                    String sendMsg = "nickname=" + strings[0] + "&place=" + strings[1] + "&title=" + strings[2] + "&start=" + strings[3] + "&end=" + strings[4];
                     System.out.println(sendMsg);
                     osw.write(sendMsg);
                     osw.flush();

@@ -3,18 +3,24 @@
 package com.example.tripmate.Main;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.tripmate.Plan.PlanTripActivity;
 import com.example.tripmate.R;
 import com.example.tripmate.TourAPI.TripDataInfo;
 
 import java.util.ArrayList;
+
+import static android.app.Activity.RESULT_OK;
 
 public class KeywordListAdapter extends BaseAdapter  {
     public ArrayList<TripDataInfo> listViewItemList = new ArrayList<TripDataInfo>();
@@ -55,7 +61,7 @@ public class KeywordListAdapter extends BaseAdapter  {
         TextView content_title = (TextView) convertView.findViewById(R.id.content_title);
 
         //Data Seet(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        TripDataInfo listViewItem = listViewItemList.get(position);
+        final TripDataInfo listViewItem = listViewItemList.get(position);
 
         /* 해당 그릇에 담긴 정보들을 커스텀 리스트뷰 xml의 각 TextView에 뿌려줌 */
         if(listViewItem.getImgURL() == "이미지가 없음") {
@@ -69,6 +75,7 @@ public class KeywordListAdapter extends BaseAdapter  {
         } else {
             textTitle.setText(listViewItem.getTitle());
         }
+
         text_adress.setText(listViewItem.getAddress1());
         content_title.setText("관광명소");
 

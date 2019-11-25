@@ -20,15 +20,7 @@ import android.widget.TimePicker;
 
 import com.example.tripmate.Board.BoardListAdapter;
 import com.example.tripmate.Board.BoardModel;
-import com.example.tripmate.Board.BoardUpdateActivity;
-import com.example.tripmate.Board.BoardWriteActivity;
-import com.example.tripmate.Board.HttpBoardList;
-import com.example.tripmate.Board.PlaceSearchActivity2;
 import com.example.tripmate.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -252,9 +244,10 @@ public class MatchingConditionActivity extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent){
-        if(requestCode == MatchingConditionActivity.Code.requestCode && resultCode == MatchingConditionActivity.Code.resultCode)
+        if(requestCode == Code.requestCode && resultCode == Code.resultCode)
             destination.setText(resultIntent.getStringExtra("place"));
     }
+
     public static class Code{
         public static int requestCode = 100;
         public static int resultCode = 1;

@@ -5,29 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/img_bg_dark"
-    tools:context=".Board.BoardViewActivity">
+    tools:context=".Board.BoardViewActivity"
+    android:background="@drawable/img_bg_dark">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-
         android:orientation="vertical">
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="50dp">
+            android:layout_marginBottom="5dp">
 
             <TextView
                 android:id="@+id/text_dest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/notosans_regular"
                 android:text="목적지 : "
+                android:fontFamily="@font/notosans_regular"
                 android:textColor="#ffffff"
                 android:textSize="18dp"></TextView>
 
@@ -190,9 +188,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
+                    android:text="여행 날짜 : "
                     android:fontFamily="@font/notosans_regular"
                     android:textColor="#ffffff"
-                    android:text="여행 날짜 : "
                     android:textSize="18dp"></TextView>
 
                 <TextView
@@ -224,9 +222,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
+                    android:text="여행 테마 : "
                     android:fontFamily="@font/notosans_regular"
                     android:textColor="#ffffff"
-                    android:text="여행 테마 : "
                     android:textSize="18dp"></TextView>
 
                 <TextView
@@ -247,7 +245,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="150dp">
+            android:layout_marginTop="200dp">
 
             <Button
                 android:id="@+id/boardview_button_chat"
@@ -271,8 +269,8 @@
                 android:layout_gravity="center"
                 android:layout_marginRight="30dp"
                 android:layout_toLeftOf="@+id/boardview_button_delete"
-                android:fontFamily="@font/notosans_regular"
                 android:background="@drawable/bt_round"
+                android:fontFamily="@font/notosans_regular"
                 android:textColor="#ffffff"
                 android:text="수정"
                 android:visibility="gone">

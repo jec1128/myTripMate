@@ -1,4 +1,4 @@
-package com.example.tripmate.Plan;
+package com.example.tripmate.Plan.DataClassFile;
 
 public class PlanListModel {
     String planCode;

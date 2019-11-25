@@ -215,7 +215,7 @@
                 android:textColor="#808080"
                 android:textColorHint="#BCBCBC"
                 android:padding="15dp"
-                android:layout_centerHorizontal="true"
+                android:layout_marginStart="135dp"
                 android:layout_centerVertical="true">
 
             </EditText>

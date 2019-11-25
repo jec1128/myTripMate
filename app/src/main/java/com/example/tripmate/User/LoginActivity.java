@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -39,9 +40,9 @@ public class LoginActivity extends Activity {
     private String myuid;
     private String email;
     private String nickname;
+    private CheckBox checkBox;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
-    private CheckBox checkBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,9 @@ public class LoginActivity extends Activity {
 
         id = findViewById(R.id.LoginActivity_text_id);
         password = findViewById(R.id.LoginActivity_text_password);
+
         checkBox = (CheckBox) findViewById(R.id.autoLoginCheck);
+
 
         login = findViewById(R.id.LoginActivity_button_login);
         login.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +64,7 @@ public class LoginActivity extends Activity {
                 } else {
                     String sendid = id.getText().toString();
                     String sendpassword = password.getText().toString();
+
 
                     try {
                         HttpUserLogin httpUserDataActivity = new HttpUserLogin();
@@ -88,6 +92,7 @@ public class LoginActivity extends Activity {
                         if ("success".equals(receiveMsg)) {
                             firebaseAuth = FirebaseAuth.getInstance();
                             //firebaseAuth.signOut();  로그아웃하는부분;
+
                             loginEvent();
 
                             authStateListener = new FirebaseAuth.AuthStateListener() {
@@ -102,14 +107,19 @@ public class LoginActivity extends Activity {
                             builder.setTitle("로그인").setMessage("로그인 성공했습니다");
                             builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    //if (checkBox.isChecked()) {
+
+                                    if (checkBox.isChecked()) {
                                         SaveSharedPreference.setUserName(getApplicationContext(), id.getText().toString());
                                         SaveSharedPreference.setNickName(getApplicationContext(), nickname);
-                                    //}
+                                    }
+
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     intent.putExtra("nickname",nickname);
+                                    intent.putExtra("userid",id.getText().toString());
+
                                     startActivity(intent);
                                     finish();
+
                                 }
                             });
                             dialog = builder.create();

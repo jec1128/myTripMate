@@ -22,6 +22,8 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.example.tripmate.Board.Matching.MatchingConditionActivity;
 import com.example.tripmate.R;
@@ -35,7 +37,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 
-public class fragmentBoard extends Fragment implements SwipyRefreshLayout.OnRefreshListener {
+public class fragmentBoard extends Fragment implements SwipyRefreshLayout.OnRefreshListener, View.OnClickListener{
     private static fragmentBoard instance;
     private View boardFragment;
     private FloatingActionButton write;
@@ -46,6 +48,11 @@ public class fragmentBoard extends Fragment implements SwipyRefreshLayout.OnRefr
     private static ArrayList<BoardModel> dataList;
     private static int refreshCount = 1;
     private SwipyRefreshLayout swipeRefreshLayout;
+
+    //버튼
+    private Animation fab_open, fab_close;
+    private Boolean isFabOpen = false;
+    private FloatingActionButton fab, fab1, fab2;
 
     @SuppressLint("ValidFragment")
     private fragmentBoard() {
@@ -81,6 +88,18 @@ public class fragmentBoard extends Fragment implements SwipyRefreshLayout.OnRefr
         }*/
 
         nickname = SaveSharedPreference.getNickName(this.getActivity()).toString();
+
+        //버튼 애니메이션을 위한 부분
+        fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
+
+        fab = (FloatingActionButton) boardFragment.findViewById(R.id.fab);
+        fab1 = (FloatingActionButton) boardFragment.findViewById(R.id.boardfragment_button_write);
+        fab2 = (FloatingActionButton) boardFragment.findViewById(R.id.boardfragment_button_matching);
+
+        fab.setOnClickListener(this);
+        fab1.setOnClickListener(this);
+        fab2.setOnClickListener(this);
 
         write = boardFragment.findViewById(R.id.boardfragment_button_write);
 
@@ -181,4 +200,37 @@ public class fragmentBoard extends Fragment implements SwipyRefreshLayout.OnRefr
         //recyclerView.scrollToPosition(300 + 350*refreshCount);
     }
 
+
+    //버튼 애니메이션을 위한 부분
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.fab:
+                anim();
+                break;
+            case R.id.boardfragment_button_write:
+                anim();
+                break;
+            case R.id.boardfragment_button_matching:
+                anim();
+                break;
+        }
+    }
+
+    public void anim() {
+        if (isFabOpen) {
+            fab1.startAnimation(fab_close);
+            fab2.startAnimation(fab_close);
+            fab1.setClickable(false);
+            fab2.setClickable(false);
+            isFabOpen = false;
+        } else {
+            fab1.startAnimation(fab_open);
+            fab2.startAnimation(fab_open);
+            fab1.setClickable(true);
+            fab2.setClickable(true);
+            isFabOpen = true;
+        }
+    }
 }

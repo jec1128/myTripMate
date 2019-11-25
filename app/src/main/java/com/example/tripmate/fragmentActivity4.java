@@ -36,12 +36,6 @@ public class fragmentActivity4 extends Fragment {
         myFragment = inflater.inflate(R.layout.fragment_main4, container, false);
         FragmentManager cfManager = getChildFragmentManager();
 
-        Bundle extra = this.getArguments();
-      /*  if(extra != null) {
-            extra = getArguments();
-            nickname = extra.getString("nickname");
-        }
-        System.out.println("fragment4 : " + nickname);*/
 
         viewPager = myFragment.findViewById(R.id.Viewpager);
         tabLayout = myFragment.findViewById(R.id.tabLayout);
@@ -66,10 +60,6 @@ public class fragmentActivity4 extends Fragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-              /*  if(tab.getPosition() == 0) {
-                    fragmentBoard.setRefreshCount(1);
-                    fragmentBoard.getInstance().init();
-                }*/
             }
 
             @Override
@@ -86,7 +76,7 @@ public class fragmentActivity4 extends Fragment {
     }
 
 
-   public static fragmentActivity4 getInstance() {
+    public static fragmentActivity4 getInstance() {
         if(instance == null){
             instance = new fragmentActivity4();
             return instance;

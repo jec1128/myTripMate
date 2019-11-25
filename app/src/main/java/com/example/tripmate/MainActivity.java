@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawerLayout;
     Dialog dialog;
 
+    private int fragment4count = 0;
+
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private fragmentActivity1 fragment1 = new fragmentActivity1();
     private fragmentActivity2 fragment2 = new fragmentActivity2();
@@ -43,24 +45,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private fragmentActivity4 fragment4 = fragmentActivity4.getInstance();
     private NearLocationFragment fragment5 = new NearLocationFragment();
 
-    private int fragment4count = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       /* Intent intent = getIntent();
+        Intent intent = getIntent();
         String nickname = intent.getExtras().getString("nickname");
         System.out.println("MainActivity " + nickname);
         final Bundle bundle = new Bundle();
         bundle.putString("nickname",nickname);
-*/
-
-        String nickname = "";
-        String userid = "";
-        nickname = SaveSharedPreference.getNickName(this).toString();
-        userid = SaveSharedPreference.getUserName(this).toString();
-        System.out.println("mainActivity : " + nickname + "  " + userid);
 
         //첫 화면 지정
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -80,8 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Navigation Drawer 생성 및 초기화
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         ImageView imageView = findViewById(R.id.navigation_header_image_user);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nv_main_navigation_root);
-        navigationView.setNavigationItemSelectedListener(this);
+
         //하단 툴바 생성
         bottomNavigationView =(BottomNavigationView)findViewById(R.id.bottom_navigation);
 

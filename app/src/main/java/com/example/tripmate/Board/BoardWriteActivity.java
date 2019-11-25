@@ -19,9 +19,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
-
-import com.example.tripmate.Plan.AddListActivity;
-import com.example.tripmate.Plan.PlanSearchActivity;
 import com.example.tripmate.R;
 import com.example.tripmate.SaveSharedPreference;
 
@@ -281,7 +278,7 @@ public class BoardWriteActivity extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent){
-        if(requestCode == BoardWriteActivity.Code.requestCode && resultCode == BoardWriteActivity.Code.resultCode)
+        if(requestCode == Code.requestCode && resultCode == Code.resultCode)
             destination.setText(resultIntent.getStringExtra("place"));
     }
     public static class Code{

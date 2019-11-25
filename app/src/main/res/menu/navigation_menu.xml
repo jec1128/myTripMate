@@ -1,11 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <group android:checkableBehavior="single">
-
         <item
             android:id="@+id/navigation_item_notice"
             android:checked="true"
@@ -14,20 +11,15 @@
         <item
             android:id="@+id/navigation_item_qna"
             android:title="문의하기" />
-
         <item
             android:id="@+id/navigation_item_recommand"
             android:title="일정추천받기" />
-
     </group>
 
-
     <group android:id="@+id/group_menu">
-
         <item
             android:id="@+id/navigation_item_logout"
             android:title="로그아웃" />
-
     </group>
 
 </menu>

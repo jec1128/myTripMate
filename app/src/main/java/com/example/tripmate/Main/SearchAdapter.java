@@ -44,7 +44,6 @@ public class SearchAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup viewGroup) {
         if (convertView == null) {
             convertView = inflate.inflate(R.layout.main_serch_item, null);
-
             viewHolder = new ViewHolder();
             viewHolder.label = (TextView) convertView.findViewById(R.id.textTitle);
 

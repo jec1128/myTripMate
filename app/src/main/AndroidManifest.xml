@@ -23,6 +23,8 @@
         <activity android:name=".Board.Matching.MatchingConditionActivity" />
         <activity android:name=".Board.BoardUpdateActivity" />
         <activity android:name=".Board.BoardViewActivity" />
+        <activity android:name=".Plan.HttpPlanRouteList" />
+        <activity android:name=".Plan.HttpPlanRouteAdd" />
         <activity android:name=".Intro2Activity" />
         <activity android:name=".Intro1Activity">
             <intent-filter>
@@ -31,19 +33,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Board.BoardWriteActivity" />
+        <activity android:name=".Board.BoardWriteActivity"></activity>
+        <activity android:name=".Board.Matching.PlaceSearchActivity3"></activity>
+        <activity android:name=".Board.PlaceSearchActivity"></activity>
+        <activity android:name=".Board.PlaceSearchActivity2"></activity>
         <activity android:name=".Chat.MessageActivity" />
         <activity android:name=".User.RegisterActivity" />
         <activity android:name=".User.LoginActivity" />
         <activity android:name=".Main.MainSearchListActivity" />
         <activity android:name=".Main.MainKeywordActivity" />
-        <activity android:name=".Plan.PlanKeywordActivity" />
         <activity android:name=".Plan.AddListActivity" />
-        <activity android:name=".Plan.PlanTripActivity" />
         <activity android:name=".Plan.PlanSearchActivity" />
-        <activity android:name=".Board.PlaceSearchActivity" />
-        <activity android:name=".Board.PlaceSearchActivity2" />
-        <activity android:name=".Board.Matching.PlaceSearchActivity3" />
+        <activity android:name=".Plan.PlanTripKeywordActivity" />
+        <activity android:name=".Plan.PlanTripActivity" />
         <activity android:name=".MainActivity" />
 
         <uses-library

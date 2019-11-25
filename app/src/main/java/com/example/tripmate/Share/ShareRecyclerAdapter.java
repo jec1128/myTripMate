@@ -20,11 +20,11 @@ import java.util.ArrayList;
 
 public class ShareRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-    private ArrayList<TripRouteDataInfo> tripRoute = null;
+    private ArrayList<TripRouteDataInfo> tripRoute;
 
     public ShareRecyclerAdapter(ArrayList<TripRouteDataInfo> dataList)
     {
-        tripRoute = dataList;
+        this.tripRoute = dataList;
     }
 
     @NonNull
@@ -49,8 +49,6 @@ public class ShareRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public int getItemCount() {
-        String a = String.valueOf(tripRoute.size());
-        Log.i("TDB", a);
         return tripRoute.size();
     }
 }

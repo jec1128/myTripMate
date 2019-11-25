@@ -3,6 +3,7 @@ package com.example.tripmate.User;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.tripmate.Ip;
 import com.example.tripmate.R;
@@ -32,7 +33,6 @@ public class HttpUserLogin extends Activity {
                 Ip i = new Ip();
                 String ip = i.getIP();
                 String url = "http://"+ip+":8080/TripMateServer/User/Login.jsp";
-                //String url = "http://122.199.81.61:8080/TripMateServer/User/Login.jsp";
 
                 URL obj = null;
                 try {
@@ -56,9 +56,11 @@ public class HttpUserLogin extends Activity {
 
                     int retCode = conn.getResponseCode();
                     InputStream is = conn.getInputStream();
+
                     BufferedReader br = new BufferedReader(new InputStreamReader(is));
                     String line;
                     StringBuffer response = new StringBuffer();
+
                     while ((line = br.readLine()) != null) {
                         response.append(line);
                         response.append(' ');
@@ -66,7 +68,7 @@ public class HttpUserLogin extends Activity {
                     br.close();
 
                     String result = response.toString();
-                    System.out.println(result);
+                    Log.i("aaaaa",result);
                     return result;
 
 

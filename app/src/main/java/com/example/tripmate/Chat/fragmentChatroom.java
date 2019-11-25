@@ -21,6 +21,7 @@ public class fragmentChatroom extends Fragment {
     private static ChatroomListAdapter adapter;
     private static RecyclerView recyclerView;
     @SuppressLint("ValidFragment")
+
     private fragmentChatroom() { }
 
     public static fragmentChatroom getInstance() {
@@ -30,7 +31,6 @@ public class fragmentChatroom extends Fragment {
         }
         return instance;
     }
-
 
     @Nullable
     @Override
@@ -48,5 +48,9 @@ public class fragmentChatroom extends Fragment {
         adapter = new ChatroomListAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(linearLayoutManager);
+    }
+
+    public String getTitle() {
+        return "채팅리스트";
     }
 }

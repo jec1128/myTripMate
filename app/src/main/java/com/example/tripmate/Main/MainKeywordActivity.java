@@ -2,14 +2,19 @@
 
 package com.example.tripmate.Main;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tripmate.R;
 import com.example.tripmate.TourAPI.TripDataInfo;
@@ -42,8 +47,8 @@ public class MainKeywordActivity extends AppCompatActivity {
         /* 검색 값 셋팅 부분 */
         Intent intent = getIntent(); /*데이터 수신*/
         final String keyword = intent.getStringExtra("keyword"); /*String형*/
+        Log.i("332423423",keyword);
         arraylist = new ArrayList<>();
-        Log.i("ddddd","지금출력되고있다");
 
         textview = (TextView)findViewById(R.id.top_title);
         textview.setText(keyword);
@@ -66,6 +71,8 @@ public class MainKeywordActivity extends AppCompatActivity {
                 });
             }
         }).start();
+
     }
+
 
 }

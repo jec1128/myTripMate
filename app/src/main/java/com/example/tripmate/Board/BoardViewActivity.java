@@ -146,7 +146,6 @@ public class BoardViewActivity extends AppCompatActivity {
                                         builder.setTitle("삭제").setMessage("삭제 완료되었습니다.");
                                         builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
-
                                                 onBackPressed();
                                             }
                                         });
@@ -224,5 +223,10 @@ public class BoardViewActivity extends AppCompatActivity {
         fragmentBoard.getInstance().setRefreshCount(1);
         fragmentBoard.getInstance().init();
         super.onBackPressed();
+    }
+
+    public void onRestart() {
+        super.onRestart();
+        onBackPressed();
     }
 }
