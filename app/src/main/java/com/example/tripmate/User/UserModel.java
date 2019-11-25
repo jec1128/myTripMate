@@ -5,6 +5,14 @@ public class UserModel {
     private String profileImageUrl;
     private String uid;
 
+    public UserModel(){}
+
+    public UserModel(String userName, String profileImageUrl, String uid) {
+        this.userName = userName;
+        this.profileImageUrl = profileImageUrl;
+        this.uid = uid;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -28,4 +36,5 @@ public class UserModel {
     public void setUid(String uid) {
         this.uid = uid;
     }
+
 }

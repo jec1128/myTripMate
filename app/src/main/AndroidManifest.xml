@@ -22,6 +22,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
+        <activity android:name=".User.UserUpdateActivity" />
         <activity android:name=".Board.Matching.MatchingActivity" />
         <activity android:name=".Board.Matching.MatchingConditionActivity" />
         <activity android:name=".Board.BoardUpdateActivity" />
