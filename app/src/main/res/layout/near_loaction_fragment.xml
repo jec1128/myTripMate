@@ -57,8 +57,17 @@
                 android:onClick="onSearchButtonClick"
                 android:text="Search" />
 
+            <Button
+                android:id="@+id/SettingButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="539dp"
+                android:background="@drawable/list_change_button"
+                android:onClick="onSettingButtonClick"
 
-
+                android:text="SETTING"
+                android:textColor="#FFFFFF" />
 
 
             <android.support.design.widget.FloatingActionButton
@@ -115,11 +124,6 @@
 
 
     </ViewSwitcher>
-
-
-
-
-
 
 
 </LinearLayout>

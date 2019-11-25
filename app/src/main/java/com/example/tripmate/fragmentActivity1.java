@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.tripmate.Main.MainSearchListActivity;
-import com.example.tripmate.Plan.HttpPlanRouteList;
 
 public class fragmentActivity1  extends Fragment {
 
@@ -28,7 +27,7 @@ public class fragmentActivity1  extends Fragment {
 
 
         //검색창을 누르면 나타나는 버튼
-        textBtn = (ImageButton)mainFragment.findViewById(R.id.et_sch);
+        textBtn = mainFragment.findViewById(R.id.et_sch);
         textBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -39,17 +38,6 @@ public class fragmentActivity1  extends Fragment {
             }
         });
 
-        //검색창을 누르면 나타나는 버튼
-        memberAdd = (ImageButton)mainFragment.findViewById(R.id.main_member_add_btn);
-        memberAdd.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent1 = new Intent(getActivity(), HttpPlanRouteList.class);
-                startActivity(intent1);
-            }
-        });
 
         return mainFragment;
     }

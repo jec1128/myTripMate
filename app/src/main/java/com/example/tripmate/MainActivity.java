@@ -4,8 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -15,26 +14,25 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.example.tripmate.Board.fragmentBoard;
 import com.example.tripmate.Location.NearLocationFragment;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
     BottomNavigationView bottomNavigationView;
     Button open_close;
     DrawerLayout drawerLayout;
     Dialog dialog;
+    TextView nickNameText;
 
     private int fragment4count = 0;
 
@@ -45,24 +43,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private fragmentActivity4 fragment4 = fragmentActivity4.getInstance();
     private NearLocationFragment fragment5 = new NearLocationFragment();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //아이디 및 닉네임 각 페이지에 전송
         Intent intent = getIntent();
-        String nickname = intent.getExtras().getString("nickname");
-        System.out.println("MainActivity " + nickname);
+        String nickname = "";
+        String userid = "";
+
+        nickname = SaveSharedPreference.getNickName(this);
+        userid = SaveSharedPreference.getUserName(this);
+
         final Bundle bundle = new Bundle();
         bundle.putString("nickname",nickname);
+        bundle.putString("userid", userid);
+
+        Log.i("cccccccc", nickname);
 
         //첫 화면 지정
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frameLayout,fragment1).commitAllowingStateLoss();
 
         //상단 툴바 생성
-        toolbar = (Toolbar)findViewById(R.id.my_toolbar);
+        toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
         //툴바에 홈버튼을 활성화
@@ -73,12 +78,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //Navigation Drawer 생성 및 초기화
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout);
         ImageView imageView = findViewById(R.id.navigation_header_image_user);
+        NavigationView navigationView = findViewById(R.id.nv_main_navigation_root);
+        navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+        nickNameText = headerView.findViewById(R.id.navigation_header_text_nickname);
+        nickNameText.setText(nickname);
 
         //하단 툴바 생성
-        bottomNavigationView =(BottomNavigationView)findViewById(R.id.bottom_navigation);
-
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         // BottomNavigationView 메뉴를 선택할 때마다 위치가 변하지 않도록
         BottomNavigationHelper.disableShiftMode(bottomNavigationView);
@@ -102,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         transaction.replace(R.id.frameLayout, fragment3).commitAllowingStateLoss();
                         break;
                     case R.id.action_home4:
+                        /* 내가 수정할 부분 */
                         if (fragment4count != 0 ){
                             fragmentBoard.setRefreshCount(0);
                             fragmentBoard.getInstance().init();
@@ -114,12 +124,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         break;
                 }
 
-
                 return true;
             }
 
-
         });
+
     } //onCreate
 
     //메뉴 연동
@@ -186,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             builder.setTitle("로그아웃 확인").setMessage("로그아웃 하시겠습니까?");
             builder.setPositiveButton("네", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(MainActivity.this,Intro1Activity.class);
+                    Intent intent = new Intent(MainActivity.this, Intro1Activity.class);
                     SaveSharedPreference.clearUserName(getApplicationContext());
                     startActivity(intent);
                 }
@@ -201,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             dialog.show();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

@@ -48,6 +48,20 @@
                 android:textColor="#ffffff"
                 >
             </TextView>
+
+            <!--
+            <Button
+                android:id="@+id/nav_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="네비게이션"
+                android:textStyle="bold"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="6dp"
+                android:layout_gravity="right"
+                >
+            </Button>
+    -->
             <TextView
                 android:id="@+id/list_dist"
                 android:layout_width="wrap_content"

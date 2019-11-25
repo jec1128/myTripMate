@@ -2,21 +2,15 @@ package com.example.tripmate;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.example.tripmate.Board.fragmentBoard;
-import com.example.tripmate.Chat.fragmentChatroom;
 
 public class fragmentActivity4 extends Fragment {
     private static String nickname;
@@ -86,7 +80,5 @@ public class fragmentActivity4 extends Fragment {
     public static String getNickname() {
         return nickname;
     }
-
-
 
 }

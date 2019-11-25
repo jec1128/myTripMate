@@ -14,9 +14,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:lineSpacingExtra="-0.6sp"
             android:paddingLeft="83dp"
             android:text="금오공대"
-            android:lineSpacingExtra="-0.6sp"
             android:textColor="#243f4a"
             android:textSize="15sp" />
 
@@ -33,9 +33,12 @@
 
         <TextView
             android:id="@+id/trip_memo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"/>
+            android:layout_width="300dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="45dp"
+            android:lineSpacingExtra="-0.6sp"
+            android:paddingLeft="83dp"
+            android:textSize="13sp" />
 
         <Button
             android:id="@+id/memo_add"
@@ -43,12 +46,9 @@
             android:layout_height="31dp"
             android:layout_marginLeft="300dp"
             android:layout_marginTop="45dp"
-            android:text="메모추가"
             android:lineSpacingExtra="-0.6sp"
+            android:text="메모추가"
             android:textSize="10sp" />
-
-
-
 
 
     </RelativeLayout>

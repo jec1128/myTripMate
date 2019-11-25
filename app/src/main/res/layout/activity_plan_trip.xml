@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <FrameLayout
@@ -132,7 +131,7 @@
     <LinearLayout
         android:id="@+id/ln_tmap"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="257dp"
         android:orientation="vertical">
 
     </LinearLayout>
@@ -141,7 +140,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -158,30 +158,31 @@
 
             </android.support.v7.widget.RecyclerView>
         </FrameLayout>
-
-        <Button
-            android:id="@+id/fab_result_btn"
-            android:layout_width="216dp"
-            android:layout_height="36dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="20dp"
-            android:text="Done"
-            android:textSize="13sp"
-            android:textColor="#ffffff"
-            android:lineSpacingExtra="38sp"
-            android:background="@drawable/bt_round"/>
-
     </RelativeLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp" />
+    <Button
+        android:id="@+id/fab_result_btn"
+        android:layout_width="216dp"
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center|bottom"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bt_round"
+        android:lineSpacingExtra="38sp"
+        android:text="Done"
+        android:textColor="#ffffff"
+        android:textSize="13sp" />
+
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+    <!--android:id="@+id/fab"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="bottom|right"-->
+    <!--android:layout_marginBottom="10dp"-->
+    <!--android:layout_marginRight="10dp" />-->
 
 
 
