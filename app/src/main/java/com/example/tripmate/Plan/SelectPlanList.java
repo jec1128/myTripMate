@@ -50,19 +50,19 @@ public class SelectPlanList {
         return planlist;
     }
 
-    public ArrayList<PlanRouteDataModel> getRoute(String userid) {
+    public ArrayList<PlanRouteDataModel> getRoute (String userid, String planCode){
         //removeAllItem();
         HttpPlanRouteList httpPlanRouteList = new HttpPlanRouteList();
         HttpPlanRouteList.sendTask sendTask = httpPlanRouteList.new sendTask();
         String result = null;
         routelist = new ArrayList<>();
         try {
-            result = sendTask.execute(userid).get();
+            result = sendTask.execute(userid, planCode).get();
             JSONArray jarray = null;
             jarray = new JSONObject(result).getJSONArray("list");
 
             if (jarray != null) {
-                for (int i = 0; i < jarray.length(); i++) {
+                for(int i = 0; i < jarray.length(); i++) {
                     JSONObject jsonObject = jarray.getJSONObject(i);
                     String uid = jsonObject.getString("userCode");
                     String plancode = jsonObject.getString("planCode");
@@ -84,11 +84,11 @@ public class SelectPlanList {
         return routelist;
     }
 
-    public ArrayList<CostModel> getCostlist1(String plancode) {
+    public ArrayList<CostModel> getCostlist1(String plancode){
         //removeAllItem();
         HttpCostList1 httpCostList1 = new HttpCostList1();
         HttpCostList1.sendTask sendTask = httpCostList1.new sendTask();
-        System.out.println("넘어와아아아아아" + plancode);
+        System.out.println("넘어와아아아아아"+plancode);
         String result = null;
         costlist = new ArrayList<>();
         try {
@@ -97,7 +97,7 @@ public class SelectPlanList {
             jarray = new JSONObject(result).getJSONArray("costlist");
 
             if (jarray != null) {
-                for (int i = 0; i < jarray.length(); i++) {
+                for(int i = 0; i < jarray.length(); i++) {
                     JSONObject jsonObject = jarray.getJSONObject(i);
                     String costcode = jsonObject.getString("costcode");
                     String code = jsonObject.getString("plancode");
@@ -118,11 +118,11 @@ public class SelectPlanList {
         return costlist;
     }
 
-    public ArrayList<CostModel> getCostlist2(String plancode) {
+    public ArrayList<CostModel> getCostlist2(String plancode){
         //removeAllItem();
         HttpCostList2 httpCostList2 = new HttpCostList2();
         HttpCostList2.sendTask sendTask = httpCostList2.new sendTask();
-        System.out.println("넘어와아아아아아" + plancode);
+        System.out.println("넘어와아아아아아"+plancode);
         String result = null;
         costlist = new ArrayList<>();
         try {
@@ -131,7 +131,7 @@ public class SelectPlanList {
             jarray = new JSONObject(result).getJSONArray("costlist2");
 
             if (jarray != null) {
-                for (int i = 0; i < jarray.length(); i++) {
+                for(int i = 0; i < jarray.length(); i++) {
                     JSONObject jsonObject = jarray.getJSONObject(i);
                     String costcode = jsonObject.getString("costcode");
                     String code = jsonObject.getString("plancode");

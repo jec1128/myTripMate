@@ -11,13 +11,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.tripmate.Plan.DataClassFile.PlanListModel;
+import com.example.tripmate.Plan.HttpPlanList;
 import com.example.tripmate.Plan.HttpPlanListDelete;
 import com.example.tripmate.Plan.PlanTripActivity;
 import com.example.tripmate.Plan.UpdateListActivity;
 import com.example.tripmate.R;
+import com.example.tripmate.SaveSharedPreference;
 import com.example.tripmate.fragmentActivity2;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -28,7 +35,6 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder>  {
     private ItemClickListener ItemCheckListener;
 
     public PlanListAdapter() {
-
     }
     public PlanListAdapter(ArrayList<PlanListModel> dataList)
     {
@@ -92,7 +98,7 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder>  {
                 builder.setItems(list, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
+                        switch (which){
                             case 0: //수정
                                 Intent intent = new Intent(v.getContext(), UpdateListActivity.class);
 //                                intent.putExtra("nickname", nickname);
@@ -118,9 +124,9 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder>  {
                                         String result = null;
                                         HttpPlanListDelete httpPlanListDelete = new HttpPlanListDelete();
                                         HttpPlanListDelete.SendTask sendTask = httpPlanListDelete.new SendTask();
-                                        try {
+                                        try{
                                             result = sendTask.execute(code).get();
-                                            if ("success".equals(result)) {
+                                            if("success".equals(result)){
                                                 final AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                                                 builder.setTitle("삭제").setMessage("삭제 되었습니다.");
                                                 builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -131,17 +137,12 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder>  {
                                                 });
                                                 builder.create().show();
                                             }
-                                        } catch (ExecutionException | InterruptedException e) {
-                                            e.printStackTrace();
-                                        }
+                                        } catch (ExecutionException | InterruptedException e) { e.printStackTrace(); }
                                     }
-                                });
-                                builder1.show();
-                        }
-                        dialog.dismiss();
+                                }); builder1.show();
+                        } dialog.dismiss();
                     }
-                });
-                builder.show();
+                }); builder.show();
                 return true;
             }
         });
@@ -157,14 +158,12 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder>  {
                 }
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
         return planlist.size();
     }
-
 
     public interface ItemClickListener {
         void onItemCheked(int position);

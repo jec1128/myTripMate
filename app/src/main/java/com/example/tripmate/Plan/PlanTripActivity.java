@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,9 +19,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tripmate.Plan.Cost.PlanCostActivity;
 import com.example.tripmate.Plan.DataClassFile.PlanRouteDataModel;
+import com.example.tripmate.Plan.DesignClassFile.PlanKeywordListAdapter;
 import com.example.tripmate.Plan.DesignClassFile.PlanRouteAdapter;
 import com.example.tripmate.R;
 import com.example.tripmate.SaveSharedPreference;
@@ -31,19 +34,25 @@ import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapPolyLine;
 import com.skt.Tmap.TMapView;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import io.github.luizgrp.sectionedrecyclerviewadapter.Section;
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
+import okhttp3.internal.Internal;
 
 
 //액티비티2에서 리스트 클릭시 넘어오는 화면
 
 public class PlanTripActivity extends AppCompatActivity implements PlanRouteAdapter.ClickListener {
 
+    private static PlanTripActivity instance;
+    private static RecyclerView recyclerView;
     private static final int SECOND_ACTIVITY_REQUEST_CODE = 0;
     private SectionedRecyclerViewAdapter sectionedAdapter;
     private TextView trip_add,plan_title, trip_cost;
@@ -58,10 +67,10 @@ public class PlanTripActivity extends AppCompatActivity implements PlanRouteAdap
 
     //기본적인 셋팅을 위한 데이터셋
     private ArrayList<String> dateList;
-    private String plancode;
+    private static String plancode;
     private String placeValue;
-    private String startDate;
-    private String endDate;
+    public static String startDate;
+    public static String endDate;
     private static String userid;
 
     //여행 일정 추가를 위한 데이터셋
@@ -73,6 +82,7 @@ public class PlanTripActivity extends AppCompatActivity implements PlanRouteAdap
     private String totalPrice;
     private String memo;
     private int index = 1;
+    private boolean flag = false;
 
 
     private ArrayList<PlanRouteDataModel> mItems = new ArrayList<>();
@@ -88,16 +98,16 @@ public class PlanTripActivity extends AppCompatActivity implements PlanRouteAdap
         placeValue = intent.getExtras().getString("place");
         startDate = intent.getExtras().getString("startDate");
         endDate = intent.getExtras().getString("endDate");
-        userid = SaveSharedPreference.getUserName(this);
+        userid = SaveSharedPreference.getUserName(this).toString();
         this.getDate(startDate,endDate);
 
 
         //타이틀 설정 부분
-        plan_title = findViewById(R.id.place_title);
+        plan_title = (TextView)findViewById(R.id.place_title);
         plan_title.setText(placeValue);
 
         //tmap연결
-        LinearLayout linearTmap = findViewById(R.id.ln_tmap);
+        LinearLayout linearTmap = (LinearLayout)findViewById(R.id.ln_tmap);
         tMapView = new TMapView(this);
         tMapView.setSKTMapApiKey("0b480565-acb3-4bcb-a808-20854b70cc21");
         tMapView.setCompassMode(true);
@@ -110,7 +120,7 @@ public class PlanTripActivity extends AppCompatActivity implements PlanRouteAdap
         linearTmap.addView(tMapView);
 
         //일정 추가하기 버튼
-        trip_add = findViewById(R.id.tv_tripadd);
+        trip_add = (TextView)findViewById(R.id.tv_tripadd);
         trip_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +136,7 @@ public class PlanTripActivity extends AppCompatActivity implements PlanRouteAdap
         placeValue = intent1.getStringExtra("place");
 
         //가계부
-        trip_cost = findViewById(R.id.tv_costadd);
+        trip_cost = (TextView)findViewById(R.id.tv_costadd);
         trip_cost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,11 +150,12 @@ public class PlanTripActivity extends AppCompatActivity implements PlanRouteAdap
         });
 
         //데이트에 관한 리스트 업로드
+        recyclerView = findViewById(R.id.lv_trip);
         getDate(startDate,endDate);
         Init();
 
         //결과 전송 버튼
-        btn = findViewById(R.id.fab_result_btn);
+        btn = (Button)findViewById(R.id.fab_result_btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,39 +178,42 @@ public class PlanTripActivity extends AppCompatActivity implements PlanRouteAdap
 
                     String result = null;
 
-                    try {
-                        result = sendTask.execute(userid1,plancode1,date1,title1,locationx1,locationy1,memo1,index1,"0").get();
-                        Log.i("23423423423","333333333333");
-                        if("success".equals(result)){
-                            Log.i("23423423423","4444444444");
-                            //onBackPressed();
+                try {
+                    result = sendTask.execute(userid1,plancode1,date1,title1,locationx1,locationy1,memo1,index1,"0").get();
+                    Log.i("23423423423","333333333333");
+                    if("success".equals(result)){
+                        Log.i("23423423423","4444444444");
+                        //onBackPressed();
 
-                        }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
                     }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
                 }
                 fragmentActivity2.getInstance().init();
                 finish();
-            }
+                }
 
         });
 
         //뒤로가기 버튼
-        back = findViewById(R.id.trip_back);
+        back = (ImageButton)findViewById(R.id.trip_back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                finish();
             }
         });
 
     }
 
-    public String getUId() {
+    public String getUId(){
         return userid;
+    }
+    public String getpCode(){
+        return plancode;
     }
 
     @Override
@@ -219,23 +233,20 @@ public class PlanTripActivity extends AppCompatActivity implements PlanRouteAdap
     }
 
     public void Init() {
-        SelectPlanList data = new SelectPlanList();
         sectionedAdapter = new SectionedRecyclerViewAdapter();
 
         // mItems.add(n);
         for(int i = 0; i < dateList.size(); i++) {
             sectionedAdapter.addSection(new PlanRouteAdapter(dateList.get(i),this));
-        }
 
-        final RecyclerView recyclerView = findViewById(R.id.lv_trip);
+        }
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(sectionedAdapter);
-        PlanRouteAdapter.addlist(data.getRoute(getUId()));
-        System.out.println("코드드ㅡ드 " + getUId());
+
+
 
 
     }
-
 
     //날짜 계산해서 가져오기 시작날짜-마지막날짜사이의 날짜들이 나옴
     public ArrayList<String> getDate(String start, String end) {
@@ -272,14 +283,44 @@ public class PlanTripActivity extends AppCompatActivity implements PlanRouteAdap
     @Override
     public void onHeaderRootViewClicked(@NonNull String sectionTitle, @NonNull PlanRouteAdapter section) {
         try{
-            //int idx = Integer.parseInt((index));
-            //int price = Integer.parseInt((totalPrice));
+            Double mapx = null;
+            Double mapy = null;
 
-            Double mapx = Double.parseDouble(locationx);
-            Double mapy = Double.parseDouble(locationy);
+            if(!flag){
+                flag = true;
+                SelectPlanList data = new SelectPlanList();
+                ArrayList<PlanRouteDataModel> list = new ArrayList<>();
+                list = data.getRoute(getUId(), getpCode());
+
+                Log.i("487539lshghe45656", sectionTitle);
+                for (int j = 0; j < list.size(); j++){
+                    PlanRouteDataModel item = new PlanRouteDataModel(list.get(j).getUserid(), list.get(j).getPlancode(), list.get(j).getPlandate(), list.get(j).getTitle(), list.get(j).getLocationx(), list.get(j).getLocationy(), list.get(j).getMemo(), list.get(j).getIndex());
+                    if(sectionTitle.equals(list.get(j).getPlandate())){
+                        Log.i("487539lshghle",list.get(j).getPlandate());
+                        mItems.add(item);
+                        section.addItem(item);
+                    }
+                    else
+                        Log.i("4875234sfdg1212121212","다름");
+                }
+                sectionedAdapter.notifyDataSetChanged();
+
+                for (int i = 0; i < data.getRoute(getUId(), getpCode()).size(); i++){
+                    mapx = data.getRoute(getUId(), getpCode()).get(i).getLocationx();
+                    mapy = data.getRoute(getUId(),getpCode()).get(i).getLocationy();
+                    if(mapx == null || mapy == null) {
+                        return;
+                    } else {
+                        marker(String.valueOf(mapx), String.valueOf(mapy));
+                    }
+                }
+            }
+
+            mapx = Double.parseDouble(locationx);
+            mapy = Double.parseDouble(locationy);
 
             //
-            PlanRouteDataModel item = new PlanRouteDataModel(userid, plancode, sectionTitle, title, mapx, mapy, "", index++);
+            PlanRouteDataModel item = new PlanRouteDataModel(userid, plancode, sectionTitle, title, mapx, mapy, "", index);
             mItems.add(item);
 
             section.addItem(item);
@@ -313,7 +354,6 @@ public class PlanTripActivity extends AppCompatActivity implements PlanRouteAdap
         tline.setLineWidth(2);
         for(int i = 0; i < mapModel.size(); i++){
             markerItem1 = new TMapMarkerItem();
-            mapIcon();
             TMapPoint point = new TMapPoint(mapModel.get(i).getY(), mapModel.get(i).getX());
             markerItem1.setPosition(0.5f, 1.0f);
             markerItem1.setTMapPoint(point);
@@ -326,19 +366,7 @@ public class PlanTripActivity extends AppCompatActivity implements PlanRouteAdap
     }
 
     //아이콘 설정
-    private void mapIcon(){
-        int i = mapModel.size();
-        if(i==0){
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.marker_1);
-            markerItem1.setIcon(bitmap);
-        } else if(i==1){
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.marker_2);
-            markerItem1.setIcon(bitmap);
-        } else if(i==2){
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.marker_3);
-            markerItem1.setIcon(bitmap);
-        }
-    }
+
 
     //지역별 지도
     private void location(){
@@ -396,6 +424,13 @@ public class PlanTripActivity extends AppCompatActivity implements PlanRouteAdap
         public void setX(Double x) { this.x = x; }
         public Double getY() { return y; }
         public void setY(Double y) { this.y = y; }
+    }
+    public static PlanTripActivity getInstance() {
+        if(instance == null){
+            instance = new PlanTripActivity();
+            return instance;
+        }
+        return instance;
     }
 
 }

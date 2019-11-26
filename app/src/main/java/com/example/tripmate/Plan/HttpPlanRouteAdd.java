@@ -29,7 +29,7 @@ public class HttpPlanRouteAdd extends Activity {
         super.onCreate(savedInstanceState);
     }
 
-    class SendTask extends AsyncTask<String, Void, String> {
+    public class SendTask extends AsyncTask<String, Void, String> {
 
         public String doInBackground(String... strings) {
             try {

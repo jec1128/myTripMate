@@ -1,8 +1,9 @@
-package com.example.tripmate.Plan.Cost;
+package com.example.tripmate.Share;
 
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.tripmate.Ip;
 
@@ -14,23 +15,28 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class HttpCostList1 extends Activity {
+public class HttpShareRouteInfoList extends Activity {
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     public class sendTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
         public String doInBackground(String... strings) {
             try {
-                Ip a = new Ip();
-                String ip = a.getIP();
-                String url = "http://" + ip + ":8080/TripMateServer/Plan/CostList1.jsp";
-                //String url = "http://192.168.214.146:8080/TripMateServer/Board/ShowList.jsp";
 
-                URL obj = null;
+                Ip i = new Ip();
+                String ip = i.getIP();
+                String url = "http://" + ip + ":8080/TripMateServer/Share/shareInfoRouteView.jsp";
+
+                URL urlText = null;
                 try {
-                    obj = new URL(url);
-                    HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+                    urlText = new URL(url);
+                    HttpURLConnection conn = (HttpURLConnection) urlText.openConnection();
 
                     conn.setReadTimeout(3000);
                     conn.setConnectTimeout(5000);
@@ -42,7 +48,6 @@ public class HttpCostList1 extends Activity {
 
                     OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
                     String sendmsg = "plancode=" + strings[0];
-                    System.out.println("플랜코드드드드" + sendmsg);
                     os.write(sendmsg);
                     os.flush();
                     os.close();
@@ -53,6 +58,7 @@ public class HttpCostList1 extends Activity {
                     BufferedReader br = new BufferedReader(new InputStreamReader(is));
                     String line;
                     StringBuffer response = new StringBuffer();
+
                     while ((line = br.readLine()) != null) {
                         response.append(line);
                         response.append(' ');
@@ -60,15 +66,19 @@ public class HttpCostList1 extends Activity {
                     br.close();
 
                     String result = response.toString();
-                    System.out.println("결과" + result);
+
+                    Log.i("planRoute",result);
+
                     return result;
 
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
             return null;
         }
     }

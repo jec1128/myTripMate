@@ -36,7 +36,6 @@ public class ShareRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
         ViewHolder viewHolder = new ViewHolder(view);
 
         return viewHolder;
-
     }
 
     @Override

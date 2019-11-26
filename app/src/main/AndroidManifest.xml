@@ -48,6 +48,7 @@
         <activity android:name=".Main.MainSearchListActivity" />
         <activity android:name=".Main.MainKeywordActivity" />
         <activity android:name=".Share.HttpShareInfoAdd" />
+        <activity android:name=".Share.HttpShareRouteInfoList" />
         <activity android:name=".Share.HttpShareInfoStateUpdate" />
         <activity android:name=".Share.HttpShareInfoGetList" />
         <activity android:name=".Plan.AddListActivity" />

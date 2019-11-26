@@ -1,4 +1,4 @@
-package com.example.tripmate.Plan.Cost;
+package com.example.tripmate.Plan;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -19,23 +19,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class HttpCostDelete extends Activity {
-    protected void onCreate(Bundle savedInstanceState) {
+public class HttpPlanRouteDelete extends Activity {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-    }
-
-    public String parsedData(String recvMsg) {
-        JSONArray jarray = null;
-        try {
-            jarray = new JSONObject(recvMsg).getJSONArray("costdelete");
-            JSONObject jsonObject = jarray.getJSONObject(0);
-            String receiveMsg = jsonObject.getString("msg");
-            return receiveMsg;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return null;
     }
 
     public class SendTask extends AsyncTask<String, Void, String> {
@@ -43,7 +29,7 @@ public class HttpCostDelete extends Activity {
             try {
                 Ip a = new Ip();
                 String ip = a.getIP();
-                String url = "http://" + ip + ":8080/TripMateServer/Plan/CostDelete.jsp";
+                String url = "http://" + ip + ":8080/TripMateServer/Plan/PlanRouteDelete.jsp";
                 URL obj = null;
                 try {
                     obj = new URL(url);
@@ -58,7 +44,7 @@ public class HttpCostDelete extends Activity {
                     conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
                     OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
-                    String sendMsg = "costcode=" + strings[0];
+                    String sendMsg = "plan_date=" + strings[0] + "&title=" + strings[1];
                     System.out.println(sendMsg);
                     osw.write(sendMsg);
                     osw.flush();
@@ -89,5 +75,18 @@ public class HttpCostDelete extends Activity {
             }
             return null;
         }
+    }
+    public String parsedData(String recvMsg){
+        JSONArray jarray = null;
+        try {
+            jarray = new JSONObject(recvMsg).getJSONArray("routedelete");
+            JSONObject jsonObject = jarray.getJSONObject(0);
+            String receiveMsg = jsonObject.getString("msg");
+            return receiveMsg;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

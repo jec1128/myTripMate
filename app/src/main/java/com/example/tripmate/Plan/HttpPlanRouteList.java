@@ -52,7 +52,7 @@ public class HttpPlanRouteList extends Activity {
                     conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
                     OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
-                    String sendmsg = "userid=" + strings[0];
+                    String sendmsg = "userid=" + strings[0] + "&plancode=" + strings[1];
                     os.write(sendmsg);
                     os.flush();
                     os.close();

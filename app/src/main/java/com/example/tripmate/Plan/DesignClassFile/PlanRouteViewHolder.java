@@ -15,14 +15,16 @@ public class PlanRouteViewHolder extends RecyclerView.ViewHolder {
     TextView trip_item_route;
     TextView trip_item_price;
     TextView trip_item_memo;
+    Button trip_memo_add;
 
     public PlanRouteViewHolder(View itemView) {
         super(itemView);
 
         trip_item_numbering = itemView.findViewById(R.id.trip_item_numbering);
         trip_item_route = itemView.findViewById(R.id.trip_item_route);
-        trip_item_price = itemView.findViewById(R.id.trip_item_price);
+        //trip_item_price = itemView.findViewById(R.id.trip_item_price);
         trip_item_memo = itemView.findViewById(R.id.trip_item_memo);
+        trip_memo_add = itemView.findViewById(R.id.memo_add);
 
     }
 }
